@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   draw_cub.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 09:10:41 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/11/27 09:22:50 by aklimchu         ###   ########.fr       */
+/*   Created: 2024/11/29 11:22:30 by aklimchu          #+#    #+#             */
+/*   Updated: 2024/11/29 15:10:10 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-int	main()
+void	draw_cub(void *input)
 {
-	printf("Success\n");
+	t_cub	*cub;
+
+	cub = (t_cub *)input;
+	if (cub->mlx == NULL)
+		return ;
+	draw_map(cub);
+	//raycasting algorythm
 }
