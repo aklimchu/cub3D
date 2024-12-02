@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/11/29 15:09:06 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/02 10:32:43 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define CUB3D_H
 
 # include "../libft/include/libft.h"
+# include "../libft/include/get_next_line.h"
+# include "../libft/include/ft_printf.h"
+# include "../libft/include/memlist.h"
 # include "../MLX42/include/MLX42.h"
 # include "../MLX42/include/MLX42_Int.h"
 # include <stdio.h> //for printf
