@@ -6,7 +6,7 @@
 #    By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 11:18:05 by aklimchu          #+#    #+#              #
-#    Updated: 2024/11/29 15:09:50 by aklimchu         ###   ########.fr        #
+#    Updated: 2024/12/02 14:46:42 by pleander         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,10 +44,13 @@ SRC 		=	src/main.c \
 				src/free_and_exit.c \
 				src/events.c \
 				src/tools.c \
-				src/draw_cub.c
+				src/draw_cub.c \
+				src/error.c \
+				src/parse/parse.c \
+				src/parse/parse_line.c
 OBJ 		= $(SRC:%.c=$(OBJ_DIR)/%.o)
 OBJ_DIR		= obj
-INCLUDE		= -I "./inc"
+INCLUDE		= -I "./inc" -I "./libft/include"
 
 # Rules
 all:	libmlx $(NAME)

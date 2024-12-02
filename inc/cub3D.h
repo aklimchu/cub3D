@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/02 10:32:43 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/02 13:14:45 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,19 @@
 
 # define SCREEN_W 1500
 # define SCREEN_H 1500
+
+# define ERR_INVALID_FILE "Invalid input file"
+# define ERR_FATAL "Fatal error"
+
+typedef enum e_map_elems
+{
+	EMPTY,
+	WALL,
+	START_NO,
+	START_SO,
+	START_WE,
+	START_EA
+}	t_map_elems;
 
 typedef struct s_coord
 {
@@ -54,6 +67,24 @@ typedef struct s_rect
 	int		color;
 }				t_rect;
 
+typedef struct s_color
+{
+	uint8_t	r;
+	uint8_t	g;
+	uint8_t	b;
+}	t_color;
+
+typedef struct s_map
+{
+	char		*no_texture;
+	char		*so_texture;
+	char		*we_texture;
+	char		*ea_texture;
+	t_color		floor_color;
+	t_color		roof_color;
+	t_map_elems	**map;
+}	t_map;
+
 void	handle_destroy(void *input);
 void	free_everything(mlx_image_t *img, t_cub *cub, int exit_code);
 void	handle_keypress(struct mlx_key_data key_data, void *input);
@@ -62,5 +93,8 @@ void	initialize_values(t_cub *cub);
 void	draw_map(t_cub *cub);
 void	draw_rect(mlx_image_t *img, t_rect rect);
 void	fill_rect(mlx_image_t *img, t_rect rect);
+void	error_exit(char	*msg);
+t_map	*parse(char *path);
+void	parse_line(char *line, t_map *map);
 
 #endif /*CUB3D_H*/
