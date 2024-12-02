@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_checkchar.c                                     :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/22 12:33:38 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/05/22 12:52:06 by aklimchu         ###   ########.fr       */
+/*   Created: 2024/04/24 14:10:31 by pleander          #+#    #+#             */
+/*   Updated: 2024/04/24 14:16:14 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "include/libft.h"
 
-int	ft_checkchar(char format)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	char	*set;
-
-	set = "cspdiuxX%";
-	while (*set)
-	{
-		if (*set == format)
-			return (1);
-		set++;
-	}
-	return (0);
+	new->next = *lst;
+	*lst = new;
 }

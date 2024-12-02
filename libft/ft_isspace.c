@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 09:00:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/05/22 12:59:42 by aklimchu         ###   ########.fr       */
+/*   Created: 2024/07/11 16:41:59 by pleander          #+#    #+#             */
+/*   Updated: 2024/07/11 16:43:46 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-t_list	*ft_lstnew(void *content)
+int	ft_isspace(int c)
 {
-	t_list	*new;
-
-	new = (t_list *)malloc(sizeof(*new));
-	if (new == NULL)
-		return ((void *) 0);
-	new->content = content;
-	new->next = NULL;
-	return (new);
+	if (c == '\t' || c == '\n'
+		|| c == '\v' || c == '\f'
+		|| c == '\r' || c == ' ')
+		return (1);
+	return (0);
 }

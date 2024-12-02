@@ -3,48 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/19 10:39:51 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/06/26 13:48:07 by aklimchu         ###   ########.fr       */
+/*   Created: 2024/04/18 13:19:39 by pleander          #+#    #+#             */
+/*   Updated: 2024/07/11 16:44:13 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-static const char	*whites(const char *str)
-{
-	while ((*str == 32) || (*str > 8 && *str < 14))
-		str++;
-	if (*str == 43 && *(str + 1) == 45)
-		return (str);
-	else if (*str == 43)
-		str++;
-	return (str);
-}
+#include "include/libft.h"
 
 int	ft_atoi(const char *str)
 {
-	int			res;
-	int			neg;
-	long int	checkl;
+	long	res;
+	int		sign;
 
+	sign = 1;
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '-')
+	{
+		sign = -1;
+		str++;
+	}
+	else if (*str == '+')
+		str++;
 	res = 0;
-	neg = 1;
-	checkl = 0;
-	str = whites(str);
-	if (*str == 45)
+	while (*str && ft_isdigit(*str))
 	{
-		neg = neg * (-1);
-		str++;
-	}
-	while (*str > 47 && *str < 58)
-	{
-		checkl = checkl * 10 + (*str - '0');
-		if (checkl < 0 && neg == 1)
+		res = (res * 10) + sign * (*str - '0');
+		if (sign == 1 && res < 0)
 			return (-1);
-		if (checkl < 0 && neg == -1)
+		else if (sign == -1 && res > 0)
 			return (0);
-		res = res * 10 + (*str - '0');
 		str++;
 	}
-	return (res * neg);
+	return ((int)res);
 }

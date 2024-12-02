@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 09:39:39 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/05/06 12:35:08 by aklimchu         ###   ########.fr       */
+/*   Created: 2024/08/26 09:44:11 by pleander          #+#    #+#             */
+/*   Updated: 2024/08/26 09:56:00 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_lstsize(t_list *lst)
+int	ft_abs(int n)
 {
-	int	i;	
-
-	i = 0;
-	while (lst)
-	{
-		i++;
-		lst = lst->next;
-	}
-	return (i);
+	if (n < 0)
+		return (-n);
+	return (n);
 }

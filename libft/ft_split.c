@@ -3,86 +3,102 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/22 11:28:07 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/05/22 13:01:53 by aklimchu         ###   ########.fr       */
+/*   Created: 2024/04/19 10:45:50 by pleander          #+#    #+#             */
+/*   Updated: 2024/04/25 13:50:07 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <stdlib.h>
+#include "include/libft.h"
 
-#include "libft.h"
-
-static void	free_m(char **new_s, size_t i)
+static int	count_splits(char const *s, char c)
 {
-	size_t	count;
+	int	count;
+	int	len;
+	int	i;
 
 	count = 0;
-	while (count <= i)
-	{
-		free(new_s[count]);
+	i = 0;
+	len = (int)ft_strlen(s);
+	if (len == 0)
+		return (0);
+	if (s[i] != c && i == 0)
 		count++;
+	while (i < len - 1)
+	{
+		if (s[i] == c && s[i + 1] != c)
+			count++;
+		i++;
 	}
-	free(new_s);
-	return ;
+	return (count);
 }
 
-static size_t	nextc(char const *s, char c)
+static void	free_array(char **splits)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (*s != c && (*s))
+	while (splits[i])
 	{
-		s++;
+		free(splits[i]);
 		i++;
 	}
-	return (i);
 }
 
-static size_t	new_count(char const *s, char c)
+static int	do_splitting(char **splits, char *trimmed, char c, int n_splits)
 {
-	size_t	i;	
+	int	start;
+	int	end;
+	int	i;
 
-	i = 1;
-	if (*s != c && (*s))
+	end = 0;
+	i = 0;
+	start = end;
+	while (n_splits - i > 0)
 	{
-		i++;
-		s++;
-	}
-	while (*s && *(s + 1))
-	{
-		if (*s == c && *(s + 1) != c)
+		if (trimmed[end] == c || (trimmed[end] == 0))
+		{
+			splits[i] = ft_substr(trimmed, start, end - start);
+			if (splits[i] == NULL)
+			{
+				free_array(splits);
+				return (0);
+			}
 			i++;
-		s++;
+			while (end < (int)ft_strlen(trimmed) && trimmed[end] == c)
+				end++;
+			start = end;
+		}
+		end++;
 	}
-	return (i);
+	return (1);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**new_s;
-	size_t	i;
+	char	**splits;
+	char	*trimmed;
+	int		n_splits;
+	char	set[2];
 
-	new_s = (char **)malloc(new_count(s, c) * sizeof(char *));
-	if (new_s == NULL)
-		return ((void *) 0);
-	i = 0;
-	while (*s)
+	set[0] = c;
+	set[1] = 0;
+	trimmed = ft_strtrim(s, set);
+	if (!trimmed)
+		return (NULL);
+	n_splits = count_splits(trimmed, c);
+	splits = ft_calloc(n_splits + 1, sizeof(char *));
+	if (!splits)
 	{
-		if (*s == c)
-			s++;
-		else
-		{
-			new_s[i] = ft_substr(s, 0, nextc(s, c));
-			if (new_s[i] == NULL)
-			{
-				free_m(new_s, i);
-				return (NULL);
-			}
-			i++;
-			s = s + nextc(s, c);
-		}
+		free(trimmed);
+		return (NULL);
 	}
-	new_s[i] = ((void *) 0);
-	return (new_s);
+	if (!do_splitting(splits, trimmed, c, n_splits))
+	{
+		free(splits);
+		splits = NULL;
+	}
+	free(trimmed);
+	return (splits);
 }

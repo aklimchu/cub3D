@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 09:58:10 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/04/24 16:19:46 by aklimchu         ###   ########.fr       */
+/*   Created: 2024/04/16 14:23:06 by pleander          #+#    #+#             */
+/*   Updated: 2024/04/16 14:34:58 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isprint(int c)
 {
-	if (c > 31 && c < 127)
+	if (c >= 32 && c <= 126)
 		return (1);
 	return (0);
 }

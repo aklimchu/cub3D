@@ -3,35 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 10:28:35 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/05/06 10:33:22 by aklimchu         ###   ########.fr       */
+/*   Created: 2024/04/18 12:39:51 by pleander          #+#    #+#             */
+/*   Updated: 2024/04/25 13:40:27 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
+#include <stddef.h>
+#include "include/libft.h"
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	size_t	totallen;
-	size_t	i;
-	size_t	dstlen;
+	size_t	src_len;
+	size_t	dst_len;
+	size_t	n;
 
-	i = 0;
-	totallen = ft_strlen(dst) + ft_strlen(src);
-	dstlen = ft_strlen(dst);
-	if (dstsize < dstlen)
-		return (dstsize + ft_strlen(src));
-	while (*dst)
-		dst++;
-	while (i + 1 < dstsize - dstlen && *src)
+	src_len = ft_strlen(src);
+	dst_len = 0;
+	while (dst[dst_len] && dst_len < dstsize)
+		dst_len++;
+	if (dst_len >= dstsize)
+		return (src_len + dst_len);
+	n = 0;
+	while (src[n] && dst_len + n < dstsize - 1)
 	{
-		*dst = *src;
-		dst++;
-		src++;
-		i++;
+		dst[dst_len + n] = src[n];
+		n++;
 	}
-	*dst = '\0';
-	return (totallen);
+	dst[dst_len + n] = '\0';
+	return (dst_len + src_len);
 }

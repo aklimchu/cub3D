@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 13:46:25 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/05/06 10:20:46 by aklimchu         ###   ########.fr       */
+/*   Created: 2024/05/28 09:28:38 by pleander          #+#    #+#             */
+/*   Updated: 2024/05/31 15:21:15 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
-{
-	t_list	*temp;
+# include <stddef.h>
 
-	if (!lst || !del)
-		return ;
-	while (*lst)
-	{
-		temp = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		*lst = temp;
-	}
-	*lst = NULL;
-}
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 32
+# endif
+
+# define OPEN_MAX 10240
+
+char	*get_next_line(int fd);
+
+#endif

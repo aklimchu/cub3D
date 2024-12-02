@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 13:28:22 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/04/18 13:29:04 by aklimchu         ###   ########.fr       */
+/*   Created: 2024/04/18 08:15:24 by pleander          #+#    #+#             */
+/*   Updated: 2024/04/18 09:10:42 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_tolower(int c)
 {
-	if (c > 64 && c < 91)
+	if (c >= 'A' && c <= 'Z')
 		return (c + 32);
 	return (c);
 }

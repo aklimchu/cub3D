@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 12:07:39 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/05/22 12:59:02 by aklimchu         ###   ########.fr       */
+/*   Created: 2024/05/31 15:19:41 by pleander          #+#    #+#             */
+/*   Updated: 2024/05/31 15:19:43 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+char	*ft_strncat(char *dest, char *src, unsigned int nb)
 {
-	if (!lst || !del)
-		return ;
-	del(lst->content);
-	free(lst);
+	char			*orig;
+	unsigned int	i;
+
+	i = 0;
+	orig = dest;
+	while (*dest)
+	{
+		dest++;
+	}
+	while (*src && i < nb)
+	{
+		*dest = *src;
+		dest++;
+		src++;
+		i++;
+	}
+	*dest = '\0';
+	return (orig);
 }

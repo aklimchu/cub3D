@@ -3,112 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 08:29:58 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/05/22 12:57:32 by aklimchu         ###   ########.fr       */
+/*   Created: 2024/04/22 13:05:52 by pleander          #+#    #+#             */
+/*   Updated: 2024/04/25 13:30:50 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "include/libft.h"
 
-#include "libft.h"
-
-static size_t	countd(int n)
+static void	convert(int n, char *str, int sign)
 {
-	size_t	d;
+	char	c;
 
-	d = 0;
-	if (n == 0)
-		return (1);
-	if (n < 0)
-		n = n * (-1);
-	while (n > 0)
+	if (sign < 0)
+		if (n < (9 / sign))
+			convert(n / 10, str, sign);
+	if (sign > 0)
+		if (n > (9 / sign))
+			convert(n / 10, str, sign);
+	c = (n % 10) * sign + '0';
+	str[ft_strlen(str)] = c;
+}
+
+static size_t	count(long n, int sign)
+{
+	size_t	c;
+
+	c = 1;
+	while (n * sign > 9)
 	{
+		c++;
 		n = n / 10;
-		d++;
 	}
-	return (d);
-}
-
-static char	*creates(size_t d, int n)
-{
-	char	*str;
-	int		isneg;
-
-	isneg = 0;
-	if (n < 0)
-		isneg = -1;
-	str = (char *)malloc((d - isneg + 1) * sizeof(char));
-	if (str == NULL)
-		return ((void *)0);
-	str = str + d - isneg;
-	*str = '\0';
-	str = str - d + isneg;
-	if (isneg == -1)
-		*str = '-';
-	return (str);
-}
-
-static char	*writes(char *str, size_t d, int n)
-{
-	size_t	i;
-	int		isneg;
-
-	i = 0;
-	isneg = 1;
-	if (n < 0)
-	{
-		str++;
-		isneg = -1;
-	}
-	str = str + d;
-	while (i < d)
-	{
-		str--;
-		*str = (n * isneg) % 10 + '0';
-		n = n / 10;
-		i++;
-	}
-	if (isneg == -1)
-		str--;
-	return (str);
-}
-
-static char	*ifmaxint(void)
-{
-	char	*str;
-
-	str = (char *)malloc(12 * sizeof(char));
-	if (str == NULL)
-		return ((void *)0);
-	*str = '-';
-	*(str + 1) = '2';
-	*(str + 2) = '1';
-	*(str + 3) = '4';
-	*(str + 4) = '7';
-	*(str + 5) = '4';
-	*(str + 6) = '8';
-	*(str + 7) = '3';
-	*(str + 8) = '6';
-	*(str + 9) = '4';
-	*(str + 10) = '8';
-	*(str + 11) = '\0';
-	return (str);
+	if (sign < 0)
+		c++;
+	return (c);
 }
 
 char	*ft_itoa(int n)
 {
-	size_t	d;
 	char	*str;
+	size_t	size;
+	int		sign;
 
-	if (n == -2147483648)
-	{
-		str = ifmaxint();
-		return (str);
-	}
-	d = countd(n);
-	str = creates(d, n);
-	if (str == NULL)
-		return ((void *)0);
-	str = writes(str, d, n);
+	sign = 1;
+	if (n < 0)
+		sign = -1;
+	size = count(n, sign) + 1;
+	str = ft_calloc(size, sizeof(char));
+	if (!str)
+		return (NULL);
+	if (sign < 0)
+		str[0] = '-';
+	convert((long)n, str, sign);
 	return (str);
 }

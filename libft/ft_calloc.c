@@ -3,31 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/19 14:13:55 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/05/22 12:58:04 by aklimchu         ###   ########.fr       */
+/*   Created: 2024/04/18 15:01:07 by pleander          #+#    #+#             */
+/*   Updated: 2024/04/25 13:29:04 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
+#include <stdlib.h>
+#include <stdint.h>
+#include "include/libft.h"
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	void	*arr;
-	size_t	i;
+	void	*alloc;
 
-	if (count && size && SIZE_MAX / size < count)
-		return ((void *) 0);
-	arr = (void *)malloc(count * size);
-	if (arr == NULL)
-		return ((void *) 0);
-	i = 0;
-	while (i < count * size)
+	if (count != 0)
 	{
-		*(unsigned char *)arr = 0;
-		arr++;
-		i++;
+		if (size > SIZE_MAX / count)
+			return (NULL);
 	}
-	return (arr - count * size);
+	alloc = malloc(count * size);
+	if (!alloc)
+		return (NULL);
+	ft_bzero(alloc, count * size);
+	return (alloc);
 }

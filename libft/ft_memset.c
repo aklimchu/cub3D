@@ -3,25 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 10:55:01 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/05/06 10:28:02 by aklimchu         ###   ########.fr       */
+/*   Created: 2024/04/16 15:12:52 by pleander          #+#    #+#             */
+/*   Updated: 2024/04/25 13:36:01 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
+#include <stddef.h>
 
 void	*ft_memset(void *b, int c, size_t len)
 {
-	size_t	i;
+	unsigned char	*p;	
+	size_t			i;
+	size_t			qword_value;
 
+	p = (unsigned char *)b;
 	i = 0;
-	while (i < len)
+	while (i < sizeof(size_t))
 	{
-		*(unsigned char *)b = c;
-		b++;
+		qword_value = (qword_value << 8) | (unsigned char)c;
 		i++;
 	}
-	return (b - i);
+	while (len >= sizeof(size_t))
+	{
+		*(size_t *)p = qword_value;
+		p += sizeof(size_t);
+		len -= sizeof(size_t);
+	}
+	while (len > 0)
+	{
+		*p = (unsigned char)c;
+		p++;
+		len--;
+	}
+	return (b);
 }

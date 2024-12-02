@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 12:53:46 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/04/18 13:23:26 by aklimchu         ###   ########.fr       */
+/*   Created: 2024/04/17 13:32:20 by pleander          #+#    #+#             */
+/*   Updated: 2024/04/18 09:11:06 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_toupper(int c)
 {
-	if (c > 96 && c < 123)
+	if (c >= 'a' && c <= 'z')
 		return (c - 32);
 	return (c);
 }

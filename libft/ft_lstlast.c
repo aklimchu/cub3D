@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 09:43:11 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/05/06 12:34:19 by aklimchu         ###   ########.fr       */
+/*   Created: 2024/04/24 15:05:04 by pleander          #+#    #+#             */
+/*   Updated: 2024/04/24 15:47:12 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
+#include "include/libft.h"
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	t_list	*temp;
+	t_list	*cur;
 
-	if (lst == NULL)
-		return ((void *) 0);
-	temp = lst;
-	while (temp->next != NULL)
-	{
-		temp = temp->next;
-	}
-	return (temp);
+	cur = lst;
+	if (!cur)
+		return (NULL);
+	while (cur->next)
+		cur = cur->next;
+	return (cur);
 }

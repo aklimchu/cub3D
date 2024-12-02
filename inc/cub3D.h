@@ -13,7 +13,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../libft/libft.h"
+# include "../libft/include/libft.h"
 # include "../MLX42/include/MLX42.h"
 # include "../MLX42/include/MLX42_Int.h"
 # include <stdio.h> //for printf
