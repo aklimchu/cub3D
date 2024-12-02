@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:16:34 by pleander          #+#    #+#             */
-/*   Updated: 2024/12/02 14:39:49 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:58:17 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	parse_texture_path(char **dst, char *line)
 	ft_memcpy(dst, path_start, path_end - path_start);
 	while (ft_isspace(*line))
 		line++;
-	if (*line != '\0')
+	if (*line != '\n' || *line != '\0')
 		error_exit(ERR_INVALID_FILE);
 }
 
