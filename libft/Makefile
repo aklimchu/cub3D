@@ -12,7 +12,7 @@
 
 NAME := libft.a
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -g
+CFLAGS := -Wall -Wextra -Werror
 CFILES := ft_atoi.c \
 	ft_abs.c \
 	ft_atoi_base.c \
@@ -37,6 +37,7 @@ CFILES := ft_atoi.c \
 	ft_split.c \
 	ft_strchr.c \
 	ft_strdup.c \
+	ft_strndup.c \
 	ft_striteri.c \
 	ft_strjoin.c \
 	ft_strncat.c \
