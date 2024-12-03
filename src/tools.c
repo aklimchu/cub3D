@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:27:30 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/11/29 15:10:25 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:13:28 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	initialize_values(t_cub *cub)
 {
 	cub->map_size.x = 10;
 	cub->map_size.y = 10;
-	cub->player.x = 0;
-	cub->player.y = 0;
+	cub->player.x = 0.5;
+	cub->player.y = 0.5;
 	cub->cell_size.x = 64;
 	cub->cell_size.y = 64;
 	cub->map = (int *)malloc(cub->map_size.x * cub->map_size.y * sizeof(int));
-	memset(cub->map, 0, cub->map_size.x * cub->map_size.y); // ?
+	memset(cub->map, 0, cub->map_size.x * cub->map_size.y * sizeof(int)); // ?
 }
 
 void	draw_map(t_cub *cub)

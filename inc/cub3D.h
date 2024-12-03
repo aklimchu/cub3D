@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/02 13:14:45 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:20:52 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include <fcntl.h> // for open
 # include <unistd.h> // for close
 # include <sys/time.h> // for gettimeofday
+# include <stdbool.h> // for boolean data type
+# include <math.h> // for mathematical functions
 
 # define SCREEN_W 1500
 # define SCREEN_H 1500
@@ -48,12 +50,18 @@ typedef struct s_coord
 	int		y;
 }				t_coord;
 
+typedef struct s_coord_f
+{
+	double	x;
+	double	y;
+}				t_coord_f;
+
 typedef struct s_cub
 {
 	mlx_t		*mlx;
 	mlx_image_t *img;
 	t_coord		map_size;
-	t_coord		player;
+	t_coord_f	player;
 	t_coord		cell_size;
 	int			*map;
 }				t_cub;
@@ -92,6 +100,7 @@ void	draw_cub(void *input);
 void	initialize_values(t_cub *cub);
 void	draw_map(t_cub *cub);
 void	draw_rect(mlx_image_t *img, t_rect rect);
+void	raycasting(t_cub *cub);
 void	fill_rect(mlx_image_t *img, t_rect rect);
 void	error_exit(char	*msg);
 t_map	*parse(char *path);
