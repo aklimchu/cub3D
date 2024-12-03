@@ -26,13 +26,38 @@ static void	parse_texture_path(char **dst, char *line)
 		line++;
 	path_end = line;
 	*dst = creserve(sizeof(char), path_end - path_start + 1);
-	if (!dst)
+	if (!*dst)
 		error_exit(ERR_FATAL);
-	ft_memcpy(dst, path_start, path_end - path_start);
+	ft_memcpy(*dst, path_start, path_end - path_start);
 	while (ft_isspace(*line))
 		line++;
-	if (*line != '\n' || *line != '\0')
+	if (*line == '\n' || *line == '\0')
+		return;
+	else
 		error_exit(ERR_INVALID_FILE);
+}
+
+static int line_is_empty(char *line)
+{
+	while (ft_isspace(*line))
+		line++;
+	if (*line == '\0')
+		return (1);
+	else
+		return (0);
+}
+
+static void parse_color(t_color *dst, char *line)
+{
+	char *red;
+	char *green;
+	char *blue;
+
+	while (ft_isspace(*line))
+		line++;
+	green = line;
+	ft_strchr(line, ',');
+
 }
 
 void parse_line(char *line, t_map *map)
@@ -50,4 +75,8 @@ void parse_line(char *line, t_map *map)
 		else
 			error_exit(ERR_INVALID_FILE);
 	}
+	else if (line_is_empty(line))
+		return ;
+	else
+		error_exit(ERR_INVALID_FILE);
 }
