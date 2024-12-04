@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:16:34 by pleander          #+#    #+#             */
-/*   Updated: 2024/12/02 14:58:17 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:38:45 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int line_is_empty(char *line)
 		return (0);
 }
 
-static void parse_color(t_color *dst, char *line)
+/* static void parse_color(t_color *dst, char *line)
 {
 	char *red;
 	char *green;
@@ -58,7 +58,7 @@ static void parse_color(t_color *dst, char *line)
 	green = line;
 	ft_strchr(line, ',');
 
-}
+} */
 
 void parse_line(char *line, t_map *map)
 {
