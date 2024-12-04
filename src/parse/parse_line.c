@@ -6,10 +6,11 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:16:34 by pleander          #+#    #+#             */
-/*   Updated: 2024/12/02 14:58:17 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/04 10:45:28 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdint.h>
 #include "cub3D.h"
 #include "libft.h"
 #include "memlist.h"
@@ -47,19 +48,6 @@ static int line_is_empty(char *line)
 		return (0);
 }
 
-static void parse_color(t_color *dst, char *line)
-{
-	char *red;
-	char *green;
-	char *blue;
-
-	while (ft_isspace(*line))
-		line++;
-	green = line;
-	ft_strchr(line, ',');
-
-}
-
 void parse_line(char *line, t_map *map)
 {
 	if (ft_isalpha(line[0]))
@@ -72,6 +60,10 @@ void parse_line(char *line, t_map *map)
 			parse_texture_path(&map->we_texture, line + 3);
 		else if (!ft_strncmp(line, "EA ", 3))
 			parse_texture_path(&map->ea_texture, line + 3);
+		else if (!ft_strncmp(line, "F ", 2))
+			parse_colors(&map->floor_color, line + 2);
+		else if (!ft_strncmp(line, "C ", 2))
+			parse_colors(&map->roof_color, line + 2);
 		else
 			error_exit(ERR_INVALID_FILE);
 	}

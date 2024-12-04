@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/02 13:14:45 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/04 10:43:27 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ void	fill_rect(mlx_image_t *img, t_rect rect);
 void	error_exit(char	*msg);
 t_map	*parse(char *path);
 void	parse_line(char *line, t_map *map);
+void	parse_colors(t_color *dst, char *line);
 
 #endif /*CUB3D_H*/
