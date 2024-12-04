@@ -6,7 +6,7 @@
 #    By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 11:18:05 by aklimchu          #+#    #+#              #
-#    Updated: 2024/12/02 14:46:42 by pleander         ###   ########.fr        #
+#    Updated: 2024/12/04 14:25:19 by aklimchu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ NAME		= cub3D
 
 # Compiler
 CC 			= cc
-CFLAGS		= -Wall -Wextra -Werror -I $(LIBFT_DIR)
+CFLAGS		= -g -ggdb3 -Wall -Wextra -Werror -I $(LIBFT_DIR)
 RM			= rm -f
 RMDIR		= rm -rf
 
@@ -40,14 +40,16 @@ LIBFT_DIR	= libft
 LIBFT_LIB	= $(LIBFT_DIR)/libft.a
 
 # Source / OBJ files / Includes
-SRC 		=	src/main.c \
-				src/free_and_exit.c \
-				src/events.c \
-				src/tools.c \
-				src/draw_cub.c \
-				src/error.c \
+SRC 		=	src/graphics/events.c \
+				src/graphics/tools.c \
+				src/graphics/tools_2.c \
+				src/graphics/draw_cub.c \
+				src/graphics/raycasting.c \
 				src/parse/parse.c \
-				src/parse/parse_line.c
+				src/parse/parse_line.c \
+				src/main.c \
+				src/free_and_exit.c \
+				src/error.c
 OBJ 		= $(SRC:%.c=$(OBJ_DIR)/%.o)
 OBJ_DIR		= obj
 INCLUDE		= -I "./inc" -I "./libft/include"
