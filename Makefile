@@ -6,7 +6,7 @@
 #    By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 11:18:05 by aklimchu          #+#    #+#              #
-#    Updated: 2024/12/04 11:43:54 by aklimchu         ###   ########.fr        #
+#    Updated: 2024/12/04 14:25:19 by aklimchu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,9 +41,10 @@ LIBFT_LIB	= $(LIBFT_DIR)/libft.a
 
 # Source / OBJ files / Includes
 SRC 		=	src/graphics/events.c \
-				src/graphics/drawing_tools.c \
-				src/graphics/drawing_tools_2.c \
+				src/graphics/tools.c \
+				src/graphics/tools_2.c \
 				src/graphics/draw_cub.c \
+				src/graphics/raycasting.c \
 				src/parse/parse.c \
 				src/parse/parse_line.c \
 				src/main.c \

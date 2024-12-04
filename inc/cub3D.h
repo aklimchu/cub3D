@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/04 11:02:57 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:19:12 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void	draw_rect(mlx_image_t *img, t_rect rect);
 void	draw_player(t_cub *cub);
 void	raycasting(t_cub *cub);
 void	fill_rect(mlx_image_t *img, t_rect rect);
+void	draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b);
 // miscellaneous
 void	initialize_values(t_cub *cub);
 // exit

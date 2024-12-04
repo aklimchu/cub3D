@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:27:30 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/04 11:42:43 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/04 14:25:27 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	initialize_values(t_cub *cub)
 	memset(&cub->player, 0, sizeof(cub->player));
 	cub->player.x = 300;
 	cub->player.y = 300;
-	cub->player.dx = 5;
-	cub->player.dy = 5;
-	/* cub->player.dx = cos(cub->player.angle) * 5;
-	cub->player.dy = sin(cub->player.angle) * 5; */
+	/* cub->player.dx = 5;
+	cub->player.dy = 5; */
+	cub->player.dx = cos(cub->player.angle) * 5;
+	cub->player.dy = sin(cub->player.angle) * 5;
 	cub->cell_size.x = 64;
 	cub->cell_size.y = 64;
 	cub->map = (int *)reserve(cub->map_size.x * cub->map_size.y * sizeof(int));

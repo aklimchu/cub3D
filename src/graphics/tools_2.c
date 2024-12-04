@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drawing_tools_2.c                                  :+:      :+:    :+:   */
+/*   tools_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:42:30 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/04 11:44:08 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:19:02 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void	draw_line(t_vars *vars, mlx_image_t *img, t_pyth a, t_pyth b);
-
 void	draw_player(t_cub *cub)
 {
-	double i, angle, x1, y1;
+	float i, angle, x1, y1;
 
 	i = 0;
 	while (i < 360)
@@ -28,11 +26,14 @@ void	draw_player(t_cub *cub)
 		i += 0.1;
 	}
 	//draw direction line
+	draw_line(cub->img, (t_coord_f){cub->player.x, cub->player.y}, \
+		(t_coord_f){cub->player.x + cub->player.dx * 5, \
+		cub->player.y + cub->player.dy * 5});
 	
 }
 
 //The function draws the line based on given dimensions
-static void	draw_line(t_vars *vars, mlx_image_t *img, t_pyth a, t_pyth b)
+void	draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b)
 {
 	double	x;
 	double	y;
@@ -49,7 +50,7 @@ static void	draw_line(t_vars *vars, mlx_image_t *img, t_pyth a, t_pyth b)
 	y = a.y;
 	while (pixels)
 	{
-		mlx_put_pixel(img, x, y, vars->img_color);
+		mlx_put_pixel(img, x, y, 0xFFFFFFFF);
 		x += diff_x;
 		y += diff_y;
 		--pixels;
