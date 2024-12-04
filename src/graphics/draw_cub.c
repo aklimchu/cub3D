@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:22:30 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/03 15:37:46 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/04 10:22:29 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,20 @@ void	draw_cub(void *input)
 	cub = (t_cub *)input;
 	if (cub->mlx == NULL)
 		return ;
+	mlx_delete_image(cub->mlx, cub->img);
+	cub->img = mlx_new_image(cub->mlx, SCREEN_W, SCREEN_H);
+	if (cub->img == NULL)
+		free_everything(NULL, cub, 1);
 	draw_map(cub);
+	draw_player(cub);
 	raycasting(cub);
+	if (!cub->img || (mlx_image_to_window(cub->mlx, cub->img, 0, 0) < 0))
+		free_everything(cub->img, cub, EXIT_FAILURE);
 }
 
 void	raycasting(t_cub *cub)
 {
-	t_coord_f		ray_dir;
+	t_coord_f	ray_dir;
 	t_coord_f	ray_start;
 	t_coord		step;
 	t_coord_f	ray_unit_step_size;
@@ -34,19 +41,19 @@ void	raycasting(t_cub *cub)
 	t_coord		map_check;
 
 	mlx_get_mouse_pos(cub->mlx, &mouse.x, &mouse.y);
-/* 	ray_dir.x = 0;
-	ray_dir.y = 1; */
+	ray_dir.x = 1;
+	ray_dir.y = 1;
 	ray_start.x = cub->player.x;
 	ray_start.y = cub->player.y;
 	//ray_dir should change based on keys pressed
 
 
-	  float dirX = -1.0,  dirY = 0.0; //initial direction vector
+	/*  float dirX = -1.0,  dirY = 0.0; //initial direction vector
 	float planeX = 0.0, planeY = 0.66; //the 2d raycaster version of camera plane
 	//float cameraX = 2*x/float(w)-1; //x-coordinate in camera space
 	float cameraX = 1; // delete
       ray_dir.x = dirX + planeX * cameraX;
-      ray_dir.y = dirY + planeY * cameraX;
+      ray_dir.y = dirY + planeY * cameraX; */
 	
 	ray_unit_step_size.x = sqrt(1 + (ray_dir.y / ray_dir.x) * \
 		(ray_dir.y / ray_dir.x));
@@ -102,7 +109,8 @@ void	raycasting(t_cub *cub)
 		if (map_check.x >= 0 && map_check.x < cub->map_size.x && \
 			map_check.y >= 0 && map_check.y < cub->map_size.y)
 		{
-			if (cub->map[map_check.y * cub->map_size.x + map_check.x] == 1)
+			if (map_check.y * cub->map_size.x + map_check.x < cub->map_size.x * cub->map_size.y && \
+				cub->map[map_check.y * cub->map_size.x + map_check.x] == 1)
 			{
 				tile_found = true;
 				printf("TILE FOUND!!!: %d\n", map_check.y * cub->map_size.x + map_check.x);

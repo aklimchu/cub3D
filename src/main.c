@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:10:41 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/03 09:34:26 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/04 10:45:29 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int	main(int argc, char **argv)
 	create_image(&cub);
 	initialize_values(&cub);
 	mlx_loop_hook(cub.mlx, &draw_cub, &cub);
-	if (!cub.img || (mlx_image_to_window(cub.mlx, cub.img, 0, 0) < 0))
-		free_everything(cub.img, &cub, EXIT_FAILURE);
 	mlx_close_hook(cub.mlx, &handle_destroy, &cub);
 	mlx_key_hook(cub.mlx, &handle_keypress, &cub);
 	mlx_loop(cub.mlx);
