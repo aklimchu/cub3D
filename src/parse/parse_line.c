@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:16:34 by pleander          #+#    #+#             */
-/*   Updated: 2024/12/04 10:45:28 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/04 14:55:10 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,15 @@ static int line_is_empty(char *line)
 		return (0);
 }
 
-void parse_line(char *line, t_map *map)
+/**
+ * @brief Parses a line if it is of recongnized format, othweise
+ * return -1
+ *
+ * @param line: line to parse
+ * @param map: map
+ * @return: 0 if parsed line, -1 otherwise
+ */
+int parse_line(char *line, t_map *map)
 {
 	if (ft_isalpha(line[0]))
 	{
@@ -68,7 +76,8 @@ void parse_line(char *line, t_map *map)
 			error_exit(ERR_INVALID_FILE);
 	}
 	else if (line_is_empty(line))
-		return ;
+		return (0);
 	else
-		error_exit(ERR_INVALID_FILE);
+		return (-1);
+	return (0);
 }

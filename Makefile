@@ -6,7 +6,7 @@
 #    By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 11:18:05 by aklimchu          #+#    #+#              #
-#    Updated: 2024/12/02 14:46:42 by pleander         ###   ########.fr        #
+#    Updated: 2024/12/04 14:48:13 by pleander         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ NAME		= cub3D
 
 # Compiler
 CC 			= cc
-CFLAGS		= -Wall -Wextra -Werror -I $(LIBFT_DIR)
+CFLAGS		= -Wall -Wextra -I $(LIBFT_DIR) -g
 RM			= rm -f
 RMDIR		= rm -rf
 
@@ -47,20 +47,19 @@ SRC 		=	src/main.c \
 				src/draw_cub.c \
 				src/error.c \
 				src/parse/parse.c \
-				src/parse/parse_line.c
+				src/parse/parse_line.c \
+				src/parse/parse_colors.c \
+				src/parse/parse_map.c
+
 OBJ 		= $(SRC:%.c=$(OBJ_DIR)/%.o)
 OBJ_DIR		= obj
 INCLUDE		= -I "./inc" -I "./libft/include"
 
 # Rules
-all:	libmlx $(NAME)
+all:	$(MLX) $(NAME)
 
-libmlx: .mlx42
-
-.mlx42:
+$(MLX):
 	@echo "$(YELLOW)Compiling mlx42... $(DEF_COLOR)"
-	@touch .mlx42
-	@git clone https://github.com/codam-coding-college/MLX42.git $(MLX_PATH)
 	@cmake $(MLX_PATH) -B $(MLX_PATH)/build && make -C $(MLX_PATH)/build -j4				# make mlx42
 	@cp MLX42/include/MLX42/MLX42.h MLX42/include/
 	@cp MLX42/include/MLX42/MLX42_Int.h MLX42/include/
@@ -87,7 +86,7 @@ clean:
 
 fclean:		clean
 	@echo "$(GREEN)Deleting cub3D... $(DEF_COLOR)"
-	@$(RMDIR) $(NAME) $(LIBFT_LIB) $(MLX) .mlx42 $(MLX_PATH)
+	@$(RMDIR) $(NAME) $(LIBFT_LIB) $(MLX_PATH)/build
 	@make fclean -C $(LIBFT_DIR) --no-print-directory
 	@echo "$(GREEN)CLEAR $(DEF_COLOR)"
 

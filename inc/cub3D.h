@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/04 10:43:27 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:51:15 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef enum e_map_elems
 {
 	EMPTY,
 	WALL,
+	PADDING,
 	START_NO,
 	START_SO,
 	START_WE,
@@ -55,7 +56,7 @@ typedef struct s_cub
 	t_coord		map_size;
 	t_coord		player;
 	t_coord		cell_size;
-	int			*map;
+	t_map_elems	**map;
 }				t_cub;
 
 typedef struct s_rect
@@ -95,7 +96,9 @@ void	draw_rect(mlx_image_t *img, t_rect rect);
 void	fill_rect(mlx_image_t *img, t_rect rect);
 void	error_exit(char	*msg);
 t_map	*parse(char *path);
-void	parse_line(char *line, t_map *map);
+int		parse_line(char *line, t_map *map);
 void	parse_colors(t_color *dst, char *line);
+void	read_map_line(char *line, t_list **lst);
+void	parse_map(t_map *map, t_list **rows);
 
 #endif /*CUB3D_H*/
