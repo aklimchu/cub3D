@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:24:41 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/05 13:48:14 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/05 14:16:48 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	raycasting(t_cub *cub)
 			map_pos.x = (int)ray_pos.x / 64;
 			map_pos.y = (int)ray_pos.y / 64;
 			if (map_pos.x >= 0 && map_pos.y >= 0 && map_pos.x <= cub->map_size.x && \
-				map_pos.y <= cub->map_size.y && cub->map.map[map_pos.x][map_pos.y] == 2)
+				map_pos.y <= cub->map_size.y && get_tile(map_pos.y, map_pos.x, cub->map) == WALL)
 			{
 				printf("Wall hit: %d, %d\n", map_pos.x, map_pos.y);
 				ray_horiz.x = ray_pos.x;
@@ -118,7 +118,7 @@ void	raycasting(t_cub *cub)
 			map_pos.x = (int)ray_pos.x / 64;
 			map_pos.y = (int)ray_pos.y / 64;
 			if (map_pos.x >= 0 && map_pos.y >= 0 && map_pos.x <= cub->map_size.x && \
-				map_pos.y <= cub->map_size.y && cub->map.map[map_pos.x][map_pos.y] == 2)
+				map_pos.y <= cub->map_size.y && get_tile(map_pos.y, map_pos.x, cub->map) == WALL)
 			{
 				printf("Wall hit: %d, %d\n", map_pos.x, map_pos.y);
 				ray_vert.x = ray_pos.x;
