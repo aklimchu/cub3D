@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:10:41 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/05 12:06:37 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/05 12:53:55 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,9 @@ int	main(int argc, char **argv)
 	t_cub	cub;
 	t_map	*map;
 
-	/* if (argc != 2)
+	if (argc != 2)
 		error_exit("Incorrect amount of arguments");
-	cub.map = parse(argv[1]); */
-	(void)argc;
-	(void)argv;
-	(void)map;
+	cub.map = parse(argv[1]);
 	create_images(&cub);
 	initialize_values(&cub);
 	mlx_loop_hook(cub.mlx, &draw_cub, &cub);

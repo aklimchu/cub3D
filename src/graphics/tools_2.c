@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:42:30 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/05 09:33:18 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/05 13:09:24 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,37 @@ void	draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b, int color)
 		x += diff_x;
 		y += diff_y;
 		--pixels;
+	}
+}
+
+void	draw_rect(mlx_image_t *img, t_rect rect)
+{
+	int		x;
+	int		y;
+
+	x = rect.x;
+	y = rect.y;
+	while (x < rect.x + rect.width)
+		mlx_put_pixel(img, x++, y, rect.color);
+	while (y < rect.y + rect.height)
+		mlx_put_pixel(img, x, y++, rect.color);
+	while (x > rect.x)
+		mlx_put_pixel(img, x--, y, rect.color);
+	while (y > rect.y)
+		mlx_put_pixel(img, x, y--, rect.color);
+}
+
+void	fill_rect(mlx_image_t *img, t_rect rect)
+{
+	int		y;
+	int		x;
+
+	y = rect.y;
+	while (y < rect.y + rect.height)
+	{
+		x = rect.x;
+		while (x < rect.x + rect.width)
+			mlx_put_pixel(img, x++, y, rect.color);
+		y++;
 	}
 }
