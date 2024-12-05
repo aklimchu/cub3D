@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/05 12:06:01 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/05 12:07:57 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,6 @@ typedef struct s_player
 	float	angle;
 }				t_player;
 
-typedef struct s_cub
-{
-	mlx_t		*mlx;
-	mlx_image_t *img;
-	t_coord		map_size;
-	t_player	player;
-	t_coord		cell_size;
-	int			*map;
-}				t_cub;
-
 typedef struct s_rect
 {
 	int		x;
@@ -114,17 +104,7 @@ typedef struct s_cub
 	t_player	player;
 	t_coord		cell_size;
 	t_map		*map;
-	int			*map2;
 }				t_cub;
-
-typedef struct s_rect
-{
-	int		x;
-	int		y;
-	int		width;
-	int		height;
-	int		color;
-}				t_rect;
 
 // FUNCTIONS
 // parsing
