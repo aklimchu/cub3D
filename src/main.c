@@ -17,19 +17,21 @@ static void	create_image(t_cub *cub);
 int	main(int argc, char **argv)
 {
 	t_cub	cub;
-	t_map	*map;
 
 	if (argc != 2)
 		error_exit("Incorrect amount of arguments");
 	cub.map = parse(argv[1]);
-	create_image(&cub);
-	initialize_values(&cub);
-	mlx_loop_hook(cub.mlx, &draw_cub, &cub);
-	//mlx_close_hook(cub.mlx, &handle_destroy, &cub);
-	mlx_key_hook(cub.mlx, &handle_keypress, &cub);
-	mlx_loop(cub.mlx);
-	free_everything(cub.img, &cub, EXIT_SUCCESS);
-	exit(EXIT_SUCCESS);
+	//show_map(cub.map->map);
+	t_map_elems tok = get_tile(5,10, cub.map);
+	printf("%s\n", get_token(tok));
+	// create_image(&cub);
+	// initialize_values(&cub);
+	// mlx_loop_hook(cub.mlx, &draw_cub, &cub);
+	// //mlx_close_hook(cub.mlx, &handle_destroy, &cub);
+	// mlx_key_hook(cub.mlx, &handle_keypress, &cub);
+	// mlx_loop(cub.mlx);
+	// free_everything(cub.img, &cub, EXIT_SUCCESS);
+	// exit(EXIT_SUCCESS);
 }
 
 static void	create_image(t_cub *cub)

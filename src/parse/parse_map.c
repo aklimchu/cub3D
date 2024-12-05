@@ -89,28 +89,27 @@ static void	parse_map_row(t_map_elems *dst, int size, char *row)
 	}
 	while (i < size)
 		dst[i++] = PADDING;
+	dst[i] = END_ROW;
 }
 
 void	parse_map(t_map *map, t_list **rows)
 {
-	int		n_rows;
-	int		n_cols;
 	int		i;
 	t_list	*cur;
 
-	n_cols = get_longest_row(rows);
-	n_rows = ft_lstsize(*rows);
-	map->map = reserve(sizeof(void *) * n_rows);
+	map->map_cols = (size_t)get_longest_row(rows);
+	map->map_rows = (size_t)ft_lstsize(*rows);
+	map->map = creserve(map->map_rows + 1, sizeof(void *));
 	if (!map->map)
 		error_exit(ERR_FATAL);
 	i = 0;
 	cur = *rows;
-	while (i < n_rows && cur)
+	while (i < map->map_rows && cur)
 	{
-		map->map[i] = reserve(sizeof(t_map_elems) * n_cols);
+		map->map[i] = creserve(map->map_cols + 1, sizeof(t_map_elems));
 		if (!map->map[i])
 			error_exit(ERR_FATAL);
-		parse_map_row(map->map[i], n_cols, (char *)cur->content);
+		parse_map_row(map->map[i], map->map_cols, (char *)cur->content);
 		cur = cur->next;
 		i++;
 	}

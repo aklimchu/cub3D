@@ -43,7 +43,8 @@ typedef enum e_map_elems
 	START_NO,
 	START_SO,
 	START_WE,
-	START_EA
+	START_EA,
+	END_ROW
 }	t_map_elems;
 
 typedef struct s_coord
@@ -83,6 +84,8 @@ typedef struct s_map
 	t_color		floor_color;
 	t_color		roof_color;
 	t_map_elems	**map;
+	size_t		map_cols;
+	size_t		map_rows;
 }	t_map;
 
 typedef struct s_cub
@@ -106,13 +109,14 @@ typedef struct s_rect
 
 // FUNCTIONS
 // parsing
-t_map	*parse(char *path);
-void	parse_colors(t_color *dst, char *line);
-void	read_map_line(char *line, t_list **lst);
-void	parse_map(t_map *map, t_list **rows);
-char	*get_token(t_map_elems tok);
-void	show_map(t_map_elems **map);
-int		parse_line(char *line, t_map *map);
+t_map		*parse(char *path);
+void		parse_colors(t_color *dst, char *line);
+void		read_map_line(char *line, t_list **lst);
+void		parse_map(t_map *map, t_list **rows);
+char		*get_token(t_map_elems tok);
+void		show_map(t_map_elems **map);
+int			parse_line(char *line, t_map *map);
+t_map_elems	get_tile(size_t row, size_t col, t_map *map);
 // events
 void	handle_destroy(void *input);
 void	handle_keypress(struct mlx_key_data key_data, void *input);

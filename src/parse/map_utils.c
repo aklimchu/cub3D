@@ -28,6 +28,8 @@ char	*get_token(t_map_elems tok)
 		return ("W");
 	else if (tok == START_EA)
 		return ("E");
+	else if (tok == END_ROW)
+		return ("$");
 	else
 		return ("!ERROR!");
 }
@@ -41,7 +43,7 @@ void	show_map(t_map_elems **map)
 	while (map[i])
 	{
 		j = 0;
-		while (map[i][j])
+		while (map[i][j] != END_ROW)
 		{
 			ft_printf("%s", get_token(map[i][j]));
 			j++;
@@ -49,4 +51,13 @@ void	show_map(t_map_elems **map)
 		ft_printf("\n");
 		i++;
 	}
+}
+
+t_map_elems	get_tile(size_t row, size_t col, t_map *map)
+{
+	if (col > map->map_cols - 1 || col < 0)
+		error_exit("get_tile: attemtped read out of bounds");
+	if (row > map->map_rows - 1 || row < 0)
+		error_exit("get_tile: attemtped read out of bounds");
+	return (map->map[row][col]);
 }
