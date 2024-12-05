@@ -22,6 +22,7 @@ static void parse_file(int fd, t_map *map)
 	t_list	*map_rows;
 
 	reading_map = 0;
+	map_rows = NULL;
 	line = get_next_line(fd);
 	while (line)
 	{

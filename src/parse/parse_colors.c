@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:42:46 by pleander          #+#    #+#             */
-/*   Updated: 2024/12/04 11:06:55 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/05 10:27:38 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	parse_single_color(uint8_t *dst, char *color_start, char *color_end)
 	*dst = (uint8_t)color;
 }
 
-void parse_colors(t_color *dst, char *line)
+void	parse_colors(t_color *dst, char *line)
 {
 	char	*color_start;
 	char	*color_end;

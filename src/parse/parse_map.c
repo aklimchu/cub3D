@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:23:32 by pleander          #+#    #+#             */
-/*   Updated: 2024/12/04 16:03:13 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/05 10:11:33 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	parse_map_row(t_map_elems *dst, int size, char *row)
 	int i;
 
 	i = 0;
-	while (row[i])
+	while (row[i] && row[i] != '\n')
 	{
 		if (row[i] == ' ')	
 			dst[i] = PADDING;
@@ -96,6 +96,7 @@ void	parse_map(t_map *map, t_list **rows)
 	int n_rows;
 	int	n_cols;
 	int	i;
+	t_list *cur;
 
 	n_cols = get_longest_row(rows);
 	n_rows = ft_lstsize(*rows);
@@ -103,12 +104,15 @@ void	parse_map(t_map *map, t_list **rows)
 	if (!map->map)
 		error_exit(ERR_FATAL);
 	i = 0;
-	while (i < n_rows)
+	cur = *rows;
+	while (i < n_rows && cur)
 	{
 		map->map[i] = reserve(sizeof(t_map_elems) * n_cols);
 		if (!map->map[i])
 			error_exit(ERR_FATAL);
-		parse_map_row(map->map[i], n_cols, *(char **)(*rows)->content);
+		parse_map_row(map->map[i], n_cols, (char *)cur->content);
+		cur = cur->next;
+		i++;
 	}
 }
 	

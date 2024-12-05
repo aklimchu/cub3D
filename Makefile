@@ -6,7 +6,7 @@
 #    By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 11:18:05 by aklimchu          #+#    #+#              #
-#    Updated: 2024/12/04 14:48:13 by pleander         ###   ########.fr        #
+#    Updated: 2024/12/05 10:06:55 by pleander         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,8 @@ SRC 		=	src/main.c \
 				src/parse/parse.c \
 				src/parse/parse_line.c \
 				src/parse/parse_colors.c \
-				src/parse/parse_map.c
+				src/parse/parse_map.c \
+				src/parse/map_utils.c
 
 OBJ 		= $(SRC:%.c=$(OBJ_DIR)/%.o)
 OBJ_DIR		= obj
