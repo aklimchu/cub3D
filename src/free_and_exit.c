@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:06:14 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/04 10:53:51 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/05 09:36:15 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ void	handle_destroy(void *input)
 	t_cub	*cub;
 
 	cub = (t_cub *)input;
-	free_everything(cub->img, cub, 0);
+	free_everything(cub, 0);
 }
 
 //The function frees the memory based on arguments provided
-void	free_everything(mlx_image_t *img, t_cub *cub, int exit_code)
+void	free_everything(t_cub *cub, int exit_code)
 {
-	// if (cub->map)
-	// 	free (cub->map);
-	if (img)
-		mlx_delete_image(cub->mlx, img);
+	if (cub->img_map)
+		mlx_delete_image(cub->mlx, cub->img_map);
+	if (cub->img_game)
+		mlx_delete_image(cub->mlx, cub->img_game);
 	mlx_terminate(cub->mlx);
 	memlist_release_all();
 	exit(exit_code);

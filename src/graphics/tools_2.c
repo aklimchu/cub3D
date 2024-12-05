@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:42:30 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/04 15:19:02 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/05 09:33:18 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@ void	draw_player(t_cub *cub)
 		angle = i;
 		x1 = 5 * cos(angle * M_PI / 180);
 		y1 = 5 * sin(angle * M_PI / 180);
-		mlx_put_pixel(cub->img, cub->player.x + x1, cub->player.y + y1, 0xFFFFFFFF);
+		mlx_put_pixel(cub->img_map, cub->player.x + x1, cub->player.y + y1, 0xFFFFFFFF);
 		i += 0.1;
 	}
 	//draw direction line
-	draw_line(cub->img, (t_coord_f){cub->player.x, cub->player.y}, \
+	draw_line(cub->img_map, (t_coord_f){cub->player.x, cub->player.y}, \
 		(t_coord_f){cub->player.x + cub->player.dx * 5, \
-		cub->player.y + cub->player.dy * 5});
+		cub->player.y + cub->player.dy * 5}, 0xFFFFFFFF);
 	
 }
 
 //The function draws the line based on given dimensions
-void	draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b)
+void	draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b, int color)
 {
 	double	x;
 	double	y;
@@ -50,7 +50,7 @@ void	draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b)
 	y = a.y;
 	while (pixels)
 	{
-		mlx_put_pixel(img, x, y, 0xFFFFFFFF);
+		mlx_put_pixel(img, x, y, color);
 		x += diff_x;
 		y += diff_y;
 		--pixels;
