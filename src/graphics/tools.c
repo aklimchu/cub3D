@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drawing_tools.c                                    :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 11:27:30 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/04 14:25:27 by aklimchu         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/12/05 12:02:58 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../inc/cub3D.h"
 
@@ -21,8 +22,6 @@ void	initialize_values(t_cub *cub)
 	memset(&cub->player, 0, sizeof(cub->player));
 	cub->player.x = 300;
 	cub->player.y = 300;
-	/* cub->player.dx = 5;
-	cub->player.dy = 5; */
 	cub->player.dx = cos(cub->player.angle) * 5;
 	cub->player.dy = sin(cub->player.angle) * 5;
 	cub->cell_size.x = 64;
@@ -35,11 +34,11 @@ void	initialize_values(t_cub *cub)
 		1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 		1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
 		1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+		1, 0, 0, 0, 0, 0, 0, 1, 0, 1,
+		1, 0, 1, 0, 0, 0, 0, 0, 0, 1,
 		1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
 		1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-		1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-		1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-		1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+		1, 0, 0, 0, 0, 1, 0, 0, 0, 1,
 		1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
 		1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 	};
@@ -68,11 +67,11 @@ void	draw_map(t_cub *cub)
 			// Fill rectangle
 			if (cub->map[i * cub->map_size.x + j] == 1)
 			{
-				fill_rect(cub->img, (t_rect){current.x + 1, current.y + 1, cub->cell_size.x - 2, \
+				fill_rect(cub->img_map, (t_rect){current.x + 1, current.y + 1, cub->cell_size.x - 2, \
 					cub->cell_size.y - 2, 0x0000FFFF});
 			}
 			// Draw cell border
-			draw_rect(cub->img, (t_rect){current.x, current.y, cub->cell_size.x, \
+			draw_rect(cub->img_map, (t_rect){current.x, current.y, cub->cell_size.x, \
 				cub->cell_size.y, 0x00FFFFFF});
 			j++;
 			current.x += cub->cell_size.x;
