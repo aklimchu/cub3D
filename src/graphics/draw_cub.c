@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:22:30 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/05 13:35:35 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/05 14:59:50 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	draw_cub(void *input)
 		free_everything(cub, 1);
 	draw_map(cub);
 	draw_player(cub);
-	//raycasting(cub);
+	raycasting(cub);
 	if (!cub->img_map || (mlx_image_to_window(cub->mlx, cub->img_map, 0, 0) < 0))
 		free_everything(cub, EXIT_FAILURE);
 	/* if (!cub->img_game || (mlx_image_to_window(cub->mlx, cub->img_game, 650, 0) < 0))

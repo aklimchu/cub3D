@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/05 14:49:26 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/05 15:06:14 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # include <stdbool.h> // for boolean data type
 # include <math.h> // for mathematical functions
 
-# define SCREEN_W 1500
-# define SCREEN_H 1500
+# define SCREEN_W 2000
+# define SCREEN_H 2000
 # define DEGREE 0.0174533
 
 // ERROR MESSAGES
