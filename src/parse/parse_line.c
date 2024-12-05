@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 11:16:34 by pleander          #+#    #+#             */
-/*   Updated: 2024/12/04 15:38:45 by aklimchu         ###   ########.fr       */
+/*   Created: 2024/12/05 10:35:57 by pleander          #+#    #+#             */
+/*   Updated: 2024/12/05 10:36:04 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdint.h>
 #include "cub3D.h"
 #include "libft.h"
 #include "memlist.h"
@@ -32,12 +33,12 @@ static void	parse_texture_path(char **dst, char *line)
 	while (ft_isspace(*line))
 		line++;
 	if (*line == '\n' || *line == '\0')
-		return;
+		return ;
 	else
 		error_exit(ERR_INVALID_FILE);
 }
 
-static int line_is_empty(char *line)
+static int	line_is_empty(char *line)
 {
 	while (ft_isspace(*line))
 		line++;
@@ -47,20 +48,15 @@ static int line_is_empty(char *line)
 		return (0);
 }
 
-/* static void parse_color(t_color *dst, char *line)
-{
-	char *red;
-	char *green;
-	char *blue;
-
-	while (ft_isspace(*line))
-		line++;
-	green = line;
-	ft_strchr(line, ',');
-
-} */
-
-void parse_line(char *line, t_map *map)
+/**
+ * @brief Parses a line if it is of recongnized format, othweise
+ * return -1
+ *
+ * @param line: line to parse
+ * @param map: map
+ * @return: 0 if parsed line, -1 otherwise
+ */
+int	parse_line(char *line, t_map *map)
 {
 	if (ft_isalpha(line[0]))
 	{
@@ -72,11 +68,16 @@ void parse_line(char *line, t_map *map)
 			parse_texture_path(&map->we_texture, line + 3);
 		else if (!ft_strncmp(line, "EA ", 3))
 			parse_texture_path(&map->ea_texture, line + 3);
+		else if (!ft_strncmp(line, "F ", 2))
+			parse_colors(&map->floor_color, line + 2);
+		else if (!ft_strncmp(line, "C ", 2))
+			parse_colors(&map->roof_color, line + 2);
 		else
 			error_exit(ERR_INVALID_FILE);
 	}
 	else if (line_is_empty(line))
-		return ;
+		return (0);
 	else
-		error_exit(ERR_INVALID_FILE);
+		return (-1);
+	return (0);
 }
