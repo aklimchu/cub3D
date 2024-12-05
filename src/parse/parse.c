@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:51:26 by pleander          #+#    #+#             */
-/*   Updated: 2024/12/05 10:29:32 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/05 14:49:08 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,11 @@ t_map	*parse(char *path)
 	if (fd < 0)
 		error_exit(strerror(errno));
 	map = creserve(1, sizeof(t_map));
+	map->player_start.x = -1;
+	map->player_start.y = -1;
 	if (!map)
 		error_exit(ERR_FATAL);
 	parse_file(fd, map);
+	check_map(map);
 	return (map);
 }

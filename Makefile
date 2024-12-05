@@ -6,7 +6,7 @@
 #    By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 11:18:05 by aklimchu          #+#    #+#              #
-#    Updated: 2024/12/05 12:03:19 by aklimchu         ###   ########.fr        #
+#    Updated: 2024/12/05 14:49:50 by pleander         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRC 		=	src/graphics/events.c \
 				src/parse/parse_colors.c \
 				src/parse/parse_map.c \
 				src/parse/map_utils.c \
+				src/parse/validate_map.c \
 				src/main.c \
 				src/free_and_exit.c \
 				src/error.c
