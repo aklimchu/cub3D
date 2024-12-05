@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/05 10:44:29 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/05 11:58:17 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_cub
 	t_player	player;
 	t_coord		cell_size;
 	t_map		*map;
+	int			*map2;
 }				t_cub;
 
 typedef struct s_rect
