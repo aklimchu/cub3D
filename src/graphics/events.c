@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:15:43 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/04 14:04:02 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/05 09:36:51 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	handle_keypress(struct mlx_key_data key_data, void *input)
 	
 	cub = (t_cub *)input;
 	if (key_data.key == MLX_KEY_ESCAPE && key_data.action == MLX_PRESS)
-		free_everything(cub->img, cub, 0);
+		free_everything(cub, 0);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
 	{
 		cub->player.x += cub->player.dy;
