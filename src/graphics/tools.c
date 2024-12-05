@@ -6,15 +6,14 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:17:51 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/05 13:25:23 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/05 13:46:56 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
 static void		get_map_size(t_cub *cub);
-static void		get_player_location(t_cub *cub);
-static float	find_angle(t_map_elems **map);
+static float	find_angle_and_player(t_map_elems **map, t_cub *cub);
 
 void	initialize_values(t_cub *cub)
 {
@@ -22,11 +21,7 @@ void	initialize_values(t_cub *cub)
 	
 	get_map_size(cub);
 	get_player_location(cub);
-	/* cub->map_size.x = 10;
-	cub->map_size.y = 10; */
-	cub->player.angle = find_angle(cub->map->map);
-/* 	cub->player.x = 300; // change to actual location
-	cub->player.y = 300; // change to actual location */
+	cub->player.angle = find_angle_and_player(cub->map->map, cub);
 	cub->player.dx = cos(cub->player.angle) * 5;
 	cub->player.dy = sin(cub->player.angle) * 5;
 	cub->cell_size.x = 64;
@@ -50,13 +45,7 @@ static void		get_map_size(t_cub *cub)
 	cub->map_size.y = i;
 }
 
-static void		get_player_location(t_cub *cub)
-{
-	// find tile
-	// calculate the center of tile
-}
-
-static float	find_angle(t_map_elems **map)
+static float	find_angle_and_player(t_map_elems **map, t_cub *cub)
 {
 	int	i;
 	int	j;
@@ -74,6 +63,8 @@ static float	find_angle(t_map_elems **map)
 		}
 		i++;
 	}
+	cub->player.x = (i + 0.5) * cub->cell_size.x;
+	cub->player.y = (j + 0.5) * cub->cell_size.y;
 	if (map[i][j] == START_NO)
 		return (0);
 	if (map[i][j] == START_SO)
@@ -100,13 +91,13 @@ void	draw_map(t_cub *cub)
 		while (j < cub->map_size.x)
 		{
 			// Fill rectangle
-			if (cub->map[i * cub->map_size.x + j] == 2)
+			if (cub->map->map[i][j] == 2)
 			{
 				fill_rect(cub->img_map, (t_rect){current.x + 1, current.y + 1, cub->cell_size.x - 2, \
 					cub->cell_size.y - 2, 0x0000FFFF});
 			}
 			// Draw cell border
-			if (cub->map.... = 1)
+			if (cub->map->map[i][j] = 1 || cub->map->map[i][j] == 2)
 				draw_rect(cub->img_map, (t_rect){current.x, current.y, cub->cell_size.x, \
 					cub->cell_size.y, 0x00FFFFFF});
 			j++;

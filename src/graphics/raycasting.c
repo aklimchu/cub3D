@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:24:41 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/05 12:54:46 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/05 13:48:14 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	raycasting(t_cub *cub)
 	t_coord_f	ray_horiz;
 	t_coord_f	ray_vert;
 	t_coord		map_pos;
-	int			map_index;
 	float		ray_angle;
 	float		dist_to_ray_final;
 	int	i = 0;
@@ -68,11 +67,10 @@ void	raycasting(t_cub *cub)
 		{
 			map_pos.x = (int)ray_pos.x / 64;
 			map_pos.y = (int)ray_pos.y / 64;
-			map_index = map_pos.y * cub->map_size.x + map_pos.x;
-			if (map_index > 0 && map_index < cub->map_size.x * cub->map_size.y && \
-				cub->map[map_index] == 1) // wall hit
+			if (map_pos.x >= 0 && map_pos.y >= 0 && map_pos.x <= cub->map_size.x && \
+				map_pos.y <= cub->map_size.y && cub->map.map[map_pos.x][map_pos.y] == 2)
 			{
-				printf("Wall hit: %d\n", map_pos.y * cub->map_size.x + map_pos.x);
+				printf("Wall hit: %d, %d\n", map_pos.x, map_pos.y);
 				ray_horiz.x = ray_pos.x;
 				ray_horiz.y = ray_pos.y;
 				dist_to_ray_horiz = check_dist_to_ray((t_coord_f){cub->player.x, cub->player.y}, \
@@ -119,11 +117,10 @@ void	raycasting(t_cub *cub)
 		{
 			map_pos.x = (int)ray_pos.x / 64;
 			map_pos.y = (int)ray_pos.y / 64;
-			map_index = map_pos.y * cub->map_size.x + map_pos.x;
-			if (map_index > 0 && map_index < cub->map_size.x * cub->map_size.y && \
-				cub->map[map_index] == 1) // wall hit
+			if (map_pos.x >= 0 && map_pos.y >= 0 && map_pos.x <= cub->map_size.x && \
+				map_pos.y <= cub->map_size.y && cub->map.map[map_pos.x][map_pos.y] == 2)
 			{
-				printf("Wall hit: %d\n", map_pos.y * cub->map_size.x + map_pos.x);
+				printf("Wall hit: %d, %d\n", map_pos.x, map_pos.y);
 				ray_vert.x = ray_pos.x;
 				ray_vert.y = ray_pos.y;
 				dist_to_ray_vert = check_dist_to_ray((t_coord_f){cub->player.x, cub->player.y}, \
