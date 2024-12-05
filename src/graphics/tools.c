@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:17:51 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/05 14:29:12 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/05 15:00:41 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,46 +16,28 @@ static float	find_angle_and_player(t_map *map, t_cub *cub);
 
 void	initialize_values(t_cub *cub)
 {
+	cub->cell_size.x = 30; // was 64
+	cub->cell_size.y = 30; // was 64
 	cub->map_size.x = cub->map->map_cols;
 	cub->map_size.y = cub->map->map_rows;
 	cub->player.angle = find_angle_and_player(cub->map, cub);
 	cub->player.dx = cos(cub->player.angle) * 5;
 	cub->player.dy = sin(cub->player.angle) * 5;
-	cub->cell_size.x = 64;
-	cub->cell_size.y = 64;
 }
 
 static float	find_angle_and_player(t_map *map, t_cub *cub)
 {
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	while (i < map->map_rows)
-	{
-		j = 0;
-		while (j < map->map_cols)
-		{
-			if (get_tile(i, j, map) == START_NO || get_tile(i, j, map) == START_SO ||\
-				get_tile(i, j, map) == START_WE || get_tile(i, j, map) == START_EA)
-				break ;
-			j++;
-		}
-		i++;
-	}
-	printf("size of map %zu, %zu\n", map->map_rows , map->map_cols);
-	printf("player found in tile %zu, %zu\n", i , j);
-	cub->player.y = (i + 0.5) * cub->cell_size.y;
-	cub->player.x = (j + 0.5) * cub->cell_size.x;
-	if (get_tile(i, j, map) == START_NO)
+	cub->player.y = (5 + 0.5) * cub->cell_size.y; // get tile number from parsing
+	cub->player.x = (12 + 0.5) * cub->cell_size.x; // get tile number from parsing
+	if (get_tile(5, 12, map) == START_NO)
 		return (0);
-	if (get_tile(i, j, map) == START_SO)
+	if (get_tile(5, 12, map) == START_SO)
 		return (M_PI);
-	if (get_tile(i, j, map) == START_WE)
+	if (get_tile(5, 12, map) == START_WE)
 		return (3 * M_PI / 2);
-	if (get_tile(i, j, map) == START_EA)
+	if (get_tile(5, 12, map) == START_EA)
 		return (M_PI / 2);
-	return (-1);
+	return (0);
 }
 
 void	draw_map(t_cub *cub)

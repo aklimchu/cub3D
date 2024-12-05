@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:24:41 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/05 14:16:48 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/05 15:02:08 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,16 @@ void	raycasting(t_cub *cub)
 		float	neg_inv_tan = -1 / tan(ray_angle);
 		if (ray_angle > M_PI) // looking up
 		{
-			ray_pos.y = ((((int)cub->player.y / 64) * 64) - 0.0001);
+			ray_pos.y = ((((int)cub->player.y / cub->cell_size.y) * cub->cell_size.y) - 0.0001);
 			ray_pos.x = (cub->player.y - ray_pos.y) * neg_inv_tan + cub->player.x;
-			offset.y = -64;
+			offset.y = -1 * cub->cell_size.y;
 			offset.x = -offset.y * neg_inv_tan;
 		}
 		if (ray_angle < M_PI) // looking down
 		{
-			ray_pos.y = ((((int)cub->player.y / 64) * 64) + 64);
+			ray_pos.y = ((((int)cub->player.y / cub->cell_size.y) * cub->cell_size.y) + cub->cell_size.y);
 			ray_pos.x = (cub->player.y - ray_pos.y) * neg_inv_tan + cub->player.x;
-			offset.y = 64;
+			offset.y = cub->cell_size.y;
 			offset.x = -offset.y * neg_inv_tan;
 		}
 		if (ray_angle == 0 || ray_angle == M_PI) // looking straight left or right
@@ -65,10 +65,10 @@ void	raycasting(t_cub *cub)
 		}
 		while (dof < 8)
 		{
-			map_pos.x = (int)ray_pos.x / 64;
-			map_pos.y = (int)ray_pos.y / 64;
-			if (map_pos.x >= 0 && map_pos.y >= 0 && map_pos.x <= cub->map_size.x && \
-				map_pos.y <= cub->map_size.y && get_tile(map_pos.y, map_pos.x, cub->map) == WALL)
+			map_pos.x = (int)ray_pos.x / cub->cell_size.x;
+			map_pos.y = (int)ray_pos.y / cub->cell_size.y;
+			if (map_pos.x >= 0 && map_pos.y >= 0 && map_pos.x < cub->map_size.x && \
+				map_pos.y < cub->map_size.y && get_tile(map_pos.y, map_pos.x, cub->map) == WALL) // or equal?
 			{
 				printf("Wall hit: %d, %d\n", map_pos.x, map_pos.y);
 				ray_horiz.x = ray_pos.x;
@@ -95,16 +95,16 @@ void	raycasting(t_cub *cub)
 		float	neg_tan = -1 * tan(ray_angle);
 		if (ray_angle > M_PI / 2 && ray_angle < M_PI * 3 / 2) // looking left
 		{
-			ray_pos.x = ((((int)cub->player.x / 64) * 64) - 0.0001);
+			ray_pos.x = ((((int)cub->player.x / cub->cell_size.x) * cub->cell_size.x) - 0.0001);
 			ray_pos.y = (cub->player.x - ray_pos.x) * neg_tan + cub->player.y;
-			offset.x = -64;
+			offset.x = -1 * cub->cell_size.x;
 			offset.y = -offset.x * neg_tan;
 		}
 		if (ray_angle < M_PI / 2 || ray_angle > M_PI * 3 / 2) // looking right
 		{
-			ray_pos.x = ((((int)cub->player.x / 64) * 64) + 64);
+			ray_pos.x = ((((int)cub->player.x / cub->cell_size.x) * cub->cell_size.x) + cub->cell_size.x);
 			ray_pos.y = (cub->player.x - ray_pos.x) * neg_tan + cub->player.y;
-			offset.x = 64;
+			offset.x = cub->cell_size.x;
 			offset.y = -offset.x * neg_tan;
 		}
 		if (ray_angle == 0 || ray_angle == M_PI) // looking straight lup or down
@@ -115,10 +115,10 @@ void	raycasting(t_cub *cub)
 		}
 		while (dof < 8)
 		{
-			map_pos.x = (int)ray_pos.x / 64;
-			map_pos.y = (int)ray_pos.y / 64;
-			if (map_pos.x >= 0 && map_pos.y >= 0 && map_pos.x <= cub->map_size.x && \
-				map_pos.y <= cub->map_size.y && get_tile(map_pos.y, map_pos.x, cub->map) == WALL)
+			map_pos.x = (int)ray_pos.x / cub->cell_size.x;
+			map_pos.y = (int)ray_pos.y / cub->cell_size.y;
+			if (map_pos.x >= 0 && map_pos.y >= 0 && map_pos.x < cub->map_size.x && \
+				map_pos.y < cub->map_size.y && get_tile(map_pos.y, map_pos.x, cub->map) == WALL) // or equal?
 			{
 				printf("Wall hit: %d, %d\n", map_pos.x, map_pos.y);
 				ray_vert.x = ray_pos.x;
