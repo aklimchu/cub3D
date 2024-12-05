@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:16:34 by pleander          #+#    #+#             */
-/*   Updated: 2024/12/04 14:55:10 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/05 10:29:00 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ static void	parse_texture_path(char **dst, char *line)
 	while (ft_isspace(*line))
 		line++;
 	if (*line == '\n' || *line == '\0')
-		return;
+		return ;
 	else
 		error_exit(ERR_INVALID_FILE);
 }
 
-static int line_is_empty(char *line)
+static int	line_is_empty(char *line)
 {
 	while (ft_isspace(*line))
 		line++;
@@ -56,7 +56,7 @@ static int line_is_empty(char *line)
  * @param map: map
  * @return: 0 if parsed line, -1 otherwise
  */
-int parse_line(char *line, t_map *map)
+int	parse_line(char *line, t_map *map)
 {
 	if (ft_isalpha(line[0]))
 	{

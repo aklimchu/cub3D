@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:51:26 by pleander          #+#    #+#             */
-/*   Updated: 2024/12/04 15:24:31 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/05 10:29:32 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "libft.h"
 #include "memlist.h"
 
-static void parse_file(int fd, t_map *map)
+static void	parse_file(int fd, t_map *map)
 {
 	char	*line;
 	int		reading_map;
@@ -51,4 +51,3 @@ t_map	*parse(char *path)
 	parse_file(fd, map);
 	return (map);
 }
-

@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:23:32 by pleander          #+#    #+#             */
-/*   Updated: 2024/12/05 10:11:33 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/05 10:30:18 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	read_map_line(char *line, t_list **lst)
 
 static int	get_longest_row(t_list **rows)
 {
-	t_list *row;
+	t_list	*row;
 	int		longest;
 	int		len;
 
@@ -64,12 +64,12 @@ static int	get_longest_row(t_list **rows)
 
 static void	parse_map_row(t_map_elems *dst, int size, char *row)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (row[i] && row[i] != '\n')
 	{
-		if (row[i] == ' ')	
+		if (row[i] == ' ')
 			dst[i] = PADDING;
 		else if (row[i] == '0')
 			dst[i] = EMPTY;
@@ -93,10 +93,10 @@ static void	parse_map_row(t_map_elems *dst, int size, char *row)
 
 void	parse_map(t_map *map, t_list **rows)
 {
-	int n_rows;
-	int	n_cols;
-	int	i;
-	t_list *cur;
+	int		n_rows;
+	int		n_cols;
+	int		i;
+	t_list	*cur;
 
 	n_cols = get_longest_row(rows);
 	n_rows = ft_lstsize(*rows);
@@ -115,4 +115,3 @@ void	parse_map(t_map *map, t_list **rows)
 		i++;
 	}
 }
-	
