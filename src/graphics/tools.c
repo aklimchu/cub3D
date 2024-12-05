@@ -5,49 +5,75 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/12/05 12:02:58 by aklimchu         ###   ########.fr       */
+/*   Created: 2024/12/05 13:17:51 by aklimchu          #+#    #+#             */
+/*   Updated: 2024/12/05 13:46:56 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../inc/cub3D.h"
+
+static void		get_map_size(t_cub *cub);
+static float	find_angle_and_player(t_map_elems **map, t_cub *cub);
 
 void	initialize_values(t_cub *cub)
 {
 	int		i;
 	
-	cub->map_size.x = 10;
-	cub->map_size.y = 10;
-	memset(&cub->player, 0, sizeof(cub->player));
-	cub->player.x = 300;
-	cub->player.y = 300;
+	get_map_size(cub);
+	get_player_location(cub);
+	cub->player.angle = find_angle_and_player(cub->map->map, cub);
 	cub->player.dx = cos(cub->player.angle) * 5;
 	cub->player.dy = sin(cub->player.angle) * 5;
 	cub->cell_size.x = 64;
 	cub->cell_size.y = 64;
-	cub->map = (int *)reserve(cub->map_size.x * cub->map_size.y * sizeof(int));
-	if (!cub->map)
-		error_exit("malloc failed");
-	int raw_map[] =
-	{
-		1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-		1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-		1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-		1, 0, 0, 0, 0, 0, 0, 1, 0, 1,
-		1, 0, 1, 0, 0, 0, 0, 0, 0, 1,
-		1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-		1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-		1, 0, 0, 0, 0, 1, 0, 0, 0, 1,
-		1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-		1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-	};
+}
+
+static void		get_map_size(t_cub *cub)
+{
+	int	i;
+
 	i = 0;
-	while (i < cub->map_size.x * cub->map_size.y)
+	while (map[i])
+		i++;
+	cub->map_size.x = i;
+	i = 0;
+	if (map[0])
 	{
-		cub->map[i] = raw_map[i];
+		while (map[0][i])
+			i++;
+	}
+	cub->map_size.y = i;
+}
+
+static float	find_angle_and_player(t_map_elems **map, t_cub *cub)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == START_NO || map[i][j] == START_SO ||\
+				map[i][j] == START_WE || map[i][j] == START_EA)
+				break ;
+			j++;
+		}
 		i++;
 	}
+	cub->player.x = (i + 0.5) * cub->cell_size.x;
+	cub->player.y = (j + 0.5) * cub->cell_size.y;
+	if (map[i][j] == START_NO)
+		return (0);
+	if (map[i][j] == START_SO)
+		return (M_PI);
+	if (map[i][j] == START_WE)
+		return (3 * M_PI / 2);
+	if (map[i][j] == START_EA)
+		return (M_PI / 2);
+	return (-1);
 }
 
 void	draw_map(t_cub *cub)
@@ -65,14 +91,15 @@ void	draw_map(t_cub *cub)
 		while (j < cub->map_size.x)
 		{
 			// Fill rectangle
-			if (cub->map[i * cub->map_size.x + j] == 1)
+			if (cub->map->map[i][j] == 2)
 			{
 				fill_rect(cub->img_map, (t_rect){current.x + 1, current.y + 1, cub->cell_size.x - 2, \
 					cub->cell_size.y - 2, 0x0000FFFF});
 			}
 			// Draw cell border
-			draw_rect(cub->img_map, (t_rect){current.x, current.y, cub->cell_size.x, \
-				cub->cell_size.y, 0x00FFFFFF});
+			if (cub->map->map[i][j] = 1 || cub->map->map[i][j] == 2)
+				draw_rect(cub->img_map, (t_rect){current.x, current.y, cub->cell_size.x, \
+					cub->cell_size.y, 0x00FFFFFF});
 			j++;
 			current.x += cub->cell_size.x;
 		}
@@ -81,34 +108,4 @@ void	draw_map(t_cub *cub)
 	}
 }
 
-void	draw_rect(mlx_image_t *img, t_rect rect)
-{
-	int		x;
-	int		y;
 
-	x = rect.x;
-	y = rect.y;
-	while (x < rect.x + rect.width)
-		mlx_put_pixel(img, x++, y, rect.color);
-	while (y < rect.y + rect.height)
-		mlx_put_pixel(img, x, y++, rect.color);
-	while (x > rect.x)
-		mlx_put_pixel(img, x--, y, rect.color);
-	while (y > rect.y)
-		mlx_put_pixel(img, x, y--, rect.color);
-}
-
-void	fill_rect(mlx_image_t *img, t_rect rect)
-{
-	int		y;
-	int		x;
-
-	y = rect.y;
-	while (y < rect.y + rect.height)
-	{
-		x = rect.x;
-		while (x < rect.x + rect.width)
-			mlx_put_pixel(img, x++, y, rect.color);
-		y++;
-	}
-}
