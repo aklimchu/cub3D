@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/05 10:19:16 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/05 10:34:34 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,13 @@
 # include <fcntl.h> // for open
 # include <unistd.h> // for close
 # include <sys/time.h> // for gettimeofday
+# include <stdbool.h> // for boolean data type
+# include <math.h> // for mathematical functions
 
 # define SCREEN_W 1500
 # define SCREEN_H 1500
 
+// ERROR MESSAGES
 # define ERR_INVALID_FILE "Invalid input file"
 # define ERR_FATAL "Fatal error"
 
@@ -49,12 +52,27 @@ typedef struct s_coord
 	int		y;
 }				t_coord;
 
+typedef struct s_coord_f
+{
+	float	x;
+	float	y;
+}				t_coord_f;
+
+typedef struct s_player
+{
+	float	x;
+	float	y;
+	float	dx;
+	float	dy;
+	float	angle;
+}				t_player;
+
 typedef struct s_cub
 {
 	mlx_t		*mlx;
 	mlx_image_t *img;
 	t_coord		map_size;
-	t_coord		player;
+	t_player	player;
 	t_coord		cell_size;
 	t_map_elems	**map;
 }				t_cub;
@@ -86,21 +104,30 @@ typedef struct s_map
 	t_map_elems	**map;
 }	t_map;
 
-void	handle_destroy(void *input);
-void	free_everything(mlx_image_t *img, t_cub *cub, int exit_code);
-void	handle_keypress(struct mlx_key_data key_data, void *input);
-void	draw_cub(void *input);
-void	initialize_values(t_cub *cub);
-void	draw_map(t_cub *cub);
-void	draw_rect(mlx_image_t *img, t_rect rect);
-void	fill_rect(mlx_image_t *img, t_rect rect);
-void	error_exit(char	*msg);
+// FUNCTIONS
+// parsing
 t_map	*parse(char *path);
-int		parse_line(char *line, t_map *map);
 void	parse_colors(t_color *dst, char *line);
 void	read_map_line(char *line, t_list **lst);
 void	parse_map(t_map *map, t_list **rows);
 char	*get_token(t_map_elems tok);
 void	show_map(t_map_elems **map);
+int		parse_line(char *line, t_map *map);
+// events
+void	handle_destroy(void *input);
+void	handle_keypress(struct mlx_key_data key_data, void *input);
+// drawing
+void	draw_cub(void *input);
+void	draw_map(t_cub *cub);
+void	draw_rect(mlx_image_t *img, t_rect rect);
+void	draw_player(t_cub *cub);
+void	raycasting(t_cub *cub);
+void	fill_rect(mlx_image_t *img, t_rect rect);
+void	draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b);
+// miscellaneous
+void	initialize_values(t_cub *cub);
+// exit
+void	free_everything(mlx_image_t *img, t_cub *cub, int exit_code);
+void	error_exit(char	*msg);
 
 #endif /*CUB3D_H*/

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+         #
+#    By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/16 09:43:07 by pleander          #+#    #+#              #
-#    Updated: 2024/08/26 09:45:10 by pleander         ###   ########.fr        #
+#    Updated: 2024/12/04 09:05:02 by aklimchu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
