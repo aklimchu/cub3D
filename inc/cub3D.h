@@ -116,7 +116,7 @@ void		parse_colors(t_color *dst, char *line);
 void		read_map_line(char *line, t_list **lst);
 void		parse_map(t_map *map, t_list **rows);
 char		*get_token(t_map_elems tok);
-void		show_map(t_map_elems **map);
+void		show_map(t_map *map);
 int			parse_line(char *line, t_map *map);
 t_map_elems	get_tile(size_t row, size_t col, t_map *map);
 // events

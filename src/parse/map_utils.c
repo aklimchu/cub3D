@@ -34,18 +34,18 @@ char	*get_token(t_map_elems tok)
 		return ("!ERROR!");
 }
 
-void	show_map(t_map_elems **map)
+void	show_map(t_map *map)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
-	while (map[i])
+	while (i < map->map_rows)
 	{
 		j = 0;
-		while (map[i][j] != END_ROW)
+		while (j < map->map_cols)
 		{
-			ft_printf("%s", get_token(map[i][j]));
+			ft_printf("%s", get_token(get_tile(i, j, map)));
 			j++;
 		}
 		ft_printf("\n");
