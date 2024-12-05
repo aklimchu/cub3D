@@ -39,13 +39,13 @@
 typedef enum e_map_elems
 {
 	EMPTY = 1,
-	WALL,
-	PADDING,
-	START_NO,
-	START_SO,
-	START_WE,
-	START_EA,
-	END_ROW
+	WALL = 2,
+	PADDING = 3,
+	START_NO = 4,
+	START_SO = 5,
+	START_WE = 6,
+	START_EA = 7,
+	END_ROW = 8
 }	t_map_elems;
 
 typedef struct s_coord
