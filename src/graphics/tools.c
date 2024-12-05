@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:17:51 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/05 15:00:41 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/05 15:13:50 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ void	initialize_values(t_cub *cub)
 
 static float	find_angle_and_player(t_map *map, t_cub *cub)
 {
-	cub->player.y = (5 + 0.5) * cub->cell_size.y; // get tile number from parsing
-	cub->player.x = (12 + 0.5) * cub->cell_size.x; // get tile number from parsing
-	if (get_tile(5, 12, map) == START_NO)
-		return (0);
-	if (get_tile(5, 12, map) == START_SO)
-		return (M_PI);
-	if (get_tile(5, 12, map) == START_WE)
+	cub->player.y = (map->player_start.x + 0.5) * cub->cell_size.y; // get tile number from parsing
+	cub->player.x = (map->player_start.y + 0.5) * cub->cell_size.x; // get tile number from parsing
+	if (get_tile(map->player_start.x, map->player_start.y, map) == START_NO)
 		return (3 * M_PI / 2);
-	if (get_tile(5, 12, map) == START_EA)
+	if (get_tile(map->player_start.x, map->player_start.y, map) == START_SO)
 		return (M_PI / 2);
+	if (get_tile(map->player_start.x, map->player_start.y, map) == START_WE)
+		return (M_PI);
+	if (get_tile(map->player_start.x, map->player_start.y, map) == START_EA)
+		return (0);
 	return (0);
 }
 

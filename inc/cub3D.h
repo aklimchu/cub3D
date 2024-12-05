@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/05 15:06:14 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/05 15:07:42 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ typedef struct s_map
 	t_map_elems	**map;
 	size_t		map_cols;
 	size_t		map_rows;
-	t_coord		player_start;
+	t_coord		player_start; // row first
 }	t_map;
 
 typedef struct s_cub
