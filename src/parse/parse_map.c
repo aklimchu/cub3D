@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:23:32 by pleander          #+#    #+#             */
-/*   Updated: 2024/12/05 10:30:18 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/09 09:49:50 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static void	parse_map_row(t_map_elems *dst, int size, char *row)
 
 void	parse_map(t_map *map, t_list **rows)
 {
-	int		i;
+	size_t	i;
 	t_list	*cur;
 
 	map->map_cols = (size_t)get_longest_row(rows);

@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/05 15:07:42 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/09 09:40:26 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ void		show_map(t_map *map);
 int			parse_line(char *line, t_map *map);
 t_map_elems	get_tile(size_t row, size_t col, t_map *map);
 void		check_map(t_map *map);
+void		check_tiles(t_map *map);
 // events
 void	handle_destroy(void *input);
 void	handle_keypress(struct mlx_key_data key_data, void *input);

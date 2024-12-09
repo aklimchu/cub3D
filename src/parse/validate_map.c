@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 14:40:34 by pleander          #+#    #+#             */
-/*   Updated: 2024/12/05 15:19:13 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/09 09:42:13 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,5 @@ void	check_map(t_map *map)
 {
 	find_player_start(map);
 	check_player_inside_map(map);
+	check_tiles(map);
 }
