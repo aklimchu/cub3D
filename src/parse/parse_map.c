@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:23:32 by pleander          #+#    #+#             */
-/*   Updated: 2024/12/05 10:30:18 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/09 09:49:50 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,14 @@ static	void	check_map_line(char *line)
 void	read_map_line(char *line, t_list **lst)
 {
 	t_list	*new;
+	char	*dup;
 
 	check_map_line(line);
-	new = ft_lstnew(line);
+	dup = ft_strdup(line);
+	if (!dup)
+		error_exit(ERR_FATAL);
+	memlist_add(dup);
+	new = ft_lstnew(dup);
 	if (!new)
 		error_exit(ERR_FATAL);
 	memlist_add(new);
@@ -70,22 +75,21 @@ static void	parse_map_row(t_map_elems *dst, int size, char *row)
 	while (row[i] && row[i] != '\n')
 	{
 		if (row[i] == ' ')
-			dst[i] = PADDING;
+			dst[i++] = PADDING;
 		else if (row[i] == '0')
-			dst[i] = EMPTY;
+			dst[i++] = EMPTY;
 		else if (row[i] == '1')
-			dst[i] = WALL;
+			dst[i++] = WALL;
 		else if (row[i] == 'N')
-			dst[i] = START_NO;
+			dst[i++] = START_NO;
 		else if (row[i] == 'S')
-			dst[i] = START_SO;
+			dst[i++] = START_SO;
 		else if (row[i] == 'W')
-			dst[i] = START_WE;
+			dst[i++] = START_WE;
 		else if (row[i] == 'E')
-			dst[i] = START_EA;
+			dst[i++] = START_EA;
 		else
 			error_exit(ERR_INVALID_FILE);
-		i++;
 	}
 	while (i < size)
 		dst[i++] = PADDING;
@@ -94,7 +98,7 @@ static void	parse_map_row(t_map_elems *dst, int size, char *row)
 
 void	parse_map(t_map *map, t_list **rows)
 {
-	int		i;
+	size_t	i;
 	t_list	*cur;
 
 	map->map_cols = (size_t)get_longest_row(rows);

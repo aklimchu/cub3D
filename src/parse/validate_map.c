@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 14:40:34 by pleander          #+#    #+#             */
-/*   Updated: 2024/12/05 15:19:13 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/09 09:42:13 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static void	find_player_start(t_map *map)
 		}
 		i++;
 	}
+	if (map->player_start.x == -1 || map->player_start.y == -1)
+		error_exit("Player start location missing");
 }
 
 static void	check_player_inside_map(t_map *map)
@@ -67,6 +69,9 @@ static void	check_player_inside_map(t_map *map)
 
 void	check_map(t_map *map)
 {
+	if (!map->map || !*map->map)
+		error_exit("The map is missing from the cub-file");
 	find_player_start(map);
 	check_player_inside_map(map);
+	check_tiles(map);
 }

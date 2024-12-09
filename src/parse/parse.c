@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:51:26 by pleander          #+#    #+#             */
-/*   Updated: 2024/12/05 14:49:08 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/09 10:20:13 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,22 @@
 #include "get_next_line.h"
 #include "libft.h"
 #include "memlist.h"
+
+static void	release_list(t_list **lst)
+{
+	t_list	*current;
+	t_list	*next;
+
+	current = *lst;
+	while (current)
+	{
+		next = current->next;
+		release(current->content);
+		release(current);
+		current = next;
+	}
+	*lst = NULL;
+}
 
 static void	parse_file(int fd, t_map *map)
 {
@@ -24,6 +40,7 @@ static void	parse_file(int fd, t_map *map)
 	reading_map = 0;
 	map_rows = NULL;
 	line = get_next_line(fd);
+	memlist_add(line);
 	while (line)
 	{
 		if (reading_map)
@@ -31,10 +48,14 @@ static void	parse_file(int fd, t_map *map)
 		if (!reading_map && parse_line(line, map) < 0)
 			reading_map = 1;
 		else
+		{
+			release(line);
 			line = get_next_line(fd);
+			memlist_add(line);
+		}
 	}
 	parse_map(map, &map_rows);
-	ft_lstclear(&map_rows, &free);
+	release_list(&map_rows);
 }
 
 t_map	*parse(char *path)
