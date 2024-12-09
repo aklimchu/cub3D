@@ -14,8 +14,9 @@
 
 echo "Running CUB3D tests.."
 
-CUB3D="../cub3D"
-BROKEN_MAPS=$(ls broken_maps/*.cub)
+SCRIPTDIR=$(dirname "$0")
+CUB3D="$SCRIPTDIR/../cub3D"
+BROKEN_MAPS=$(ls "$SCRIPTDIR"/broken_maps/*.cub)
 
 echo "Testing maps that should not work.."
 for MAP in $BROKEN_MAPS
