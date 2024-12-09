@@ -30,9 +30,14 @@ static	void	check_map_line(char *line)
 void	read_map_line(char *line, t_list **lst)
 {
 	t_list	*new;
+	char	*dup;
 
 	check_map_line(line);
-	new = ft_lstnew(line);
+	dup = ft_strdup(line);
+	if (!dup)
+		error_exit(ERR_FATAL);
+	memlist_add(dup);
+	new = ft_lstnew(dup);
 	if (!new)
 		error_exit(ERR_FATAL);
 	memlist_add(new);

@@ -15,6 +15,22 @@
 #include "libft.h"
 #include "memlist.h"
 
+static void release_list(t_list **lst)
+{
+	t_list	*current;
+	t_list	*next;
+
+	current = *lst;
+	while (current)
+	{
+		next = current->next;
+		release(current->content);
+		release(current);
+		current = next;
+	}
+	*lst = NULL;
+}
+
 static void	parse_file(int fd, t_map *map)
 {
 	char	*line;
@@ -33,14 +49,13 @@ static void	parse_file(int fd, t_map *map)
 			reading_map = 1;
 		else
 		{
-			if (!reading_map)
-				release(line);
+			release(line);
 			line = get_next_line(fd);
 			memlist_add(line);
 		}
 	}
 	parse_map(map, &map_rows);
-	ft_lstclear(&map_rows, &release);
+	release_list(&map_rows);
 }
 
 t_map	*parse(char *path)
