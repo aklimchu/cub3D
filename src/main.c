@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:10:41 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/05 12:53:55 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/09 11:34:13 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,14 @@ static void	create_images(t_cub *cub)
 	cub->mlx = mlx_init(SCREEN_W, SCREEN_H, "cub3D", 0);
 	if (cub->mlx == NULL)
 		exit (EXIT_FAILURE);
-	cub->img_map = mlx_new_image(cub->mlx, SCREEN_W, SCREEN_H);
+	cub->img_map = mlx_new_image(cub->mlx, SCREEN_W / 2, SCREEN_H / 2);
 	if (cub->img_map == NULL)
 		free_everything(cub, EXIT_FAILURE);
 	cub->img_game = mlx_new_image(cub->mlx, SCREEN_W / 2, SCREEN_H / 2);
 	if (cub->img_game == NULL)
+		free_everything(cub, EXIT_FAILURE);
+	if (!cub->img_map || (mlx_image_to_window(cub->mlx, cub->img_map, 0, 0) < 0))
+		free_everything(cub, EXIT_FAILURE);
+	if (!cub->img_game || (mlx_image_to_window(cub->mlx, cub->img_game, 650, 0) < 0))
 		free_everything(cub, EXIT_FAILURE);
 }

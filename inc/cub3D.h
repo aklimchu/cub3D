@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/05 15:07:42 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/09 11:26:02 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,16 @@
 # include <stdbool.h> // for boolean data type
 # include <math.h> // for mathematical functions
 
-# define SCREEN_W 2000
-# define SCREEN_H 2000
+# define SCREEN_W 3000
+# define SCREEN_H 3000
 # define DEGREE 0.0174533
+# define WHITE 0xFFFFFFFF
+# define GREY 0x808080FF
+# define YELLOW 0xFFFF00FF
+# define BLUE 0x0000FFFF
+# define RED 0xFF0000FF
+# define GREEN 0x008000FF
+#define BPP sizeof(int32_t)
 
 // ERROR MESSAGES
 # define ERR_INVALID_FILE "Invalid input file"
@@ -106,8 +113,12 @@ typedef struct s_cub
 	mlx_image_t *img_game;
 	t_coord		map_size;
 	t_player	player;
-	t_coord		cell_size;
+	int			cell_size;
 	t_map		*map;
+	int			iter_limit;
+	float dist_to_ray;
+	int ray_loop;
+	float ray_angle;
 }				t_cub;
 
 // FUNCTIONS
@@ -132,7 +143,8 @@ void	draw_player(t_cub *cub);
 void	raycasting(t_cub *cub);
 void	fill_rect(mlx_image_t *img, t_rect rect);
 void	draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b, int color);
-void	draw_game(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle);
+void	draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle);
+void	draw_game(void *input);
 // miscellaneous
 void	initialize_values(t_cub *cub);
 // exit

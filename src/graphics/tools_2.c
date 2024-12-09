@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:42:30 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/05 13:09:24 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/09 10:12:56 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ void	draw_player(t_cub *cub)
 	while (i < 360)
 	{
 		angle = i;
-		x1 = 5 * cos(angle * M_PI / 180);
-		y1 = 5 * sin(angle * M_PI / 180);
+		x1 = (cub->cell_size / 7) * cos(angle * M_PI / 180);
+		y1 = (cub->cell_size / 7) * sin(angle * M_PI / 180);
 		mlx_put_pixel(cub->img_map, cub->player.x + x1, cub->player.y + y1, 0xFFFFFFFF);
 		i += 0.1;
 	}
 	//draw direction line
-	draw_line(cub->img_map, (t_coord_f){cub->player.x, cub->player.y}, \
+	/* draw_line(cub->img_map, (t_coord_f){cub->player.x, cub->player.y}, \
 		(t_coord_f){cub->player.x + cub->player.dx * 5, \
-		cub->player.y + cub->player.dy * 5}, 0xFFFFFFFF);
+		cub->player.y + cub->player.dy * 5}, 0xFFFFFFFF); */ 
 	
 }
 
