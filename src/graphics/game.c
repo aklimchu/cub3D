@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 09:40:50 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/09 13:01:32 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/09 14:58:54 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,5 @@ void draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle)
 		wall_height = 320;
 	float	wall_offset = 160 - wall_height / 2;
 	draw_line(cub->img_game, (t_coord_f){ray_loop * 8 + 300, wall_offset + 800}, \
-		(t_coord_f){ray_loop * 8 + 300, wall_height + wall_offset + 800}, 0x008000FF);
-	
-	
+		(t_coord_f){ray_loop * 8 + 300, wall_height + wall_offset + 800}, GREEN);
 }

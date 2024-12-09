@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:17:51 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/09 13:32:07 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/09 14:41:04 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void	initialize_values(t_cub *cub)
 	}
 	cub->player.angle = find_angle_and_player(cub->map, cub);
 	
-	float	/* frame1, frame2,  */fps;
+	float	fps;
 
 	fps = 1000 / cub->mlx->delta_time;
-	cub->player.dx = cos(cub->player.angle) * /* 0.2 * fps */ 5;
-	cub->player.dy = sin(cub->player.angle) */*  0.2 * fps */ 5;
+	cub->player.dx = cos(cub->player.angle) * /* 0.2 * fps */5;
+	cub->player.dy = sin(cub->player.angle) * /* 0.2 * fps */5;
 }
 
 static float	find_angle_and_player(t_map *map, t_cub *cub)
@@ -70,12 +70,12 @@ void	draw_map(t_cub *cub)
 			if (get_tile(i, j, cub->map) == WALL)
 			{
 				fill_rect(cub->img_map, (t_rect){current.x + 1, current.y + 1, cub->cell_size - 2, \
-					cub->cell_size - 2, 0x0000FFFF});
+					cub->cell_size - 2, BLUE});
 			}
 			// Draw cell border
 			if (get_tile(i, j, cub->map) == EMPTY || get_tile(i, j, cub->map) == WALL)
 				draw_rect(cub->img_map, (t_rect){current.x, current.y, cub->cell_size, \
-					cub->cell_size, 0x00FFFFFF});
+					cub->cell_size, LIGHT_BLUE});
 			j++;
 			current.x += cub->cell_size;
 		}

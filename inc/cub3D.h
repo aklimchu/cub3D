@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/09 13:53:42 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/09 14:40:57 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@
 # define GREY 0x808080FF
 # define YELLOW 0xFFFF00FF
 # define BLUE 0x0000FFFF
+# define LIGHT_BLUE 0x00FFFFFF
 # define RED 0xFF0000FF
 # define GREEN 0x008000FF
-#define BPP sizeof(int32_t)
+# define BPP sizeof(int32_t)
 
 // ERROR MESSAGES
 # define ERR_INVALID_FILE "Invalid input file"

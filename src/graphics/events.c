@@ -6,13 +6,14 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:15:43 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/09 13:50:35 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:05:50 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
 static int	check_next_tile(t_cub *cub, float x, float y);
+static int	check_offset(float *num1, int *off1, float *num2, int *off2);
 
 void	handle_keypress(struct mlx_key_data key_data, void *input)
 {
@@ -20,12 +21,19 @@ void	handle_keypress(struct mlx_key_data key_data, void *input)
 	
 	cub = (t_cub *)input;
 	int	x_offset, y_offset;
-	x_offset = cub->cell_size / 7;
-	y_offset = cub->cell_size / 7;
+/* 	if (cub->player.dx > 0) */
+		x_offset = cub->cell_size / 7;
+/* 	else
+		x_offset = cub->cell_size / 7 * (-1);
+	if (cub->player.dy > 0) */
+		y_offset = cub->cell_size / 7;
+/* 	else
+		y_offset = cub->cell_size / 7 * (-1); */
 	
 	if (key_data.key == MLX_KEY_ESCAPE && key_data.action == MLX_PRESS)
 		free_everything(cub, 0);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_A) == true && \
+		check_offset(&cub->player.dy, &x_offset, &cub->player.dx, &y_offset) == 0 && \
 		check_next_tile(cub, cub->player.x + cub->player.dy + x_offset, \
 			cub->player.y - cub->player.dx - y_offset) == 0)
 	{
@@ -33,13 +41,15 @@ void	handle_keypress(struct mlx_key_data key_data, void *input)
 		cub->player.y -= cub->player.dx;
 	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_D) == true && \
+		check_offset(&cub->player.dy, &x_offset, &cub->player.dx, &y_offset) == 0 && \
 		check_next_tile(cub, cub->player.x - cub->player.dy - x_offset, \
 			cub->player.y + cub->player.dx + y_offset) == 0)
 	{
 		cub->player.x -= cub->player.dy;
-		cub->player.y += cub->player.dx;;
+		cub->player.y += cub->player.dx;
 	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_W) == true && \
+		check_offset(&cub->player.dx, &x_offset, &cub->player.dy, &y_offset) == 0 && \
 		check_next_tile(cub, cub->player.x + cub->player.dx + x_offset, \
 			cub->player.y + cub->player.dy + y_offset) == 0)
 	{
@@ -47,6 +57,7 @@ void	handle_keypress(struct mlx_key_data key_data, void *input)
 		cub->player.y += cub->player.dy;
 	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_S) == true && \
+		check_offset(&cub->player.dx, &x_offset, &cub->player.dy, &y_offset) == 0 && \
 		check_next_tile(cub, cub->player.x - cub->player.dx - x_offset, \
 			cub->player.y - cub->player.dy - y_offset) == 0)
 	{
@@ -87,4 +98,17 @@ static int	check_next_tile(t_cub *cub, float x, float y)
 		get_tile(y_tile, x_tile, cub->map) == START_WE)
 		return (0);
 	return (1);
+}
+
+static int	check_offset(float *num1, int *off1, float *num2, int *off2)
+{
+	if (*num1 > 0 && *off1 < 0)
+		*off1 *= -1;
+	if (*num1 < 0 && *off1 > 0)
+		*off1 *= -1;
+	if (*num2 > 0 && *off2 < 0)
+		*off2 *= -1;
+	if (*num2 < 0 && *off2 > 0)
+		*off2 *= -1;
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:24:41 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/09 10:52:47 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/09 14:55:44 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	raycasting(t_cub *cub)
 	int	i = 0;
 	int	ray_iter;
 	
-	ray_angle = cub->player.angle - 0.523599;
+	ray_angle = cub->player.angle - 0.523599; // 30 degrees
 	if (ray_angle < 0)
 		ray_angle += 2 * M_PI;
 	if (ray_angle > 2 * M_PI)
@@ -147,7 +147,7 @@ void	raycasting(t_cub *cub)
 			ray_pos.y = ray_vert.y;
 		}
 		draw_line(cub->img_map, (t_coord_f){cub->player.x, cub->player.y}, \
-			(t_coord_f){ray_pos.x, ray_pos.y}, 0xFF0000FF);
+			(t_coord_f){ray_pos.x, ray_pos.y}, RED);
 		i++;
 
 		// draw 3D
