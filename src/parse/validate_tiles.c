@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 09:16:19 by pleander          #+#    #+#             */
-/*   Updated: 2024/12/09 10:31:32 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/09 10:34:10 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static void	check_empty_tile(t_map *map, size_t row, size_t col)
 {
-	int i;
+	int	i;
 	int	j;
 
 	if (row == 0 || row == map->map_rows - 1
-			|| col == 0 || col == map->map_cols - 1)
+		|| col == 0 || col == map->map_cols - 1)
 		error_exit("The map must be surrounded by walls");
 	i = -1;
 	while (i < 2)
@@ -51,5 +51,4 @@ void	check_tiles(t_map *map)
 		}
 		i++;
 	}
-
 }

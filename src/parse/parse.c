@@ -15,7 +15,7 @@
 #include "libft.h"
 #include "memlist.h"
 
-static void release_list(t_list **lst)
+static void	release_list(t_list **lst)
 {
 	t_list	*current;
 	t_list	*next;

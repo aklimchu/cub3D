@@ -75,22 +75,21 @@ static void	parse_map_row(t_map_elems *dst, int size, char *row)
 	while (row[i] && row[i] != '\n')
 	{
 		if (row[i] == ' ')
-			dst[i] = PADDING;
+			dst[i++] = PADDING;
 		else if (row[i] == '0')
-			dst[i] = EMPTY;
+			dst[i++] = EMPTY;
 		else if (row[i] == '1')
-			dst[i] = WALL;
+			dst[i++] = WALL;
 		else if (row[i] == 'N')
-			dst[i] = START_NO;
+			dst[i++] = START_NO;
 		else if (row[i] == 'S')
-			dst[i] = START_SO;
+			dst[i++] = START_SO;
 		else if (row[i] == 'W')
-			dst[i] = START_WE;
+			dst[i++] = START_WE;
 		else if (row[i] == 'E')
-			dst[i] = START_EA;
+			dst[i++] = START_EA;
 		else
 			error_exit(ERR_INVALID_FILE);
-		i++;
 	}
 	while (i < size)
 		dst[i++] = PADDING;
