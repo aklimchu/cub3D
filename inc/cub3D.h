@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/09 14:40:57 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/10 13:46:31 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,20 @@ typedef struct s_map
 	t_coord		player_start; // row first
 }	t_map;
 
+typedef struct s_textures
+{
+	mlx_texture_t	*n;
+	mlx_texture_t	*s;
+	mlx_texture_t	*w;
+	mlx_texture_t	*e;
+}	t_textures;
+
 typedef struct s_cub
 {
 	mlx_t		*mlx;
 	mlx_image_t *img_map;
 	mlx_image_t *img_game;
+	t_textures	*textures;
 	t_coord		map_size;
 	t_player	player;
 	int			cell_size;
@@ -148,6 +157,7 @@ void	fill_rect(mlx_image_t *img, t_rect rect);
 void	draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b, int color);
 void	draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle);
 void	draw_game(void *input);
+void	load_textures(t_cub *cub);
 // miscellaneous
 void	initialize_values(t_cub *cub);
 // exit

@@ -10,10 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdint.h>
 #include "../inc/cub3D.h"
 
 void draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle)
 {
+
 	float	cosine_angle = cub->player.angle - ray_angle; // right name?
 	if (cosine_angle < 0)
 		cosine_angle += 2 * M_PI;
@@ -24,6 +26,18 @@ void draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle)
 	if (wall_height > 320)
 		wall_height = 320;
 	float	wall_offset = 160 - wall_height / 2;
-	draw_line(cub->img_game, (t_coord_f){ray_loop * 8 + 300, wall_offset + 800}, \
-		(t_coord_f){ray_loop * 8 + 300, wall_height + wall_offset + 800}, GREEN);
+	int x = ray_loop * 8 + 300;
+	int y_start = wall_offset + 800;
+	int	y_end	= wall_height + wall_offset + 800;
+	double y_scale = (double)cub->textures->n->height / wall_height;
+
+	int j;
+	j = 0;
+	while (y_start + j < y_end)
+	{
+		uint8_t* pixelstart_t = &cub->textures->e->pixels[(((int)(j * cub->textures->e->width * y_scale) + x) * BPP)];
+		uint8_t* pixelstart_i = &cub->img_game->pixels[((y_start + j) * cub->img_game->width + x) * BPP];
+		ft_memcpy(pixelstart_i, pixelstart_t, BPP * 8);
+		j++;
+	}
 }

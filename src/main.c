@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:10:41 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/09 11:34:13 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/10 13:43:51 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		error_exit("Incorrect amount of arguments");
 	cub.map = parse(argv[1]);
+	load_textures(&cub);
 	create_images(&cub);
 	initialize_values(&cub);
 	mlx_loop_hook(cub.mlx, &draw_cub, &cub);
@@ -47,3 +48,4 @@ static void	create_images(t_cub *cub)
 	if (!cub->img_game || (mlx_image_to_window(cub->mlx, cub->img_game, 650, 0) < 0))
 		free_everything(cub, EXIT_FAILURE);
 }
+
