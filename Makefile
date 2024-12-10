@@ -66,8 +66,6 @@ all:	$(MLX) $(NAME)
 $(MLX):
 	@echo "$(YELLOW)Compiling mlx42... $(DEF_COLOR)"
 	@cmake $(MLX_PATH) -B $(MLX_PATH)/build && make -C $(MLX_PATH)/build -j4				# make mlx42
-	@cp MLX42/include/MLX42/MLX42.h MLX42/include/
-	@cp MLX42/include/MLX42/MLX42_Int.h MLX42/include/
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
@@ -79,8 +77,6 @@ $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 $(NAME):	$(OBJ_DIR) $(OBJ)
 	@echo "$(YELLOW)Compiling libft... $(DEF_COLOR)"
 	@make -C $(LIBFT_DIR) --no-print-directory		# make libft
-	@cp $(LIBFT_LIB) $(NAME)	# copy libft to current
-	@cp $(MLX) $(NAME)			# copy mlx42 to current
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT_LIB) $(MLX) $(INCLUDE) -Iinclude -ldl -lglfw -pthread -lm -o $(NAME)
 	@echo "$(GREEN)SUCCESS, CUB3D IS READY $(DEF_COLOR)"
 
