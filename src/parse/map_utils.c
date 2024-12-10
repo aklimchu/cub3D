@@ -53,11 +53,28 @@ void	show_map(t_map *map)
 	}
 }
 
+/**
+ * @brief Fetches tile information with xy coordinates
+ *
+ * @param x horizontal coordinate. Grows left.
+ * @param y vertical coordinate. Grows down.
+ * @param map 
+ * @return 
+ */
+t_map_elems	get_tile_xy(size_t x, size_t y, t_map *map)
+{
+	if (x > map->map_cols - 1)
+		error_exit("get_tile: attemtped read out of bounds");
+	if (y > map->map_rows - 1)
+		error_exit("get_tile: attemtped read out of bounds");
+	return (map->map[y][x]);
+}
+
 t_map_elems	get_tile(size_t row, size_t col, t_map *map)
 {
-	if (col > map->map_cols - 1 || col < 0)
+	if (col > map->map_cols - 1)
 		error_exit("get_tile: attemtped read out of bounds");
-	if (row > map->map_rows - 1 || row < 0)
+	if (row > map->map_rows - 1)
 		error_exit("get_tile: attemtped read out of bounds");
 	return (map->map[row][col]);
 }

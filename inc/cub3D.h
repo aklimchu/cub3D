@@ -134,6 +134,7 @@ int			parse_line(char *line, t_map *map);
 t_map_elems	get_tile(size_t row, size_t col, t_map *map);
 void		check_map(t_map *map);
 void		check_tiles(t_map *map);
+t_map_elems	get_tile_xy(size_t x, size_t y, t_map *map);
 // events
 void	handle_destroy(void *input);
 void	handle_keypress(struct mlx_key_data key_data, void *input);
