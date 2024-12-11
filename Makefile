@@ -6,7 +6,7 @@
 #    By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 11:18:05 by aklimchu          #+#    #+#              #
-#    Updated: 2024/12/11 11:16:08 by aklimchu         ###   ########.fr        #
+#    Updated: 2024/12/11 12:42:53 by aklimchu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC 		=	src/graphics/events.c \
 				src/graphics/tools_2.c \
 				src/graphics/draw_cub.c \
 				src/graphics/raycasting.c \
+				src/graphics/raycasting_tools.c \
 				src/graphics/game.c \
 				src/graphics/events_tools.c \
 				src/parse/parse.c \
