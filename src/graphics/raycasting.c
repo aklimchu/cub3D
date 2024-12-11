@@ -12,14 +12,15 @@
 
 #include "../inc/cub3D.h"
 
-static void		raycasting_loop(t_cub *cub, float ray_angle, int i);
+static void		raycasting_loop(t_cub *cub, float ray_angle, int i, size_t n_rays);
 static float	check_horiz(t_cub *cub, float ray_angle, float *ray_x, float *ray_y);
 static float	check_vert(t_cub *cub, float ray_angle, float *ray_x, float *ray_y);
 
 void	raycasting(t_cub *cub)
 {
 	float		ray_angle;	
-	int			i;
+	size_t			i;
+	size_t		n_rays;
 
 	ray_angle = cub->player.angle - 30 * DEGREE;
 	if (ray_angle < 0)
@@ -27,10 +28,11 @@ void	raycasting(t_cub *cub)
 	if (ray_angle > 2 * M_PI)
 		ray_angle -= 2 * M_PI;
 	i = 0;
-	while (i < 60)
+	n_rays = cub->img_game->width / 2;
+	while (i < n_rays)
 	{
-		raycasting_loop(cub, ray_angle, i);
-		ray_angle += DEGREE;
+		raycasting_loop(cub, ray_angle, i, n_rays);
+		ray_angle += 60 * DEGREE / n_rays;
 		if (ray_angle < 0)
 			ray_angle += 2 * M_PI;
 		if (ray_angle > 2 * M_PI)
@@ -39,14 +41,16 @@ void	raycasting(t_cub *cub)
 	}
 }
 
-static void	raycasting_loop(t_cub *cub, float ray_angle, int i)
+static void	raycasting_loop(t_cub *cub, float ray_angle, int i, size_t n_rays)
 {
 	t_coord_f	ray_horiz;
 	t_coord_f	ray_vert;
 	t_coord_f	ray_pos;
 	t_coord_f	dist_to_ray;
 	float		dist_to_ray_final;
+	int			side;
 	
+	side = -1;
 	dist_to_ray.x = check_horiz(cub, ray_angle, &ray_horiz.x, &ray_horiz.y);
 	dist_to_ray.y = check_vert(cub, ray_angle, &ray_vert.x, &ray_vert.y);
 	if (dist_to_ray.x < dist_to_ray.y)
@@ -54,16 +58,19 @@ static void	raycasting_loop(t_cub *cub, float ray_angle, int i)
 		dist_to_ray_final = dist_to_ray.x;
 		ray_pos.x = ray_horiz.x;
 		ray_pos.y = ray_horiz.y;
+		side = 1;
 	}
-	if (dist_to_ray.y < dist_to_ray.x)
+	//if (dist_to_ray.y < dist_to_ray.x)
+	else
 	{
 		dist_to_ray_final = dist_to_ray.y;
 		ray_pos.x = ray_vert.x;
 		ray_pos.y = ray_vert.y;
+		side = 0;
 	}
 	draw_line(cub->img_map, (t_coord_f){cub->player.x, cub->player.y}, \
 		(t_coord_f){ray_pos.x, ray_pos.y}, RED);
-	draw_textures(cub, dist_to_ray_final, i, ray_angle);
+	draw_textures(cub, dist_to_ray_final, i, ray_angle, side, n_rays);
 }
 
 static float	check_horiz(t_cub *cub, float ray_angle, float *ray_x, float *ray_y)

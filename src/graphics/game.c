@@ -13,7 +13,7 @@
 #include <stdint.h>
 #include "../inc/cub3D.h"
 
-void draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle, int side)
+void draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle, int side, size_t n_rays)
 {
 
 	float	cosine_angle = cub->player.angle - ray_angle; // right name?
@@ -26,7 +26,7 @@ void draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle,
 	if (wall_height > 320)
 		wall_height = 320;
 	float	wall_offset = 160 - wall_height / 2;
-	int x = ray_loop * 8 + 300;
+	int x = ray_loop * (cub->img_game->width / n_rays);
 	int y_start = wall_offset + 800;
 	int	y_end	= wall_height + wall_offset + 800;
 	double y_scale = (double)cub->textures.n->height / wall_height;
@@ -52,7 +52,7 @@ void draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle,
 	while (y_start + i < y_end)
 	{
 		j = 0;
-		while (j < 8)
+		while (j < (cub->img_game->width / n_rays))
 		{
 			int texture_x = (int)(ray_dist_along_wall * cub->textures.n->width);
 			uint8_t* pixelstart_t = &cub->textures.n->pixels[(((int)(round(i * y_scale) * cub->textures.n->width) + texture_x) * BPP)];

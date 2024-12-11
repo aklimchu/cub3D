@@ -174,7 +174,7 @@ void	draw_player(t_cub *cub);
 void	raycasting(t_cub *cub);
 void	fill_rect(mlx_image_t *img, t_rect rect);
 void	draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b, int color);
-void	draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle);
+void	draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle, int side, size_t n_rays);
 void	load_textures(t_cub *cub);
 float	check_dist_to_ray(t_coord_f a, t_coord_f b, float angle);
 void	iter_loop(t_cub *cub, t_current *h, float *ray_x, float *ray_y);
