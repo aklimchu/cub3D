@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:24:41 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/09 14:55:44 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/11 11:08:25 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	raycasting(t_cub *cub)
 			if (map_pos.x >= 0 && map_pos.y >= 0 && map_pos.x < cub->map_size.x && \
 				map_pos.y < cub->map_size.y && get_tile(map_pos.y, map_pos.x, cub->map) == WALL) // or equal?
 			{
-				printf("Wall hit: %d, %d\n", map_pos.x, map_pos.y);
 				ray_horiz.x = ray_pos.x;
 				ray_horiz.y = ray_pos.y;
 				dist_to_ray_horiz = check_dist_to_ray((t_coord_f){cub->player.x, cub->player.y}, \
@@ -84,8 +83,6 @@ void	raycasting(t_cub *cub)
 				ray_iter += 1;
 			}
 		}
-		printf("x: %f\n", ray_pos.x);
-		printf("y: %f\n", ray_pos.y);
 		
 		// checking vertical lines
 		ray_iter = 0;
@@ -120,7 +117,6 @@ void	raycasting(t_cub *cub)
 			if (map_pos.x >= 0 && map_pos.y >= 0 && map_pos.x < cub->map_size.x && \
 				map_pos.y < cub->map_size.y && get_tile(map_pos.y, map_pos.x, cub->map) == WALL) // or equal?
 			{
-				printf("Wall hit: %d, %d\n", map_pos.x, map_pos.y);
 				ray_vert.x = ray_pos.x;
 				ray_vert.y = ray_pos.y;
 				dist_to_ray_vert = check_dist_to_ray((t_coord_f){cub->player.x, cub->player.y}, \

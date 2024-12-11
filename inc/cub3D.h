@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/09 14:40:57 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/11 11:26:52 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,11 @@ t_map_elems	get_tile_xy(size_t x, size_t y, t_map *map);
 // events
 void	handle_destroy(void *input);
 void	handle_keypress(struct mlx_key_data key_data, void *input);
+int		check_next_tile(t_cub *cub, float x, float y);
+int		check_offset(float *num1, int *off1, float *num2, int *off2);
+void	check_angle(t_cub *cub, bool x_dir);
+void	key_left_event(t_cub *cub);
+void	key_right_event(t_cub *cub);
 // graphics
 void	draw_cub(void *input);
 void	draw_map(t_cub *cub);
