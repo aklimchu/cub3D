@@ -39,6 +39,7 @@
 # define RED 0xFF0000FF
 # define GREEN 0x008000FF
 # define BPP sizeof(int32_t)
+# define DEGREE 0.0174533
 
 // ERROR MESSAGES
 # define ERR_INVALID_FILE "Invalid input file"
@@ -55,6 +56,7 @@ typedef enum e_map_elems
 	START_EA = 7,
 	END_ROW = 8
 }	t_map_elems;
+
 
 typedef struct s_coord
 {
@@ -76,6 +78,18 @@ typedef struct s_player
 	float	dy;
 	float	angle;
 }				t_player;
+
+typedef struct s_current
+{
+	float		dist_to_ray;
+	t_coord_f	offset;
+	t_coord_f	ray_pos;
+	t_coord		map_pos;
+	int			ray_iter;
+	float		ray_angle;
+	float		neg_inv_tan;
+	float		neg_tan;
+}				t_current;
 
 typedef struct s_rect
 {
@@ -147,6 +161,11 @@ t_map_elems	get_tile_xy(size_t x, size_t y, t_map *map);
 // events
 void	handle_destroy(void *input);
 void	handle_keypress(struct mlx_key_data key_data, void *input);
+int		check_next_tile(t_cub *cub, float x, float y);
+int		check_offset(float *num1, int *off1, float *num2, int *off2);
+void	check_angle(t_cub *cub, bool x_dir);
+void	key_left_event(t_cub *cub);
+void	key_right_event(t_cub *cub);
 // graphics
 void	draw_cub(void *input);
 void	draw_map(t_cub *cub);
@@ -156,8 +175,10 @@ void	raycasting(t_cub *cub);
 void	fill_rect(mlx_image_t *img, t_rect rect);
 void	draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b, int color);
 void	draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle);
-void	draw_game(void *input);
 void	load_textures(t_cub *cub);
+float	check_dist_to_ray(t_coord_f a, t_coord_f b, float angle);
+void	iter_loop(t_cub *cub, t_current *h, float *ray_x, float *ray_y);
+void	update_no_iter(t_cub *cub, t_current *h);
 // miscellaneous
 void	initialize_values(t_cub *cub);
 // exit

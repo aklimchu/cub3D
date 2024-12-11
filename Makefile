@@ -45,8 +45,10 @@ SRC 		=	src/graphics/events.c \
 				src/graphics/tools_2.c \
 				src/graphics/draw_cub.c \
 				src/graphics/raycasting.c \
+				src/graphics/raycasting_tools.c \
 				src/graphics/game.c \
 				src/graphics/textures.c \
+				src/graphics/events_tools.c \
 				src/parse/parse.c \
 				src/parse/parse_line.c \
 				src/parse/parse_colors.c \
