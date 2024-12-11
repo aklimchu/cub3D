@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/11 12:54:41 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/11 15:11:07 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef enum e_map_elems
 	END_ROW = 8
 }	t_map_elems;
 
+
 typedef struct s_coord
 {
 	int		x;
@@ -77,6 +78,18 @@ typedef struct s_player
 	float	dy;
 	float	angle;
 }				t_player;
+
+typedef struct s_current
+{
+	float		dist_to_ray;
+	t_coord_f	offset;
+	t_coord_f	ray_pos;
+	t_coord		map_pos;
+	int			ray_iter;
+	float		ray_angle;
+	float		neg_inv_tan;
+	float		neg_tan;
+}				t_current;
 
 typedef struct s_rect
 {
@@ -154,6 +167,8 @@ void	fill_rect(mlx_image_t *img, t_rect rect);
 void	draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b, int color);
 void	draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle);
 float	check_dist_to_ray(t_coord_f a, t_coord_f b, float angle);
+void	iter_loop(t_cub *cub, t_current *h, float *ray_x, float *ray_y);
+void	update_no_iter(t_cub *cub, t_current *h);
 // miscellaneous
 void	initialize_values(t_cub *cub);
 // exit
