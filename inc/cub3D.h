@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/11 11:26:52 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/11 12:54:41 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define RED 0xFF0000FF
 # define GREEN 0x008000FF
 # define BPP sizeof(int32_t)
+# define DEGREE 0.0174533
 
 // ERROR MESSAGES
 # define ERR_INVALID_FILE "Invalid input file"
@@ -152,7 +153,7 @@ void	raycasting(t_cub *cub);
 void	fill_rect(mlx_image_t *img, t_rect rect);
 void	draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b, int color);
 void	draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle);
-void	draw_game(void *input);
+float	check_dist_to_ray(t_coord_f a, t_coord_f b, float angle);
 // miscellaneous
 void	initialize_values(t_cub *cub);
 // exit
