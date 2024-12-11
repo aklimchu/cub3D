@@ -120,7 +120,7 @@ typedef struct s_cub
 	mlx_t		*mlx;
 	mlx_image_t *img_map;
 	mlx_image_t *img_game;
-	t_textures	*textures;
+	t_textures	textures;
 	t_coord		map_size;
 	t_player	player;
 	int			cell_size;

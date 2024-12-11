@@ -29,13 +29,13 @@ void draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle)
 	int x = ray_loop * 8 + 300;
 	int y_start = wall_offset + 800;
 	int	y_end	= wall_height + wall_offset + 800;
-	double y_scale = (double)cub->textures->n->height / wall_height;
+	double y_scale = (double)cub->textures.n->height / wall_height;
 
 	int j;
 	j = 0;
 	while (y_start + j < y_end)
 	{
-		uint8_t* pixelstart_t = &cub->textures->e->pixels[(((int)(j * cub->textures->e->width * y_scale) + x) * BPP)];
+		uint8_t* pixelstart_t = &cub->textures.n->pixels[(((int)(round(j * y_scale) * cub->textures.n->width) + x) * BPP)];
 		uint8_t* pixelstart_i = &cub->img_game->pixels[((y_start + j) * cub->img_game->width + x) * BPP];
 		ft_memcpy(pixelstart_i, pixelstart_t, BPP * 8);
 		j++;

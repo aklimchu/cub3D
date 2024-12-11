@@ -14,16 +14,16 @@
 
 void	load_textures(t_cub *cub)
 {
-	cub->textures->n = mlx_load_png(cub->map->no_texture);
-	if (!cub->textures->n)
+	cub->textures.n = mlx_load_png(cub->map->no_texture);
+	if (!cub->textures.n)
 		error_exit(strerror(mlx_errno));
-	cub->textures->s = mlx_load_png(cub->map->so_texture);
-	if (!cub->textures->s)
+	cub->textures.s = mlx_load_png(cub->map->so_texture);
+	if (!cub->textures.s)
 		error_exit(strerror(mlx_errno));
-	cub->textures->w = mlx_load_png(cub->map->we_texture);
-	if (!cub->textures->w)
+	cub->textures.w = mlx_load_png(cub->map->we_texture);
+	if (!cub->textures.w)
 		error_exit(strerror(mlx_errno));
-	cub->textures->e = mlx_load_png(cub->map->ea_texture);
-	if (!cub->textures->e)
+	cub->textures.e = mlx_load_png(cub->map->ea_texture);
+	if (!cub->textures.e)
 		error_exit(strerror(mlx_errno));
 }
