@@ -13,7 +13,7 @@
 #include <stdint.h>
 #include "../inc/cub3D.h"
 
-void draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle)
+void draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle, int side)
 {
 
 	float	cosine_angle = cub->player.angle - ray_angle; // right name?
@@ -30,14 +30,36 @@ void draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle)
 	int y_start = wall_offset + 800;
 	int	y_end	= wall_height + wall_offset + 800;
 	double y_scale = (double)cub->textures.n->height / wall_height;
+	double ray_dist_along_wall = 0;
 
-	int j;
-	j = 0;
-	while (y_start + j < y_end)
+	if (side == 1) // Horizontal
 	{
-		uint8_t* pixelstart_t = &cub->textures.n->pixels[(((int)(round(j * y_scale) * cub->textures.n->width) + x) * BPP)];
-		uint8_t* pixelstart_i = &cub->img_game->pixels[((y_start + j) * cub->img_game->width + x) * BPP];
-		ft_memcpy(pixelstart_i, pixelstart_t, BPP * 8);
-		j++;
+		ray_dist_along_wall = (int)(cub->player.x + dist_to_ray * cos(ray_angle)) % 64;
+	}
+	else if (side == 0) // Vertical
+	{
+		ray_dist_along_wall = (int)(cub->player.y + dist_to_ray * sin(ray_angle)) % 64;
+	}
+	else 
+	{
+		error_exit("Bad side :'(");
+	}
+	ray_dist_along_wall /= 64; // Make percentage of progress along the wall
+
+	int i;
+	int j;
+	i = 0;
+	while (y_start + i < y_end)
+	{
+		j = 0;
+		while (j < 8)
+		{
+			int texture_x = (int)(ray_dist_along_wall * cub->textures.n->width);
+			uint8_t* pixelstart_t = &cub->textures.n->pixels[(((int)(round(i * y_scale) * cub->textures.n->width) + texture_x) * BPP)];
+			uint8_t* pixelstart_i = &cub->img_game->pixels[((y_start + i) * cub->img_game->width + (x + j)) * BPP];
+			ft_memcpy(pixelstart_i, pixelstart_t, BPP);
+			j++;
+		}
+		i++;
 	}
 }
