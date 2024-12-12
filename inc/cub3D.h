@@ -183,7 +183,7 @@ void		load_textures(t_cub *cub);
 double		check_dist_to_ray(t_coord_f a, t_coord_f b, double angle);
 void		iter_loop(t_cub *cub, t_current *h, double *ray_x, double *ray_y);
 void		update_no_iter(t_cub *cub, t_current *h);
-float		normalize_angle(float angle);
+double		normalize_angle(double angle);
 // miscellaneous
 void		initialize_values(t_cub *cub);
 // exit

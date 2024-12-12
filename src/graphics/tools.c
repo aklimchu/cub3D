@@ -84,7 +84,7 @@ void	draw_map(t_cub *cub)
 	}
 }
 
-float normalize_angle(float angle)
+double normalize_angle(double angle)
 {
     if (angle < 0)
         angle += 2 * M_PI;
