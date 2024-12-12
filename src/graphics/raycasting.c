@@ -6,19 +6,19 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:24:41 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/12 10:50:46 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:21:55 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void		raycasting_loop(t_cub *cub, float ray_angle, int i, size_t n_rays);
-static float	check_horiz(t_cub *cub, float ray_angle, float *ray_x, float *ray_y);
-static float	check_vert(t_cub *cub, float ray_angle, float *ray_x, float *ray_y);
+static void		raycasting_loop(t_cub *cub, double ray_angle, int i, size_t n_rays);
+static double	check_horiz(t_cub *cub, double ray_angle, double *ray_x, double *ray_y);
+static double	check_vert(t_cub *cub, double ray_angle, double *ray_x, double *ray_y);
 
 void	raycasting(t_cub *cub)
 {
-	float		ray_angle;	
+	double		ray_angle;	
 	size_t		i;
 	size_t		n_rays;
 
@@ -26,22 +26,23 @@ void	raycasting(t_cub *cub)
 	ray_angle = normalize_angle(ray_angle);
 	i = 0;
 	n_rays = cub->img_game->width / 2;
+	double viewport = 60 * DEGREE;
 	while (i < n_rays)
 	{
 		raycasting_loop(cub, ray_angle, i, n_rays);
-		ray_angle += 60 * DEGREE / n_rays;
+		ray_angle += viewport / n_rays;
 		ray_angle = normalize_angle(ray_angle);
 		i++;
 	}
 }
 
-static void	raycasting_loop(t_cub *cub, float ray_angle, int i, size_t n_rays)
+static void	raycasting_loop(t_cub *cub, double ray_angle, int i, size_t n_rays)
 {
 	t_coord_f	ray_horiz;
 	t_coord_f	ray_vert;
 	t_coord_f	ray_pos;
 	t_coord_f	dist_to_ray;
-	float		dist_to_ray_final;
+	double		dist_to_ray_final;
 	int			side;
 	
 	side = -1;
@@ -66,24 +67,24 @@ static void	raycasting_loop(t_cub *cub, float ray_angle, int i, size_t n_rays)
 	draw_textures(cub, dist_to_ray_final, i, ray_angle, side, n_rays);
 }
 
-static float	check_horiz(t_cub *cub, float ray_angle, float *ray_x, float *ray_y)
+static double	check_horiz(t_cub *cub, double ray_angle, double *ray_x, double *ray_y)
 {
 	t_current	h;
 
-	*ray_x = cub->player.x;
-	*ray_y = cub->player.y;
+	*ray_x = (double)cub->player.x;
+	*ray_y = (double)cub->player.y;
 	h.ray_angle = ray_angle;
 	h.neg_inv_tan = -1 / tan(ray_angle);
 	if (ray_angle > M_PI) // looking up
 	{
-		h.ray_pos.y = ((((int)cub->player.y / CELL_SIZE) * CELL_SIZE) - 0.0001);
+		h.ray_pos.y = ((floor(cub->player.y / CELL_SIZE) * CELL_SIZE) - 0.0001);
 		h.ray_pos.x = (cub->player.y - h.ray_pos.y) * h.neg_inv_tan + cub->player.x;
 		h.offset.y = -1 * CELL_SIZE;
 		h.offset.x = -1 * h.offset.y * h.neg_inv_tan;
 	}
-	if (ray_angle < M_PI) // looking down
+	else
 	{
-		h.ray_pos.y = ((((int)cub->player.y / CELL_SIZE) * CELL_SIZE) + CELL_SIZE);
+		h.ray_pos.y = ((floor(cub->player.y / CELL_SIZE) * CELL_SIZE) + CELL_SIZE);
 		h.ray_pos.x = (cub->player.y - h.ray_pos.y) * h.neg_inv_tan + cub->player.x;
 		h.offset.y = CELL_SIZE;
 		h.offset.x = -1 * h.offset.y * h.neg_inv_tan;
@@ -94,7 +95,7 @@ static float	check_horiz(t_cub *cub, float ray_angle, float *ray_x, float *ray_y
 	return (h.dist_to_ray);
 }
 
-static float	check_vert(t_cub *cub, float ray_angle, float *ray_x, float *ray_y)
+static double	check_vert(t_cub *cub, double ray_angle, double *ray_x, double *ray_y)
 {
 	t_current	v;
 	
@@ -105,14 +106,14 @@ static float	check_vert(t_cub *cub, float ray_angle, float *ray_x, float *ray_y)
 	v.neg_tan = -1 * tan(ray_angle);
 	if (ray_angle > M_PI / 2 && ray_angle < M_PI * 3 / 2) // looking left
 	{
-		v.ray_pos.x = ((((int)cub->player.x / CELL_SIZE) * CELL_SIZE) - 0.0001);
+		v.ray_pos.x = ((floor(cub->player.x / CELL_SIZE) * CELL_SIZE) - 0.0001);
 		v.ray_pos.y = (cub->player.x - v.ray_pos.x) * v.neg_tan + cub->player.y;
 		v.offset.x = -1 * CELL_SIZE;
 		v.offset.y = -1 * v.offset.x * v.neg_tan;
 	}
-	if (ray_angle < M_PI / 2 || ray_angle > M_PI * 3 / 2) // looking right
+	else
 	{
-		v.ray_pos.x = ((((int)cub->player.x / CELL_SIZE) * CELL_SIZE) + CELL_SIZE);
+		v.ray_pos.x = ((floor(cub->player.x / CELL_SIZE) * CELL_SIZE) + CELL_SIZE);
 		v.ray_pos.y = (cub->player.x - v.ray_pos.x) * v.neg_tan + cub->player.y;
 		v.offset.x = CELL_SIZE;
 		v.offset.y = -1 * v.offset.x * v.neg_tan;

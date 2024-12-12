@@ -14,7 +14,7 @@
 
 void	draw_player(t_cub *cub)
 {
-	float i, angle, x1, y1;
+	double i, angle, x1, y1;
 
 	i = 0;
 	while (i < 360)

@@ -46,4 +46,10 @@ void	parse_colors(t_color *dst, char *line)
 	color_start = ++color_end;
 	color_end = ft_strchr(color_start, '\n');
 	parse_single_color(&dst->b, color_start, color_end);
+	dst->a = 255;
+}
+
+uint32_t	get_rgba(t_color c)
+{
+	return (c.r << 24 | c.g << 16 | c.b << 8 | c.a);
 }

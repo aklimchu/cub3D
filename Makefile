@@ -6,7 +6,7 @@
 #    By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 11:18:05 by aklimchu          #+#    #+#              #
-#    Updated: 2024/12/10 13:47:09 by pleander         ###   ########.fr        #
+#    Updated: 2024/12/12 15:25:09 by pleander         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,10 @@ NAME		= cub3D
 
 # Compiler
 CC 			= cc
-CFLAGS		= -g -ggdb3 -Wall -Wextra -I $(LIBFT_DIR)
+CFLAGS		= -g -ggdb3 -ofast -Wall -Wextra -I $(LIBFT_DIR)
 RM			= rm -f
 RMDIR		= rm -rf
+#CFLAGS		+= -fsanitize=address,undefined,leak
 
 # MLX42
 MLX_PATH	= MLX42/

@@ -68,29 +68,29 @@ typedef struct s_coord
 
 typedef struct s_coord_f
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 }				t_coord_f;
 
 typedef struct s_player
 {
-	float	x;
-	float	y;
-	float	dx;
-	float	dy;
-	float	angle;
+	double	x;
+	double	y;
+	double	dx;
+	double	dy;
+	double	angle;
 }				t_player;
 
 typedef struct s_current
 {
-	float		dist_to_ray;
+	double		dist_to_ray;
 	t_coord_f	offset;
 	t_coord_f	ray_pos;
 	t_coord		map_pos;
 	int			ray_iter;
-	float		ray_angle;
-	float		neg_inv_tan;
-	float		neg_tan;
+	double		ray_angle;
+	double		neg_inv_tan;
+	double		neg_tan;
 }				t_current;
 
 typedef struct s_rect
@@ -107,6 +107,7 @@ typedef struct s_color
 	uint8_t	r;
 	uint8_t	g;
 	uint8_t	b;
+	uint8_t a;
 }	t_color;
 
 typedef struct s_map
@@ -142,9 +143,9 @@ typedef struct s_cub
 	//int			cell_size;
 	t_map		*map;
 	int			iter_limit;
-	float dist_to_ray;
+	double dist_to_ray;
 	int ray_loop;
-	float ray_angle;
+	double ray_angle;
 }				t_cub;
 
 // FUNCTIONS
@@ -160,11 +161,12 @@ t_map_elems	get_tile(size_t row, size_t col, t_map *map);
 void		check_map(t_map *map);
 void		check_tiles(t_map *map);
 t_map_elems	get_tile_xy(size_t x, size_t y, t_map *map);
+uint32_t	get_rgba(t_color c);
 // events
 void		handle_destroy(void *input);
 void		handle_keypress(struct mlx_key_data key_data, void *input);
-int			check_next_tile(t_cub *cub, float x, float y);
-int			check_offset(float *num1, int *off1, float *num2, int *off2);
+int			check_next_tile(t_cub *cub, double x, double y);
+int			check_offset(double *num1, int *off1, double *num2, int *off2);
 void		check_angle(t_cub *cub, bool x_dir);
 void		key_left_event(t_cub *cub);
 void		key_right_event(t_cub *cub);
@@ -176,12 +178,12 @@ void		draw_player(t_cub *cub);
 void		raycasting(t_cub *cub);
 void		fill_rect(mlx_image_t *img, t_rect rect);
 void		draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b, int color);
-void		draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle, int side, size_t n_rays);
+void		draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angle, int side, size_t n_rays);
 void		load_textures(t_cub *cub);
-float		check_dist_to_ray(t_coord_f a, t_coord_f b, float angle);
-void		iter_loop(t_cub *cub, t_current *h, float *ray_x, float *ray_y);
+double		check_dist_to_ray(t_coord_f a, t_coord_f b, double angle);
+void		iter_loop(t_cub *cub, t_current *h, double *ray_x, double *ray_y);
 void		update_no_iter(t_cub *cub, t_current *h);
-float		normalize_angle(float angle);
+double		normalize_angle(double angle);
 // miscellaneous
 void		initialize_values(t_cub *cub);
 // exit
