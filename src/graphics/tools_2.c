@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:42:30 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/11 13:25:05 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:23:08 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@ void	draw_player(t_cub *cub)
 	while (i < 360)
 	{
 		angle = i;
-		x1 = ((double)CELL_SIZE / 7) * cos(angle * M_PI / 180);
-		y1 = ((double)CELL_SIZE / 7) * sin(angle * M_PI / 180);
-		mlx_put_pixel(cub->img_map, cub->player.x + x1, cub->player.y + y1, 0xFFFFFFFF);
+		x1 = ((double)CELL_SIZE / 10) * cos(angle * M_PI / 180);
+		y1 = ((double)CELL_SIZE / 10) * sin(angle * M_PI / 180);
+		//mlx_put_pixel(cub->img_map, cub->player.x + x1, cub->player.y + y1, 0xFFFFFFFF);
+		mlx_put_pixel(cub->img_map, MM_W / 2 + x1, MM_H / 2 + y1, 0xFFFFFFFF);
 		i += 0.1;
 	}
 	//draw direction line
-	/* draw_line(cub->img_map, (t_coord_f){cub->player.x, cub->player.y}, \
-		(t_coord_f){cub->player.x + cub->player.dx * 5, \
-		cub->player.y + cub->player.dy * 5}, 0xFFFFFFFF); */ 
+	draw_line(cub->img_map, (t_coord_f){MM_W / 2, MM_H / 2}, \
+		(t_coord_f){MM_W / 2 + cub->player.dx * 4, \
+		MM_H / 2 + cub->player.dy * 4}, 0xFFFFFFFF);
 	
 }
 
