@@ -12,13 +12,13 @@
 
 #include "../inc/cub3D.h"
 
-static void		raycasting_loop(t_cub *cub, float ray_angle, int i, size_t n_rays);
-static float	check_horiz(t_cub *cub, float ray_angle, float *ray_x, float *ray_y);
-static float	check_vert(t_cub *cub, float ray_angle, float *ray_x, float *ray_y);
+static void		raycasting_loop(t_cub *cub, double ray_angle, int i, size_t n_rays);
+static double	check_horiz(t_cub *cub, double ray_angle, double *ray_x, double *ray_y);
+static double	check_vert(t_cub *cub, double ray_angle, double *ray_x, double *ray_y);
 
 void	raycasting(t_cub *cub)
 {
-	float		ray_angle;	
+	double		ray_angle;	
 	size_t		i;
 	size_t		n_rays;
 
@@ -41,13 +41,13 @@ void	raycasting(t_cub *cub)
 	}
 }
 
-static void	raycasting_loop(t_cub *cub, float ray_angle, int i, size_t n_rays)
+static void	raycasting_loop(t_cub *cub, double ray_angle, int i, size_t n_rays)
 {
 	t_coord_f	ray_horiz;
 	t_coord_f	ray_vert;
 	t_coord_f	ray_pos;
 	t_coord_f	dist_to_ray;
-	float		dist_to_ray_final;
+	double		dist_to_ray_final;
 	int			side;
 	
 	side = -1;
@@ -72,7 +72,7 @@ static void	raycasting_loop(t_cub *cub, float ray_angle, int i, size_t n_rays)
 	draw_textures(cub, dist_to_ray_final, i, ray_angle, side, n_rays);
 }
 
-static float	check_horiz(t_cub *cub, float ray_angle, float *ray_x, float *ray_y)
+static double	check_horiz(t_cub *cub, double ray_angle, double *ray_x, double *ray_y)
 {
 	t_current	h;
 
@@ -100,7 +100,7 @@ static float	check_horiz(t_cub *cub, float ray_angle, float *ray_x, float *ray_y
 	return (h.dist_to_ray);
 }
 
-static float	check_vert(t_cub *cub, float ray_angle, float *ray_x, float *ray_y)
+static double	check_vert(t_cub *cub, double ray_angle, double *ray_x, double *ray_y)
 {
 	t_current	v;
 	

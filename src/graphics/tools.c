@@ -12,7 +12,7 @@
 
 #include "../inc/cub3D.h"
 
-static float	find_angle_and_player(t_map *map, t_cub *cub);
+static double	find_angle_and_player(t_map *map, t_cub *cub);
 
 void	initialize_values(t_cub *cub)
 {
@@ -30,14 +30,14 @@ void	initialize_values(t_cub *cub)
 	}
 	cub->player.angle = find_angle_and_player(cub->map, cub);
 	
-	float	fps;
+	double	fps;
 
 	fps = 1000 / cub->mlx->delta_time;
 	cub->player.dx = cos(cub->player.angle) * /* 0.2 * fps */5;
 	cub->player.dy = sin(cub->player.angle) * /* 0.2 * fps */5;
 }
 
-static float	find_angle_and_player(t_map *map, t_cub *cub)
+static double	find_angle_and_player(t_map *map, t_cub *cub)
 {
 	cub->player.y = (map->player_start.x + 0.5) * CELL_SIZE; // get tile number from parsing
 	cub->player.x = (map->player_start.y + 0.5) * CELL_SIZE; // get tile number from parsing

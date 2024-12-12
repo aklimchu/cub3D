@@ -12,13 +12,13 @@
 
 #include "../inc/cub3D.h"
 
-float	check_dist_to_ray(t_coord_f a, t_coord_f b, float angle)
+double	check_dist_to_ray(t_coord_f a, t_coord_f b, double angle)
 {
 	(void)angle;
 	return (sqrt((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y)));
 }
 
-void	iter_loop(t_cub *cub, t_current *h, float *ray_x, float *ray_y)
+void	iter_loop(t_cub *cub, t_current *h, double *ray_x, double *ray_y)
 {
 	h->ray_iter = 0;
 	h->dist_to_ray = 1000000;

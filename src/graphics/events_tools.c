@@ -12,7 +12,7 @@
 
 #include "../inc/cub3D.h"
 
-int	check_next_tile(t_cub *cub, float x, float y)
+int	check_next_tile(t_cub *cub, double x, double y)
 {
 	int	x_tile;
 	int	y_tile;
@@ -28,7 +28,7 @@ int	check_next_tile(t_cub *cub, float x, float y)
 	return (1);
 }
 
-int	check_offset(float *num1, int *off1, float *num2, int *off2)
+int	check_offset(double *num1, int *off1, double *num2, int *off2)
 {
 	if (*num1 > 0 && *off1 < 0)
 		*off1 *= -1;
