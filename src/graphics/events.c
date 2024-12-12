@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:15:43 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/11 11:28:18 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/12 08:19:11 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ void	handle_keypress(struct mlx_key_data key_data, void *input)
 	(void)key_data;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE) == true)
 		free_everything(cub, 0);
-	else if (mlx_is_key_down(cub->mlx, MLX_KEY_A) == true)
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_A) == true)
 		key_a_event(cub);
-	else if (mlx_is_key_down(cub->mlx, MLX_KEY_D) == true)
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_D) == true)
 		key_d_event(cub);
-	else if (mlx_is_key_down(cub->mlx, MLX_KEY_W) == true)
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_W) == true)
 		key_w_event(cub);
-	else if (mlx_is_key_down(cub->mlx, MLX_KEY_S) == true)
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_S) == true)
 		key_s_event(cub);	
-	else if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT) == true)
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT) == true)
 		key_left_event(cub);
-	else if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT) == true)
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT) == true)
 		key_right_event(cub);
 	cub->player.dx = cos(cub->player.angle) * 5;
 	cub->player.dy = sin(cub->player.angle) * 5;
