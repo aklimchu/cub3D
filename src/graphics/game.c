@@ -46,22 +46,17 @@ void draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle,
 
 	int i;
 	int j;
+	int texture_x = (int)(ray_dist_along_wall * cub->textures.n->width);
 	i = 0;
 	if (y_end > SCREEN_H)
-		y_end = SCREEN_H - 1;
+		y_end = SCREEN_H;
 	if (y_start < 0) // y_start + i = 0
 		i = -y_start;
 	while (y_start + i < y_end && y_end <= SCREEN_H)
 	{
-		j = 0;
-		while (j < (cub->img_game->width / n_rays))
-		{
-			int texture_x = (int)(ray_dist_along_wall * cub->textures.n->width);
-			uint8_t* pixelstart_t = &cub->textures.n->pixels[(((int)(round(i * y_scale) * cub->textures.n->width) + texture_x) * BPP)];
-			uint8_t* pixelstart_i = &cub->img_game->pixels[((y_start + i) * cub->img_game->width + (x + j)) * BPP];
-			ft_memcpy(pixelstart_i, pixelstart_t, BPP);
-			j++;
-		}
+		uint8_t* pixelstart_t = &cub->textures.n->pixels[(((int)(round(i * y_scale) * cub->textures.n->width) + texture_x) * BPP)];
+		uint8_t* pixelstart_i = &cub->img_game->pixels[((y_start + i) * cub->img_game->width + (x )) * BPP];
+		ft_memcpy(pixelstart_i, pixelstart_t, BPP * cub->img_game->width / n_rays);
 		i++;
 	}
 }
