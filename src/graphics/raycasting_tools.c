@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 12:42:34 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/11 15:11:57 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/12 08:27:46 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	iter_loop(t_cub *cub, t_current *h, float *ray_x, float *ray_y)
 		}
 	}
 }
+
 void	update_no_iter(t_cub *cub, t_current *h)
 {
 	h->ray_pos.x = cub->player.x;

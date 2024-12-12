@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/10 13:46:31 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/12 08:25:46 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,30 +159,30 @@ void		check_map(t_map *map);
 void		check_tiles(t_map *map);
 t_map_elems	get_tile_xy(size_t x, size_t y, t_map *map);
 // events
-void	handle_destroy(void *input);
-void	handle_keypress(struct mlx_key_data key_data, void *input);
-int		check_next_tile(t_cub *cub, float x, float y);
-int		check_offset(float *num1, int *off1, float *num2, int *off2);
-void	check_angle(t_cub *cub, bool x_dir);
-void	key_left_event(t_cub *cub);
-void	key_right_event(t_cub *cub);
+void		handle_destroy(void *input);
+void		handle_keypress(struct mlx_key_data key_data, void *input);
+int			check_next_tile(t_cub *cub, float x, float y);
+int			check_offset(float *num1, int *off1, float *num2, int *off2);
+void		check_angle(t_cub *cub, bool x_dir);
+void		key_left_event(t_cub *cub);
+void		key_right_event(t_cub *cub);
 // graphics
-void	draw_cub(void *input);
-void	draw_map(t_cub *cub);
-void	draw_rect(mlx_image_t *img, t_rect rect);
-void	draw_player(t_cub *cub);
-void	raycasting(t_cub *cub);
-void	fill_rect(mlx_image_t *img, t_rect rect);
-void	draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b, int color);
-void	draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle, int side, size_t n_rays);
-void	load_textures(t_cub *cub);
-float	check_dist_to_ray(t_coord_f a, t_coord_f b, float angle);
-void	iter_loop(t_cub *cub, t_current *h, float *ray_x, float *ray_y);
-void	update_no_iter(t_cub *cub, t_current *h);
+void		draw_cub(void *input);
+void		draw_map(t_cub *cub);
+void		draw_rect(mlx_image_t *img, t_rect rect);
+void		draw_player(t_cub *cub);
+void		raycasting(t_cub *cub);
+void		fill_rect(mlx_image_t *img, t_rect rect);
+void		draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b, int color);
+void		draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle, int side, size_t n_rays);
+void		load_textures(t_cub *cub);
+float		check_dist_to_ray(t_coord_f a, t_coord_f b, float angle);
+void		iter_loop(t_cub *cub, t_current *h, float *ray_x, float *ray_y);
+void		update_no_iter(t_cub *cub, t_current *h);
 // miscellaneous
-void	initialize_values(t_cub *cub);
+void		initialize_values(t_cub *cub);
 // exit
-void	free_everything(t_cub *cub, int exit_code);
-void	error_exit(char	*msg);
+void		free_everything(t_cub *cub, int exit_code);
+void		error_exit(char	*msg);
 
 #endif /*CUB3D_H*/

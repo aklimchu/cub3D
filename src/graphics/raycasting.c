@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:24:41 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/11 15:13:41 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/12 08:24:55 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static float	check_vert(t_cub *cub, float ray_angle, float *ray_x, float *ray_y)
 void	raycasting(t_cub *cub)
 {
 	float		ray_angle;	
-	size_t			i;
+	size_t		i;
 	size_t		n_rays;
 
 	ray_angle = cub->player.angle - 30 * DEGREE;
@@ -60,7 +60,6 @@ static void	raycasting_loop(t_cub *cub, float ray_angle, int i, size_t n_rays)
 		ray_pos.y = ray_horiz.y;
 		side = 1;
 	}
-	//if (dist_to_ray.y < dist_to_ray.x)
 	else
 	{
 		dist_to_ray_final = dist_to_ray.y;
@@ -95,7 +94,7 @@ static float	check_horiz(t_cub *cub, float ray_angle, float *ray_x, float *ray_y
 		h.offset.y = cub->cell_size;
 		h.offset.x = -1 * h.offset.y * h.neg_inv_tan;
 	}
-	if (ray_angle == 0 || ray_angle == M_PI) // looking straight left or right
+	if (fabs(ray_angle) < 0.01 || fabs(ray_angle - M_PI) < 0.01) // looking straight left or right
 		update_no_iter(cub, &h);
 	iter_loop(cub, &h, ray_x, ray_y);
 	return (h.dist_to_ray);
@@ -124,7 +123,7 @@ static float	check_vert(t_cub *cub, float ray_angle, float *ray_x, float *ray_y)
 		v.offset.x = cub->cell_size;
 		v.offset.y = -1 * v.offset.x * v.neg_tan;
 	}
-	if (ray_angle == M_PI / 2 || ray_angle == 3 * M_PI / 2) // looking straight up or down
+	if (fabs(ray_angle - M_PI / 2) < 0.01 || fabs(ray_angle - 3 * M_PI / 2) < 0.01) // looking straight up or down
 		update_no_iter(cub, &v);
 	iter_loop(cub, &v, ray_x, ray_y);
 	return(v.dist_to_ray);

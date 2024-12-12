@@ -1,7 +1,7 @@
 NO ./textures/dalles2.png
-SO ./textures/dalles2.png
-WE ./textures/dalles2.png
-EA ./textures/dalles2.png
+SO ./textures/cobble_stone.png
+WE ./textures/Elements_11-128x128.png
+EA ./textures/Weave_03-128x128.png
 
 F 220,100,0
 C 225,30,0
