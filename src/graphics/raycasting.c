@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:24:41 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/12 08:24:55 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/12 10:50:46 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,14 @@ void	raycasting(t_cub *cub)
 	size_t		n_rays;
 
 	ray_angle = cub->player.angle - 30 * DEGREE;
-	if (ray_angle < 0)
-		ray_angle += 2 * M_PI;
-	if (ray_angle > 2 * M_PI)
-		ray_angle -= 2 * M_PI;
+	ray_angle = normalize_angle(ray_angle);
 	i = 0;
 	n_rays = cub->img_game->width / 2;
 	while (i < n_rays)
 	{
 		raycasting_loop(cub, ray_angle, i, n_rays);
 		ray_angle += 60 * DEGREE / n_rays;
-		if (ray_angle < 0)
-			ray_angle += 2 * M_PI;
-		if (ray_angle > 2 * M_PI)
-			ray_angle -= 2 * M_PI;
+		ray_angle = normalize_angle(ray_angle);
 		i++;
 	}
 }
@@ -67,8 +61,8 @@ static void	raycasting_loop(t_cub *cub, float ray_angle, int i, size_t n_rays)
 		ray_pos.y = ray_vert.y;
 		side = 0;
 	}
-	//draw_line(cub->img_map, (t_coord_f){cub->player.x, cub->player.y}, \
-		(t_coord_f){ray_pos.x, ray_pos.y}, RED);
+	/* draw_line(cub->img_map, (t_coord_f){cub->player.x, cub->player.y}, \
+	 	(t_coord_f){ray_pos.x, ray_pos.y}, RED); */
 	draw_textures(cub, dist_to_ray_final, i, ray_angle, side, n_rays);
 }
 
