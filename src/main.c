@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:10:41 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/12 11:49:31 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:31:19 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ static void	create_images(t_cub *cub)
 		free_everything(cub, EXIT_FAILURE);
 	if (!cub->img_game || (mlx_image_to_window(cub->mlx, cub->img_game, 0, 0) < 0))
 		free_everything(cub, EXIT_FAILURE);
-	// cub->img_map->instances->z = 1; // should we use mlx_set_instance_depth?
-	// cub->img_game->instances->z = 0;
+	mlx_set_instance_depth(cub->img_map->instances, 1);
+	mlx_set_instance_depth(cub->img_game->instances, 0);
 }
 
 static void	add_shading(mlx_texture_t *texture)

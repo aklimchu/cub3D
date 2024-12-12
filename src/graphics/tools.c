@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:17:51 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/12 10:49:31 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:28:38 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static float	find_angle_and_player(t_map *map, t_cub *cub)
 	return (0);
 }
 
-void	draw_map(t_cub *cub)
+/* void	draw_map(t_cub *cub)
 {
 	size_t	i;
 	size_t	j;
@@ -81,6 +81,139 @@ void	draw_map(t_cub *cub)
 		}
 		i++;
 		current.y += CELL_SIZE;
+	}
+} */
+
+void	draw_map(t_cub *cub)
+{
+	// Draw map borders
+	/* draw_rect(cub->img_map, (t_rect){0, 0, MM_W - 1, \
+		MM_H - 1, LIGHT_BLUE}); */
+
+	t_coord		cell;
+	t_coord		current;
+	t_coord		player_offset;
+	
+
+	cell.x = cub->player.x / CELL_SIZE;
+	cell.y = cub->player.y / CELL_SIZE;
+	//printf("starting cell 1 : %d, %d\n", cell.x, cell.y);
+	
+	player_offset.x = (cub->player.x - cell.x * CELL_SIZE) / 2; // CELL_SIZE / 2 / 2
+	player_offset.y = (cub->player.y - cell.y * CELL_SIZE) / 2; // CELL_SIZE / 2 / 2
+
+	
+
+	current.x = MM_W / 2 - player_offset.x;
+	current.y = MM_H / 2 - player_offset.y;
+	while (current.y - CELL_SIZE / 2 > 0 && cell.y >= 0)
+	{
+		cell.x = cub->player.x / CELL_SIZE; // 0?
+		current.x = MM_W / 2 - CELL_SIZE / 2 / 2;
+		while (current.x - CELL_SIZE / 2 > 0 && cell.x >= 0)
+		{
+			// Fill rectangle
+			if (get_tile(cell.y, cell.x, cub->map) == WALL)
+			{
+				fill_rect(cub->img_map, (t_rect){current.x + 1, current.y + 1, CELL_SIZE / 2 - 2, \
+					CELL_SIZE / 2 - 2, BLUE});
+			}
+			// Draw cell border
+			if (get_tile(cell.y, cell.x, cub->map) == EMPTY || get_tile(cell.y, cell.x, cub->map) == WALL)
+				draw_rect(cub->img_map, (t_rect){current.x, current.y, CELL_SIZE / 2, \
+					CELL_SIZE / 2, LIGHT_BLUE});
+			cell.x--;
+			current.x -= CELL_SIZE / 2;
+		}
+		cell.y--;
+		current.y -= CELL_SIZE / 2;
+	}
+
+	cell.x = cub->player.x / CELL_SIZE;
+	cell.y = cub->player.y / CELL_SIZE;
+
+	current.x = MM_W / 2 - player_offset.x;
+	current.y = MM_H / 2 - player_offset.y;
+	
+	while (current.y - CELL_SIZE / 2 > 0 && cell.y >= 0)
+	{
+		cell.x = cub->player.x / CELL_SIZE; // 0?
+		current.x = MM_W / 2 - CELL_SIZE / 2 / 2;
+		while (current.x + CELL_SIZE / 2 < MM_W - 1 && cell.x < cub->map->map_cols)
+		{
+			// Fill rectangle
+			if (get_tile(cell.y, cell.x, cub->map) == WALL)
+			{
+				fill_rect(cub->img_map, (t_rect){current.x + 1, current.y + 1, CELL_SIZE / 2 - 2, \
+					CELL_SIZE / 2 - 2, BLUE});
+			}
+			// Draw cell border
+			if (get_tile(cell.y, cell.x, cub->map) == EMPTY || get_tile(cell.y, cell.x, cub->map) == WALL)
+				draw_rect(cub->img_map, (t_rect){current.x, current.y, CELL_SIZE / 2, \
+					CELL_SIZE / 2, LIGHT_BLUE});
+			cell.x++;
+			current.x += CELL_SIZE / 2;
+		}
+		cell.y--;
+		current.y -= CELL_SIZE / 2;
+	}
+	
+	cell.x = cub->player.x / CELL_SIZE;
+	cell.y = cub->player.y / CELL_SIZE;
+
+	current.x = MM_W / 2 - player_offset.x;
+	current.y = MM_H / 2 - player_offset.y;
+	
+	while (current.y + CELL_SIZE / 2 < MM_H - 1 && cell.y < cub->map->map_rows)
+	{
+		cell.x = cub->player.x / CELL_SIZE; // 0?
+		current.x = MM_W / 2 - CELL_SIZE / 2 / 2;
+		while (current.x - CELL_SIZE / 2 > 0 && cell.x >= 0)
+		{
+			// Fill rectangle
+			if (get_tile(cell.y, cell.x, cub->map) == WALL)
+			{
+				fill_rect(cub->img_map, (t_rect){current.x + 1, current.y + 1, CELL_SIZE / 2 - 2, \
+					CELL_SIZE / 2 - 2, BLUE});
+			}
+			// Draw cell border
+			if (get_tile(cell.y, cell.x, cub->map) == EMPTY || get_tile(cell.y, cell.x, cub->map) == WALL)
+				draw_rect(cub->img_map, (t_rect){current.x, current.y, CELL_SIZE / 2, \
+					CELL_SIZE / 2, LIGHT_BLUE});
+			cell.x--;
+			current.x -= CELL_SIZE / 2;
+		}
+		cell.y++;
+		current.y += CELL_SIZE / 2;
+	}
+	
+	cell.x = cub->player.x / CELL_SIZE;
+	cell.y = cub->player.y / CELL_SIZE;
+
+	current.x = MM_W / 2 - player_offset.x;
+	current.y = MM_H / 2 - player_offset.y;
+
+	while (current.y + CELL_SIZE / 2 < MM_H - 1 && cell.y < cub->map->map_rows)
+	{
+		cell.x = cub->player.x / CELL_SIZE; // 0?
+		current.x = MM_W / 2 - CELL_SIZE / 2 / 2;
+		while (current.x + CELL_SIZE / 2 < MM_W - 1 && cell.x < cub->map->map_cols)
+		{
+			// Fill rectangle
+			if (get_tile(cell.y, cell.x, cub->map) == WALL)
+			{
+				fill_rect(cub->img_map, (t_rect){current.x + 1, current.y + 1, CELL_SIZE / 2 - 2, \
+					CELL_SIZE / 2 - 2, BLUE});
+			}
+			// Draw cell border
+			if (get_tile(cell.y, cell.x, cub->map) == EMPTY || get_tile(cell.y, cell.x, cub->map) == WALL)
+				draw_rect(cub->img_map, (t_rect){current.x, current.y, CELL_SIZE / 2, \
+					CELL_SIZE / 2, LIGHT_BLUE});
+			cell.x++;
+			current.x += CELL_SIZE / 2;
+		}
+		cell.y++;
+		current.y += CELL_SIZE / 2;
 	}
 }
 
