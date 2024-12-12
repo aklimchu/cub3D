@@ -6,10 +6,11 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 12:42:34 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/12 08:27:46 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:23:34 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <limits.h>
 #include "../inc/cub3D.h"
 
 double	check_dist_to_ray(t_coord_f a, t_coord_f b, double angle)
@@ -24,6 +25,8 @@ void	iter_loop(t_cub *cub, t_current *h, double *ray_x, double *ray_y)
 	h->dist_to_ray = 1000000;
 	while (h->ray_iter < cub->iter_limit)
 	{
+		if (h->ray_pos.y < (double)INT_MIN)
+			break;
 		h->map_pos.x = (int)h->ray_pos.x / CELL_SIZE;
 		h->map_pos.y = (int)h->ray_pos.y / CELL_SIZE;
 		if (h->map_pos.x >= 0 && h->map_pos.y >= 0 && h->map_pos.x < cub->map_size.x && \

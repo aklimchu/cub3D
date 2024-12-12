@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:24:41 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/12 14:38:06 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:21:55 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,19 +71,18 @@ static double	check_horiz(t_cub *cub, double ray_angle, double *ray_x, double *r
 {
 	t_current	h;
 
-	*ray_x = cub->player.x;
-	*ray_y = cub->player.y;
+	*ray_x = (double)cub->player.x;
+	*ray_y = (double)cub->player.y;
 	h.ray_angle = ray_angle;
 	h.neg_inv_tan = -1 / tan(ray_angle);
 	if (ray_angle > M_PI) // looking up
 	{
 		h.ray_pos.y = ((floor(cub->player.y / CELL_SIZE) * CELL_SIZE) - 0.0001);
-		//h.ray_pos.y = (((floor(cub->player.y) / CELL_SIZE) * CELL_SIZE) - 0.0001);
 		h.ray_pos.x = (cub->player.y - h.ray_pos.y) * h.neg_inv_tan + cub->player.x;
 		h.offset.y = -1 * CELL_SIZE;
 		h.offset.x = -1 * h.offset.y * h.neg_inv_tan;
 	}
-	if (ray_angle < M_PI) // looking down
+	else
 	{
 		h.ray_pos.y = ((floor(cub->player.y / CELL_SIZE) * CELL_SIZE) + CELL_SIZE);
 		h.ray_pos.x = (cub->player.y - h.ray_pos.y) * h.neg_inv_tan + cub->player.x;
@@ -112,7 +111,7 @@ static double	check_vert(t_cub *cub, double ray_angle, double *ray_x, double *ra
 		v.offset.x = -1 * CELL_SIZE;
 		v.offset.y = -1 * v.offset.x * v.neg_tan;
 	}
-	if (ray_angle < M_PI / 2 || ray_angle > M_PI * 3 / 2) // looking right
+	else
 	{
 		v.ray_pos.x = ((floor(cub->player.x / CELL_SIZE) * CELL_SIZE) + CELL_SIZE);
 		v.ray_pos.y = (cub->player.x - v.ray_pos.x) * v.neg_tan + cub->player.y;
