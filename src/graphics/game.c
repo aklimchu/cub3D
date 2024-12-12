@@ -55,21 +55,21 @@ void draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angl
 	int i;
 	int texture_x = (int)(ray_dist_along_wall * texture->width);
 	i = 0;
-	if (y_end > SCREEN_H)
-		y_end = SCREEN_H;
+	if ((uint32_t)y_end > cub->img_game->width)
+		y_end = cub->img_game->width;
 	if (y_start < 0) // y_start + i = 0
 		i = -y_start;
 	if (y_start > 0)
 		draw_line(cub->img_game, (t_coord_f){x, 0}, (t_coord_f){x, y_start - 1}, get_rgba(cub->map->roof_color));
-	while (y_start + i < y_end && y_end <= SCREEN_H)
+	while (y_start + i < y_end && (uint32_t)y_end <= cub->img_game->width)
 	{
 		uint8_t* pixelstart_t = &texture->pixels[(((int)(floor(i * y_scale) * texture->width) + texture_x) * BPP)];
 		uint8_t* pixelstart_i = &cub->img_game->pixels[((y_start + i) * cub->img_game->width + x) * BPP];
 		ft_memcpy(pixelstart_i, pixelstart_t, BPP * cub->img_game->width / n_rays);
 		i++;
 	}
-	if (y_end < SCREEN_H)
+	if ((uint32_t)y_end < cub->img_game->width - 1)
 	{
-		draw_line(cub->img_game, (t_coord_f){x, y_end}, (t_coord_f){x, SCREEN_H - 1}, get_rgba(cub->map->floor_color));
+		draw_line(cub->img_game, (t_coord_f){x, y_end}, (t_coord_f){x, cub->img_game->width - 1}, get_rgba(cub->map->floor_color));
 	}
 }
