@@ -30,6 +30,8 @@
 
 # define SCREEN_W 3000
 # define SCREEN_H 3000
+# define MM_W 300
+# define MM_H 300
 # define DEGREE 0.0174533
 # define WHITE 0xFFFFFFFF
 # define GREY 0x808080FF
@@ -39,7 +41,7 @@
 # define RED 0xFF0000FF
 # define GREEN 0x008000FF
 # define BPP sizeof(int32_t)
-# define DEGREE 0.0174533
+# define CELL_SIZE 64
 
 // ERROR MESSAGES
 # define ERR_INVALID_FILE "Invalid input file"
@@ -137,7 +139,7 @@ typedef struct s_cub
 	t_textures	textures;
 	t_coord		map_size;
 	t_player	player;
-	int			cell_size;
+	//int			cell_size;
 	t_map		*map;
 	int			iter_limit;
 	float dist_to_ray;

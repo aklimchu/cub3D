@@ -16,40 +16,42 @@
 void draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle, int side, size_t n_rays)
 {
 
-	float	angle_diff = cub->player.angle - ray_angle; // right name?
+	double	angle_diff = cub->player.angle - ray_angle; // right name?
 	if (angle_diff < 0)
 		angle_diff += 2 * M_PI;
 	if (angle_diff > 2 * M_PI)
 		angle_diff -= 2 * M_PI;
 	dist_to_ray = dist_to_ray * cos(angle_diff); // fisheye
-	float	wall_height = 64 * 320 / dist_to_ray; // should it be cell_size instead of 64?
-	if (wall_height > 320)
-		wall_height = 320;
-	float	wall_offset = 320 / 2 - wall_height / 2;
+	double	wall_height = CELL_SIZE * SCREEN_H / dist_to_ray;
+	double	wall_offset = (double)SCREEN_H / 3 - wall_height / 2;
 	int x = ray_loop * (cub->img_game->width / n_rays);
-	int y_start = wall_offset + 800;
-	int	y_end	= wall_height + wall_offset + 800;
+	int y_start = wall_offset;
+	int	y_end	= wall_height + wall_offset;
 	double y_scale = (double)cub->textures.n->height / wall_height;
 	double ray_dist_along_wall = 0;
 
 	if (side == 1) // Horizontal
 	{
-		ray_dist_along_wall = (int)(cub->player.x + dist_to_ray * cos(ray_angle)) % 64;
+		ray_dist_along_wall = (int)(cub->player.x + dist_to_ray * cos(ray_angle)) % CELL_SIZE;
 	}
 	else if (side == 0) // Vertical
 	{
-		ray_dist_along_wall = (int)(cub->player.y + dist_to_ray * sin(ray_angle)) % 64;
+		ray_dist_along_wall = (int)(cub->player.y + dist_to_ray * sin(ray_angle)) % CELL_SIZE;
 	}
 	else 
 	{
 		error_exit("Bad side :'(");
 	}
-	ray_dist_along_wall /= 64; // Make percentage of progress along the wall
+	ray_dist_along_wall /= CELL_SIZE; // Make percentage of progress along the wall
 
 	int i;
 	int j;
 	i = 0;
-	while (y_start + i < y_end)
+	if (y_end > SCREEN_H)
+		y_end = SCREEN_H - 1;
+	if (y_start < 0) // y_start + i = 0
+		i = -y_start;
+	while (y_start + i < y_end && y_end <= SCREEN_H)
 	{
 		j = 0;
 		while (j < (cub->img_game->width / n_rays))

@@ -37,15 +37,19 @@ static void	create_images(t_cub *cub)
 	cub->mlx = mlx_init(SCREEN_W, SCREEN_H, "cub3D", 0);
 	if (cub->mlx == NULL)
 		exit (EXIT_FAILURE);
-	cub->img_map = mlx_new_image(cub->mlx, SCREEN_W / 2, SCREEN_H / 2);
+	cub->img_map = mlx_new_image(cub->mlx, MM_W, MM_H);
 	if (cub->img_map == NULL)
 		free_everything(cub, EXIT_FAILURE);
-	cub->img_game = mlx_new_image(cub->mlx, SCREEN_W / 2, SCREEN_H / 2);
+	cub->img_game = mlx_new_image(cub->mlx, SCREEN_W, SCREEN_H);
 	if (cub->img_game == NULL)
 		free_everything(cub, EXIT_FAILURE);
 	if (!cub->img_map || (mlx_image_to_window(cub->mlx, cub->img_map, 0, 0) < 0))
 		free_everything(cub, EXIT_FAILURE);
-	if (!cub->img_game || (mlx_image_to_window(cub->mlx, cub->img_game, 650, 0) < 0))
+	if (!cub->img_game || (mlx_image_to_window(cub->mlx, cub->img_game, 0, 0) < 0))
 		free_everything(cub, EXIT_FAILURE);
+	// cub->img_map->instances->z = 1;
+	// cub->img_game->instances->z = 0;
+
 }
+
 

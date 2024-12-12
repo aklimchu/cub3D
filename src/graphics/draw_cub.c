@@ -23,7 +23,7 @@ void	draw_cub(void *input)
 		cub->img_map->height * BPP);
 	ft_memset(cub->img_game->pixels, 50, cub->img_game->width * \
 		cub->img_game->height * BPP);
-	draw_map(cub);
-	draw_player(cub);
+	//draw_map(cub);
+	//draw_player(cub);
 	raycasting(cub);
 }

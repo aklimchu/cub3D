@@ -17,8 +17,8 @@ int	check_next_tile(t_cub *cub, float x, float y)
 	int	x_tile;
 	int	y_tile;
 	
-	x_tile = (int)x / cub->cell_size;
-	y_tile = (int)y / cub->cell_size;
+	x_tile = (int)x / CELL_SIZE;
+	y_tile = (int)y / CELL_SIZE;
 	if (get_tile(y_tile, x_tile, cub->map) == EMPTY || \
 		get_tile(y_tile, x_tile, cub->map) == START_NO || \
 		get_tile(y_tile, x_tile, cub->map) == START_SO || \

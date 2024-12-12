@@ -20,8 +20,8 @@ void	draw_player(t_cub *cub)
 	while (i < 360)
 	{
 		angle = i;
-		x1 = (cub->cell_size / 7) * cos(angle * M_PI / 180);
-		y1 = (cub->cell_size / 7) * sin(angle * M_PI / 180);
+		x1 = ((double)CELL_SIZE / 7) * cos(angle * M_PI / 180);
+		y1 = ((double)CELL_SIZE / 7) * sin(angle * M_PI / 180);
 		mlx_put_pixel(cub->img_map, cub->player.x + x1, cub->player.y + y1, 0xFFFFFFFF);
 		i += 0.1;
 	}

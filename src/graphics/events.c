@@ -46,8 +46,8 @@ static void	key_a_event(t_cub *cub)
 	int	x_offset;
 	int	y_offset;
 	
-	x_offset = cub->cell_size / 7;
-	y_offset = cub->cell_size / 7;
+	x_offset = CELL_SIZE / 7;
+	y_offset = CELL_SIZE / 7;
 	check_offset(&cub->player.dy, &x_offset, &cub->player.dx, &y_offset);
 	if (check_next_tile(cub, cub->player.x + cub->player.dy + x_offset, \
 		cub->player.y - cub->player.dx - y_offset) == 1)
@@ -72,8 +72,8 @@ static void	key_d_event(t_cub *cub)
 	int	x_offset;
 	int	y_offset;
 	
-	x_offset = cub->cell_size / 7;
-	y_offset = cub->cell_size / 7;
+	x_offset = CELL_SIZE / 7;
+	y_offset = CELL_SIZE / 7;
 	check_offset(&cub->player.dy, &x_offset, &cub->player.dx, &y_offset);
 	if (check_next_tile(cub, cub->player.x - cub->player.dy - x_offset, \
 		cub->player.y + cub->player.dx + y_offset) == 1)
@@ -98,8 +98,8 @@ static void	key_w_event(t_cub *cub)
 	int	x_offset;
 	int	y_offset;
 	
-	x_offset = cub->cell_size / 7;
-	y_offset = cub->cell_size / 7;
+	x_offset = CELL_SIZE / 7;
+	y_offset = CELL_SIZE / 7;
 	check_offset(&cub->player.dx, &x_offset, &cub->player.dy, &y_offset);
 	if (check_next_tile(cub, cub->player.x + cub->player.dx + x_offset, \
 		cub->player.y + cub->player.dy + y_offset) == 1)
@@ -124,8 +124,8 @@ static void	key_s_event(t_cub *cub)
 	int	x_offset;
 	int	y_offset;
 	
-	x_offset = cub->cell_size / 7;
-	y_offset = cub->cell_size / 7;
+	x_offset = CELL_SIZE / 7;
+	y_offset = CELL_SIZE / 7;
 	check_offset(&cub->player.dx, &x_offset, &cub->player.dy, &y_offset);
 	if (check_next_tile(cub, cub->player.x - cub->player.dx - x_offset, \
 		cub->player.y - cub->player.dy - y_offset) == 1)

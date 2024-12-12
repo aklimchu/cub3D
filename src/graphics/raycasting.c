@@ -67,7 +67,7 @@ static void	raycasting_loop(t_cub *cub, float ray_angle, int i, size_t n_rays)
 		ray_pos.y = ray_vert.y;
 		side = 0;
 	}
-	draw_line(cub->img_map, (t_coord_f){cub->player.x, cub->player.y}, \
+	//draw_line(cub->img_map, (t_coord_f){cub->player.x, cub->player.y}, \
 		(t_coord_f){ray_pos.x, ray_pos.y}, RED);
 	draw_textures(cub, dist_to_ray_final, i, ray_angle, side, n_rays);
 }
@@ -82,16 +82,16 @@ static float	check_horiz(t_cub *cub, float ray_angle, float *ray_x, float *ray_y
 	h.neg_inv_tan = -1 / tan(ray_angle);
 	if (ray_angle > M_PI) // looking up
 	{
-		h.ray_pos.y = ((((int)cub->player.y / cub->cell_size) * cub->cell_size) - 0.0001);
+		h.ray_pos.y = ((((int)cub->player.y / CELL_SIZE) * CELL_SIZE) - 0.0001);
 		h.ray_pos.x = (cub->player.y - h.ray_pos.y) * h.neg_inv_tan + cub->player.x;
-		h.offset.y = -1 * cub->cell_size;
+		h.offset.y = -1 * CELL_SIZE;
 		h.offset.x = -1 * h.offset.y * h.neg_inv_tan;
 	}
 	if (ray_angle < M_PI) // looking down
 	{
-		h.ray_pos.y = ((((int)cub->player.y / cub->cell_size) * cub->cell_size) + cub->cell_size);
+		h.ray_pos.y = ((((int)cub->player.y / CELL_SIZE) * CELL_SIZE) + CELL_SIZE);
 		h.ray_pos.x = (cub->player.y - h.ray_pos.y) * h.neg_inv_tan + cub->player.x;
-		h.offset.y = cub->cell_size;
+		h.offset.y = CELL_SIZE;
 		h.offset.x = -1 * h.offset.y * h.neg_inv_tan;
 	}
 	if (fabs(ray_angle) < 0.01 || fabs(ray_angle - M_PI) < 0.01) // looking straight left or right
@@ -111,16 +111,16 @@ static float	check_vert(t_cub *cub, float ray_angle, float *ray_x, float *ray_y)
 	v.neg_tan = -1 * tan(ray_angle);
 	if (ray_angle > M_PI / 2 && ray_angle < M_PI * 3 / 2) // looking left
 	{
-		v.ray_pos.x = ((((int)cub->player.x / cub->cell_size) * cub->cell_size) - 0.0001);
+		v.ray_pos.x = ((((int)cub->player.x / CELL_SIZE) * CELL_SIZE) - 0.0001);
 		v.ray_pos.y = (cub->player.x - v.ray_pos.x) * v.neg_tan + cub->player.y;
-		v.offset.x = -1 * cub->cell_size;
+		v.offset.x = -1 * CELL_SIZE;
 		v.offset.y = -1 * v.offset.x * v.neg_tan;
 	}
 	if (ray_angle < M_PI / 2 || ray_angle > M_PI * 3 / 2) // looking right
 	{
-		v.ray_pos.x = ((((int)cub->player.x / cub->cell_size) * cub->cell_size) + cub->cell_size);
+		v.ray_pos.x = ((((int)cub->player.x / CELL_SIZE) * CELL_SIZE) + CELL_SIZE);
 		v.ray_pos.y = (cub->player.x - v.ray_pos.x) * v.neg_tan + cub->player.y;
-		v.offset.x = cub->cell_size;
+		v.offset.x = CELL_SIZE;
 		v.offset.y = -1 * v.offset.x * v.neg_tan;
 	}
 	if (fabs(ray_angle - M_PI / 2) < 0.01 || fabs(ray_angle - 3 * M_PI / 2) < 0.01) // looking straight up or down

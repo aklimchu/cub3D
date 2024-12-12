@@ -24,8 +24,8 @@ void	iter_loop(t_cub *cub, t_current *h, float *ray_x, float *ray_y)
 	h->dist_to_ray = 1000000;
 	while (h->ray_iter < cub->iter_limit)
 	{
-		h->map_pos.x = (int)h->ray_pos.x / cub->cell_size;
-		h->map_pos.y = (int)h->ray_pos.y / cub->cell_size;
+		h->map_pos.x = (int)h->ray_pos.x / CELL_SIZE;
+		h->map_pos.y = (int)h->ray_pos.y / CELL_SIZE;
 		if (h->map_pos.x >= 0 && h->map_pos.y >= 0 && h->map_pos.x < cub->map_size.x && \
 			h->map_pos.y < cub->map_size.y && get_tile(h->map_pos.y, h->map_pos.x, cub->map) == WALL) // or equal?
 		{

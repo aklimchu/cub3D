@@ -21,12 +21,12 @@ void	initialize_values(t_cub *cub)
 	if (cub->map->map_cols > cub->map->map_rows)
 	{
 		cub->iter_limit = cub->map->map_cols;
-		cub->cell_size = SCREEN_W / 2 / cub->map->map_cols; // what if too small tiles?
+		//cub->cell_size = SCREEN_W / 2 / cub->map->map_cols; // what if too small tiles?
 	}
 	else
 	{
 		cub->iter_limit = cub->map->map_rows;
-		cub->cell_size = SCREEN_W / 2 / cub->map->map_rows; // what if too small tiles?
+		//cub->cell_size = SCREEN_W / 2 / cub->map->map_rows; // what if too small tiles?
 	}
 	cub->player.angle = find_angle_and_player(cub->map, cub);
 	
@@ -39,8 +39,8 @@ void	initialize_values(t_cub *cub)
 
 static float	find_angle_and_player(t_map *map, t_cub *cub)
 {
-	cub->player.y = (map->player_start.x + 0.5) * cub->cell_size; // get tile number from parsing
-	cub->player.x = (map->player_start.y + 0.5) * cub->cell_size; // get tile number from parsing
+	cub->player.y = (map->player_start.x + 0.5) * CELL_SIZE; // get tile number from parsing
+	cub->player.x = (map->player_start.y + 0.5) * CELL_SIZE; // get tile number from parsing
 	if (get_tile(map->player_start.x, map->player_start.y, map) == START_NO)
 		return (3 * M_PI / 2);
 	if (get_tile(map->player_start.x, map->player_start.y, map) == START_SO)
@@ -69,18 +69,18 @@ void	draw_map(t_cub *cub)
 			// Fill rectangle
 			if (get_tile(i, j, cub->map) == WALL)
 			{
-				fill_rect(cub->img_map, (t_rect){current.x + 1, current.y + 1, cub->cell_size - 2, \
-					cub->cell_size - 2, BLUE});
+				fill_rect(cub->img_map, (t_rect){current.x + 1, current.y + 1, CELL_SIZE - 2, \
+					CELL_SIZE - 2, BLUE});
 			}
 			// Draw cell border
 			if (get_tile(i, j, cub->map) == EMPTY || get_tile(i, j, cub->map) == WALL)
-				draw_rect(cub->img_map, (t_rect){current.x, current.y, cub->cell_size, \
-					cub->cell_size, LIGHT_BLUE});
+				draw_rect(cub->img_map, (t_rect){current.x, current.y, CELL_SIZE, \
+					CELL_SIZE, LIGHT_BLUE});
 			j++;
-			current.x += cub->cell_size;
+			current.x += CELL_SIZE;
 		}
 		i++;
-		current.y += cub->cell_size;
+		current.y += CELL_SIZE;
 	}
 }
 
