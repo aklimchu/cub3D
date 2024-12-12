@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/12 08:25:46 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/12 10:47:57 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ void		load_textures(t_cub *cub);
 double		check_dist_to_ray(t_coord_f a, t_coord_f b, double angle);
 void		iter_loop(t_cub *cub, t_current *h, double *ray_x, double *ray_y);
 void		update_no_iter(t_cub *cub, t_current *h);
+float		normalize_angle(float angle);
 // miscellaneous
 void		initialize_values(t_cub *cub);
 // exit
