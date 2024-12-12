@@ -27,26 +27,36 @@ void draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle,
 	int x = ray_loop * (cub->img_game->width / n_rays);
 	int y_start = wall_offset;
 	int	y_end	= wall_height + wall_offset;
-	double y_scale = (double)cub->textures.n->height / wall_height;
 	double ray_dist_along_wall = 0;
 
+	mlx_texture_t *texture;
+	texture = NULL;
+	//printf("player angle: %f\n", cub->player.angle); 
 	if (side == 1) // Horizontal
 	{
 		ray_dist_along_wall = (int)(cub->player.x + dist_to_ray * cos(ray_angle)) % CELL_SIZE;
+		if (ray_angle > 0 && ray_angle < M_PI)
+			texture = cub->textures.s;
+		else
+			texture = cub->textures.n;
 	}
 	else if (side == 0) // Vertical
 	{
 		ray_dist_along_wall = (int)(cub->player.y + dist_to_ray * sin(ray_angle)) % CELL_SIZE;
+		if (ray_angle > M_PI / 2 && ray_angle < (1.5) * M_PI)
+			texture = cub->textures.w;
+		else
+			texture = cub->textures.e;
 	}
 	else 
 	{
 		error_exit("Bad side :'(");
 	}
+	double y_scale = (double)texture->height / wall_height;
 	ray_dist_along_wall /= CELL_SIZE; // Make percentage of progress along the wall
 
 	int i;
-	int j;
-	int texture_x = (int)(ray_dist_along_wall * cub->textures.n->width);
+	int texture_x = (int)(ray_dist_along_wall * texture->width);
 	i = 0;
 	if (y_end > SCREEN_H)
 		y_end = SCREEN_H;
@@ -54,7 +64,7 @@ void draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle,
 		i = -y_start;
 	while (y_start + i < y_end && y_end <= SCREEN_H)
 	{
-		uint8_t* pixelstart_t = &cub->textures.n->pixels[(((int)(round(i * y_scale) * cub->textures.n->width) + texture_x) * BPP)];
+		uint8_t* pixelstart_t = &texture->pixels[(((int)(floor(i * y_scale) * texture->width) + texture_x) * BPP)];
 		uint8_t* pixelstart_i = &cub->img_game->pixels[((y_start + i) * cub->img_game->width + (x )) * BPP];
 		ft_memcpy(pixelstart_i, pixelstart_t, BPP * cub->img_game->width / n_rays);
 		i++;
