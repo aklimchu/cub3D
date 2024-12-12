@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:17:51 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/11 13:24:50 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/12 10:49:31 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,11 @@ void	draw_map(t_cub *cub)
 	}
 }
 
-
+float normalize_angle(float angle)
+{
+    if (angle < 0)
+        angle += 2 * M_PI;
+    if (angle > 2 * M_PI)
+        angle -= 2 * M_PI;
+    return (angle);
+}

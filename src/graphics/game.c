@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 09:40:50 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/12 09:07:51 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/12 11:30:11 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ void draw_textures(t_cub *cub, float dist_to_ray, int ray_loop, float ray_angle,
 {
 
 	double	angle_diff = cub->player.angle - ray_angle; // right name?
-	if (angle_diff < 0)
-		angle_diff += 2 * M_PI;
-	if (angle_diff > 2 * M_PI)
-		angle_diff -= 2 * M_PI;
+	angle_diff = normalize_angle(angle_diff);
 	dist_to_ray = dist_to_ray * cos(angle_diff); // fisheye
 	double	wall_height = CELL_SIZE * SCREEN_H / dist_to_ray;
 	double	wall_offset = (double)SCREEN_H / 3 - wall_height / 2;
