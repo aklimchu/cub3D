@@ -47,7 +47,8 @@ SRC 		=	src/graphics/events.c \
 				src/graphics/draw_cub.c \
 				src/graphics/raycasting.c \
 				src/graphics/raycasting_tools.c \
-				src/graphics/game.c \
+				src/graphics/draw_game.c \
+				src/graphics/draw_map.c \
 				src/graphics/textures.c \
 				src/graphics/events_tools.c \
 				src/parse/parse.c \

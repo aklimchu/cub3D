@@ -20,16 +20,15 @@ void	draw_player(t_cub *cub)
 	while (i < 360)
 	{
 		angle = i;
-		x1 = ((double)CELL_SIZE / 10) * cos(angle * M_PI / 180);
-		y1 = ((double)CELL_SIZE / 10) * sin(angle * M_PI / 180);
-		//mlx_put_pixel(cub->img_map, cub->player.x + x1, cub->player.y + y1, 0xFFFFFFFF);
-		mlx_put_pixel(cub->img_map, MM_W / 2 + x1, MM_H / 2 + y1, 0xFFFFFFFF);
+		x1 = ((double)CELL_SIZE / 20) * cos(angle * M_PI / 180);
+		y1 = ((double)CELL_SIZE / 20) * sin(angle * M_PI / 180);
+		mlx_put_pixel(cub->img_map, MM_W / 2 + x1, MM_H / 2 + y1, WHITE);
 		i += 0.1;
 	}
 	//draw direction line
 	draw_line(cub->img_map, (t_coord_f){MM_W / 2, MM_H / 2}, \
-		(t_coord_f){MM_W / 2 + cub->player.dx * 4, \
-		MM_H / 2 + cub->player.dy * 4}, 0xFFFFFFFF);
+		(t_coord_f){MM_W / 2 + cub->player.dx * 2, \
+		MM_H / 2 + cub->player.dy * 2}, WHITE);
 	
 }
 

@@ -43,24 +43,18 @@ void	handle_keypress(struct mlx_key_data key_data, void *input)
 
 static void	key_a_event(t_cub *cub)
 {
-	int	x_offset;
-	int	y_offset;
-	
-	x_offset = CELL_SIZE / 7;
-	y_offset = CELL_SIZE / 7;
-	check_offset(&cub->player.dy, &x_offset, &cub->player.dx, &y_offset);
-	if (check_next_tile(cub, cub->player.x + cub->player.dy + x_offset, \
-		cub->player.y - cub->player.dx - y_offset) == 1)
+	if (check_next_tile(cub, cub->player.x + cub->player.dy, \
+		cub->player.y - cub->player.dx) == 1)
 	{
 		check_angle(cub, true);
 	}
-	if (check_next_tile(cub, cub->player.x + cub->player.dy + x_offset, \
-		cub->player.y - cub->player.dx - y_offset) == 1)
+	if (check_next_tile(cub, cub->player.x + cub->player.dy, \
+		cub->player.y - cub->player.dx) == 1)
 	{
 		check_angle(cub, false);
 	}
-	if (check_next_tile(cub, cub->player.x + cub->player.dy + x_offset, \
-		cub->player.y - cub->player.dx - y_offset) == 0)
+	if (check_next_tile(cub, cub->player.x + cub->player.dy, \
+		cub->player.y - cub->player.dx) == 0)
 	{
 		cub->player.x += cub->player.dy;
 		cub->player.y -= cub->player.dx;
@@ -69,24 +63,18 @@ static void	key_a_event(t_cub *cub)
 
 static void	key_d_event(t_cub *cub)
 {
-	int	x_offset;
-	int	y_offset;
-	
-	x_offset = CELL_SIZE / 7;
-	y_offset = CELL_SIZE / 7;
-	check_offset(&cub->player.dy, &x_offset, &cub->player.dx, &y_offset);
-	if (check_next_tile(cub, cub->player.x - cub->player.dy - x_offset, \
-		cub->player.y + cub->player.dx + y_offset) == 1)
+	if (check_next_tile(cub, cub->player.x - cub->player.dy, \
+		cub->player.y + cub->player.dx) == 1)
 	{
 		check_angle(cub, true);
 	}
-	if (check_next_tile(cub, cub->player.x - cub->player.dy - x_offset, \
-		cub->player.y + cub->player.dx + y_offset) == 1)
+	if (check_next_tile(cub, cub->player.x - cub->player.dy, \
+		cub->player.y + cub->player.dx) == 1)
 	{
 		check_angle(cub, false);
 	}
-	if (check_next_tile(cub, cub->player.x - cub->player.dy - x_offset, \
-		cub->player.y + cub->player.dx + y_offset) == 0)
+	if (check_next_tile(cub, cub->player.x - cub->player.dy, \
+		cub->player.y + cub->player.dx) == 0)
 	{
 		cub->player.x -= cub->player.dy;
 		cub->player.y += cub->player.dx;
@@ -95,24 +83,18 @@ static void	key_d_event(t_cub *cub)
 
 static void	key_w_event(t_cub *cub)
 {
-	int	x_offset;
-	int	y_offset;
-	
-	x_offset = CELL_SIZE / 7;
-	y_offset = CELL_SIZE / 7;
-	check_offset(&cub->player.dx, &x_offset, &cub->player.dy, &y_offset);
-	if (check_next_tile(cub, cub->player.x + cub->player.dx + x_offset, \
-		cub->player.y + cub->player.dy + y_offset) == 1)
+	if (check_next_tile(cub, cub->player.x + cub->player.dx, \
+		cub->player.y + cub->player.dy) == 1)
 	{
 		check_angle(cub, true);
 	}
-	if (check_next_tile(cub, cub->player.x + cub->player.dx + x_offset, \
-		cub->player.y + cub->player.dy + y_offset) == 1)
+	if (check_next_tile(cub, cub->player.x + cub->player.dx, \
+		cub->player.y + cub->player.dy) == 1)
 	{
 		check_angle(cub, false);
 	}
-	if (check_next_tile(cub, cub->player.x + cub->player.dx + x_offset, \
-		cub->player.y + cub->player.dy + y_offset) == 0)
+	if (check_next_tile(cub, cub->player.x + cub->player.dx, \
+		cub->player.y + cub->player.dy) == 0)
 	{
 		cub->player.x += cub->player.dx;
 		cub->player.y += cub->player.dy;
@@ -121,24 +103,18 @@ static void	key_w_event(t_cub *cub)
 
 static void	key_s_event(t_cub *cub)
 {
-	int	x_offset;
-	int	y_offset;
-	
-	x_offset = CELL_SIZE / 7;
-	y_offset = CELL_SIZE / 7;
-	check_offset(&cub->player.dx, &x_offset, &cub->player.dy, &y_offset);
-	if (check_next_tile(cub, cub->player.x - cub->player.dx - x_offset, \
-		cub->player.y - cub->player.dy - y_offset) == 1)
+	if (check_next_tile(cub, cub->player.x - cub->player.dx, \
+		cub->player.y - cub->player.dy) == 1)
 	{
 		check_angle(cub, true);
 	}
-	if (check_next_tile(cub, cub->player.x - cub->player.dx - x_offset, \
-		cub->player.y - cub->player.dy - y_offset) == 1)
+	if (check_next_tile(cub, cub->player.x - cub->player.dx, \
+		cub->player.y - cub->player.dy) == 1)
 	{
 		check_angle(cub, false);
 	}
-	if (check_next_tile(cub, cub->player.x - cub->player.dx - x_offset, \
-		cub->player.y - cub->player.dy - y_offset) == 0)
+	if (check_next_tile(cub, cub->player.x - cub->player.dx, \
+		cub->player.y - cub->player.dy) == 0)
 	{
 		cub->player.x -= cub->player.dx;
 		cub->player.y -= cub->player.dy;

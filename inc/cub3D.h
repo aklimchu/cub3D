@@ -17,8 +17,8 @@
 # include "../libft/include/get_next_line.h"
 # include "../libft/include/ft_printf.h"
 # include "../libft/include/memlist.h"
-# include "../MLX42/include/MLX42.h"
-# include "../MLX42/include/MLX42_Int.h"
+# include "../MLX42/include/MLX42/MLX42.h"
+# include "../MLX42/include/MLX42/MLX42_Int.h"
 # include <stdio.h> //for printf
 # include <stdlib.h> //for exit status and malloc
 # include <errno.h> // for errno (error identifiers)
@@ -28,8 +28,8 @@
 # include <stdbool.h> // for boolean data type
 # include <math.h> // for mathematical functions
 
-# define SCREEN_W 3000
-# define SCREEN_H 3000
+# define SCREEN_W 800
+# define SCREEN_H 800
 # define MM_W 300
 # define MM_H 300
 # define DEGREE 0.0174533
@@ -42,6 +42,7 @@
 # define GREEN 0x008000FF
 # define BPP sizeof(int32_t)
 # define CELL_SIZE 64
+# define MAP_CELL_SIZE 25
 
 // ERROR MESSAGES
 # define ERR_INVALID_FILE "Invalid input file"
@@ -166,7 +167,6 @@ uint32_t	get_rgba(t_color c);
 void		handle_destroy(void *input);
 void		handle_keypress(struct mlx_key_data key_data, void *input);
 int			check_next_tile(t_cub *cub, double x, double y);
-int			check_offset(double *num1, int *off1, double *num2, int *off2);
 void		check_angle(t_cub *cub, bool x_dir);
 void		key_left_event(t_cub *cub);
 void		key_right_event(t_cub *cub);

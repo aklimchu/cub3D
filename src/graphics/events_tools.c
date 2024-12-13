@@ -28,7 +28,7 @@ int	check_next_tile(t_cub *cub, double x, double y)
 	return (1);
 }
 
-int	check_offset(double *num1, int *off1, double *num2, int *off2)
+/* int	check_offset(double *num1, double *off1, double *num2, double *off2)
 {
 	if (*num1 > 0 && *off1 < 0)
 		*off1 *= -1;
@@ -39,7 +39,7 @@ int	check_offset(double *num1, int *off1, double *num2, int *off2)
 	if (*num2 < 0 && *off2 > 0)
 		*off2 *= -1;
 	return (0);
-}
+} */
 
 void	check_angle(t_cub *cub, bool x_dir)
 {
