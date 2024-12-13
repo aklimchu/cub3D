@@ -60,3 +60,20 @@ double normalize_angle(double angle)
         angle -= 2 * M_PI;
     return (angle);
 }
+
+void	draw_cell(t_cub *cub, t_coord cell, t_coord_f current)
+{
+	int	tile;
+	
+	tile = get_tile(cell.y, cell.x, cub->map);
+	if (tile == WALL)
+	{
+		fill_rect(cub->img_map, (t_rect){current.x + 1, current.y + 1, MAP_CELL_SIZE - 2, \
+				MAP_CELL_SIZE - 2, BLUE});
+	}
+	if (tile == EMPTY || tile == WALL)
+	{
+		draw_rect(cub->img_map, (t_rect){current.x, current.y, MAP_CELL_SIZE, \
+			MAP_CELL_SIZE, LIGHT_BLUE});
+	}
+}
