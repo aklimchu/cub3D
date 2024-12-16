@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:19:18 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 13:15:06 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/16 13:15:27 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,3 +60,4 @@ void	update_player(t_cub *cub)
         cub->player.x += cub->player.dx;
         cub->player.y += cub->player.dy;
     }
+}
