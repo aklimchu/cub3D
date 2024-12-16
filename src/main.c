@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:10:41 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/12 15:31:19 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/16 08:46:29 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,16 @@ static void	create_images(t_cub *cub)
 	cub->img_game = mlx_new_image(cub->mlx, w, h);
 	if (cub->img_game == NULL)
 		free_everything(cub, EXIT_FAILURE);
-	if (!cub->img_map || (mlx_image_to_window(cub->mlx, cub->img_map, 0, 0) < 0))
+	if (!cub->img_map || (mlx_image_to_window(cub->mlx, \
+		cub->img_map, 0, 0) < 0))
+	{
 		free_everything(cub, EXIT_FAILURE);
-	if (!cub->img_game || (mlx_image_to_window(cub->mlx, cub->img_game, 0, 0) < 0))
+	}
+	if (!cub->img_game || (mlx_image_to_window(cub->mlx, \
+		cub->img_game, 0, 0) < 0))
+	{
 		free_everything(cub, EXIT_FAILURE);
+	}
 	mlx_set_instance_depth(cub->img_map->instances, 1);
 	mlx_set_instance_depth(cub->img_game->instances, 0);
 }
@@ -64,22 +70,22 @@ static void	add_shading(mlx_texture_t *texture)
 {
 	float	shading_factor;
 	int		i;
-    uint8_t *pixels;
-    int		pixel_count;
-	uint8_t *pixel;
+	uint8_t	*pixels;
+	int		pixel_count;
+	uint8_t	*pixel;
 
 	shading_factor = 0.7;
 	i = 0;
 	pixels = texture->pixels;
 	pixel_count = texture->width * texture->height;
-    while (i < pixel_count)
-    {
-        pixel = &pixels[i * BPP];
-        pixel[0] = (uint8_t)(pixel[0] * shading_factor); // Red
-        pixel[1] = (uint8_t)(pixel[1] * shading_factor); // Green
-        pixel[2] = (uint8_t)(pixel[2] * shading_factor); // Blue
-        if (BPP == 4)
-            pixel[3] = pixel[3];
-        i++;
-    }
+	while (i < pixel_count)
+	{
+		pixel = &pixels[i * BPP];
+		pixel[0] = (uint8_t)(pixel[0] * shading_factor);
+		pixel[1] = (uint8_t)(pixel[1] * shading_factor);
+		pixel[2] = (uint8_t)(pixel[2] * shading_factor);
+		if (BPP == 4)
+			pixel[3] = pixel[3];
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:14:45 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/11 11:28:37 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/16 08:54:59 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_next_tile(t_cub *cub, double x, double y)
 {
 	int	x_tile;
 	int	y_tile;
-	
+
 	x_tile = (int)x / CELL_SIZE;
 	y_tile = (int)y / CELL_SIZE;
 	if (get_tile(y_tile, x_tile, cub->map) == EMPTY || \
