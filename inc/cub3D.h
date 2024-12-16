@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 11:48:52 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/16 13:28:55 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ uint32_t	get_rgba(t_color c);
 void		handle_destroy(void *input);
 void		handle_keypress(struct mlx_key_data key_data, void *input);
 int			check_next_tile(t_cub *cub, double x, double y);
-void		check_angle(t_cub *cub, bool x_dir, double *dx, double *dy);
+void		check_angle(bool x_dir, double *dx, double *dy);
 void		key_left_event(t_cub *cub);
 void		key_right_event(t_cub *cub);
 // graphics
