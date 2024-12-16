@@ -6,14 +6,14 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 12:42:34 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 09:12:45 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/16 10:12:15 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
 #include "../inc/cub3D.h"
 
-double	check_dist_to_ray(t_coord_d a, t_coord_d b, double angle)
+double	check_dist_to_ray(t_coord_f a, t_coord_f b, double angle)
 {
 	(void)angle;
 	return (sqrt((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y)));
@@ -35,8 +35,8 @@ void	iter_loop(t_cub *cub, t_current *h, double *ray_x, double *ray_y)
 		{
 			*ray_x = h->r_pos.x;
 			*ray_y = h->r_pos.y;
-			h->dist_to_ray = check_dist_to_ray((t_coord_d){cub->player.x, \
-				cub->player.y}, (t_coord_d){(*ray_x), (*ray_y)}, h->ray_angle);
+			h->dist_to_ray = check_dist_to_ray((t_coord_f){cub->player.x, \
+				cub->player.y}, (t_coord_f){(*ray_x), (*ray_y)}, h->ray_angle);
 			h->ray_iter = cub->iter_limit;
 		}
 		else

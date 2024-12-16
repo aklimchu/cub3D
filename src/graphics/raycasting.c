@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:24:41 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 09:13:11 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/16 10:12:15 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	raycasting(t_cub *cub)
 
 static void	ray_loop(t_cub *cub, double ray_angle, int i, size_t n_rays)
 {
-	t_coord_d	ray_horiz;
-	t_coord_d	ray_vert;
-	t_coord_d	r_pos;
-	t_coord_d	dist_to_ray;
+	t_coord_f	ray_horiz;
+	t_coord_f	ray_vert;
+	t_coord_f	r_pos;
+	t_coord_f	dist_to_ray;
 	double		dist_to_ray_final;
 	int			side;
 
@@ -63,8 +63,8 @@ static void	ray_loop(t_cub *cub, double ray_angle, int i, size_t n_rays)
 		r_pos.y = ray_vert.y;
 		side = 0;
 	}
-	/* draw_line(cub->img_map, (t_coord_d){cub->player.x, cub->player.y}, \
-	 	(t_coord_d){r_pos.x, r_pos.y}, RED); */
+	/* draw_line(cub->img_map, (t_coord_f){cub->player.x, cub->player.y}, \
+	 	(t_coord_f){r_pos.x, r_pos.y}, RED); */
 	draw_textures(cub, dist_to_ray_final, i, ray_angle, side, n_rays);
 }
 

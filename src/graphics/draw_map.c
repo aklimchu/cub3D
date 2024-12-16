@@ -6,22 +6,22 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 08:38:26 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 08:54:00 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/16 10:12:15 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void	draw_ul(t_cub *cub, t_coord_d offset, t_coord cell, t_coord_d cur);
-static void	draw_ur(t_cub *cub, t_coord_d offset, t_coord cell, t_coord_d cur);
-static void	draw_dl(t_cub *cub, t_coord_d offset, t_coord cell, t_coord_d cur);
-static void	draw_dr(t_cub *cub, t_coord_d offset, t_coord cell, t_coord_d cur);
+static void	draw_ul(t_cub *cub, t_coord_f offset, t_coord cell, t_coord_f cur);
+static void	draw_ur(t_cub *cub, t_coord_f offset, t_coord cell, t_coord_f cur);
+static void	draw_dl(t_cub *cub, t_coord_f offset, t_coord cell, t_coord_f cur);
+static void	draw_dr(t_cub *cub, t_coord_f offset, t_coord cell, t_coord_f cur);
 
 void	draw_map(t_cub *cub)
 {
 	t_coord		cell;
-	t_coord_d	player_offset;
-	t_coord_d	current;
+	t_coord_f	player_offset;
+	t_coord_f	current;
 
 	cell.y = cub->player.y / CELL_SIZE;
 	cell.x = cub->player.x / CELL_SIZE;
@@ -36,7 +36,7 @@ void	draw_map(t_cub *cub)
 	draw_dr(cub, player_offset, cell, current);
 }
 
-static void	draw_ul(t_cub *cub, t_coord_d offset, t_coord cell, t_coord_d cur)
+static void	draw_ul(t_cub *cub, t_coord_f offset, t_coord cell, t_coord_f cur)
 {
 	while (cur.y - MAP_CELL_SIZE > 0 && cell.y >= 0)
 	{
@@ -53,7 +53,7 @@ static void	draw_ul(t_cub *cub, t_coord_d offset, t_coord cell, t_coord_d cur)
 	}
 }
 
-static void	draw_ur(t_cub *cub, t_coord_d offset, t_coord cell, t_coord_d cur)
+static void	draw_ur(t_cub *cub, t_coord_f offset, t_coord cell, t_coord_f cur)
 {
 	while (cur.y - MAP_CELL_SIZE > 0 && cell.y >= 0)
 	{
@@ -71,7 +71,7 @@ static void	draw_ur(t_cub *cub, t_coord_d offset, t_coord cell, t_coord_d cur)
 	}
 }
 
-static void	draw_dl(t_cub *cub, t_coord_d offset, t_coord cell, t_coord_d cur)
+static void	draw_dl(t_cub *cub, t_coord_f offset, t_coord cell, t_coord_f cur)
 {
 	while (cur.y + MAP_CELL_SIZE < MM_H - 1 && \
 		(size_t)cell.y < cub->map->map_rows)
@@ -89,7 +89,7 @@ static void	draw_dl(t_cub *cub, t_coord_d offset, t_coord cell, t_coord_d cur)
 	}
 }
 
-static void	draw_dr(t_cub *cub, t_coord_d offset, t_coord cell, t_coord_d cur)
+static void	draw_dr(t_cub *cub, t_coord_f offset, t_coord cell, t_coord_f cur)
 {
 	while (cur.y + MAP_CELL_SIZE < MM_H - 1 && \
 		(size_t)cell.y < cub->map->map_rows)

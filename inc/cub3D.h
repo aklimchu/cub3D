@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 09:21:38 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/16 10:12:25 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ typedef struct s_coord
 	int	y;
 }				t_coord;
 
-typedef struct s_coord_d
+typedef struct s_coord_f
 {
 	double	x;
 	double	y;
-}				t_coord_d;
+}				t_coord_f;
 
 typedef struct s_player
 {
@@ -84,8 +84,8 @@ typedef struct s_player
 typedef struct s_current
 {
 	double		dist_to_ray;
-	t_coord_d	offset;
-	t_coord_d	r_pos;
+	t_coord_f	offset;
+	t_coord_f	r_pos;
 	t_coord		map_pos;
 	int			ray_iter;
 	double		ray_angle;
@@ -175,14 +175,14 @@ void		draw_rect(mlx_image_t *img, t_rect rect);
 void		draw_player(t_cub *cub);
 void		raycasting(t_cub *cub);
 void		fill_rect(mlx_image_t *img, t_rect rect);
-void		draw_line(mlx_image_t *img, t_coord_d a, t_coord_d b, int color);
+void		draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b, int color);
 void		draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angle, int side, size_t n_rays);
 void		load_textures(t_cub *cub);
-double		check_dist_to_ray(t_coord_d a, t_coord_d b, double angle);
+double		check_dist_to_ray(t_coord_f a, t_coord_f b, double angle);
 void		iter_loop(t_cub *cub, t_current *h, double *ray_x, double *ray_y);
 void		update_no_iter(t_cub *cub, t_current *h);
 double		normalize_angle(double angle);
-void		draw_cell(t_cub *cub, t_coord cell, t_coord_d current);
+void		draw_cell(t_cub *cub, t_coord cell, t_coord_f current);
 // miscellaneous
 void		initialize_values(t_cub *cub);
 // exit
