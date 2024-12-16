@@ -28,7 +28,6 @@ void draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angl
 
 	mlx_texture_t *texture;
 	texture = NULL;
-	//printf("player angle: %f\n", cub->player.angle); 
 	double ray_hit_location = 0;
 	if (side == 1) // Horizontal
 	{
@@ -56,6 +55,7 @@ void draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angl
 	ray_dist_along_wall /= CELL_SIZE; // Make percentage of progress along the wall
 
 	int i;
+	size_t j;
 	int texture_x = (int)floor(ray_dist_along_wall * (texture->width - 1));
 	i = 0;
 	if ((uint32_t)y_end > cub->img_game->height)
@@ -63,7 +63,15 @@ void draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angl
 	if (y_start < 0) // y_start + i = 0
 		i = -y_start;
 	if (y_start > 0)
-		draw_line(cub->img_game, (t_coord_f){x, 0}, (t_coord_f){x, y_start - 1}, get_rgba(cub->map->roof_color));
+	{
+		j = 0;
+		while (j < cub->img_game->width / n_rays)
+		{
+			draw_line(cub->img_game, (t_coord_f){x + j, 0}, (t_coord_f){x + j, y_start - 1}, get_rgba(cub->map->roof_color));
+			j++;
+		}
+	}
+
 	while (y_start + i < y_end && (uint32_t)y_end <= cub->img_game->width)
 	{
 		uint8_t* pixelstart_t = &texture->pixels[(((int)(floor(i * y_scale) * texture->width) + texture_x) * BPP)];
@@ -73,6 +81,11 @@ void draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angl
 	}
 	if ((uint32_t)y_end < cub->img_game->height - 1)
 	{
-		draw_line(cub->img_game, (t_coord_f){x, y_end}, (t_coord_f){x, cub->img_game->height - 1}, get_rgba(cub->map->floor_color));
+		j = 0;
+		while (j < cub->img_game->width / n_rays)
+		{
+		draw_line(cub->img_game, (t_coord_f){x + j, y_end}, (t_coord_f){x + j, cub->img_game->height - 1}, get_rgba(cub->map->floor_color));
+			j++;
+		}
 	}
 }
