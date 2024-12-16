@@ -17,6 +17,7 @@ void	*ft_memset(void *b, int c, size_t len)
 	size_t			i;
 	size_t			qword_value;
 
+	qword_value = 0;
 	p = (unsigned char *)b;
 	i = 0;
 	while (i < sizeof(size_t))
