@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:17:51 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 11:27:06 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/16 13:35:54 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static double	find_angle_and_player(t_map *map, t_cub *cub);
 
 void	initialize_values(t_cub *cub)
 {
-	double	fps;
-
 	cub->map_size.x = cub->map->map_cols;
 	cub->map_size.y = cub->map->map_rows;
 	if (cub->map->map_cols > cub->map->map_rows)
@@ -25,23 +23,23 @@ void	initialize_values(t_cub *cub)
 	else
 		cub->iter_limit = cub->map->map_rows;
 	cub->player.angle = find_angle_and_player(cub->map, cub);
-	fps = 1000 / cub->mlx->delta_time;
-	cub->player.dx = cos(cub->player.angle) * /* 0.2 * fps */5; // do we need fps?
-	cub->player.dy = sin(cub->player.angle) * /* 0.2 * fps */5;
 	ft_memset(&cub->keys, false, sizeof(cub->keys));
 }
 
 static double	find_angle_and_player(t_map *map, t_cub *cub)
 {
+	int	tile;
+
 	cub->player.y = (map->player_start.x + 0.5) * CELL_SIZE;
 	cub->player.x = (map->player_start.y + 0.5) * CELL_SIZE;
-	if (get_tile(map->player_start.x, map->player_start.y, map) == START_NO)
+	tile = get_tile(map->player_start.x, map->player_start.y, map);
+	if (tile == START_NO)
 		return (3 * M_PI / 2);
-	if (get_tile(map->player_start.x, map->player_start.y, map) == START_SO)
+	if (tile == START_SO)
 		return (M_PI / 2);
-	if (get_tile(map->player_start.x, map->player_start.y, map) == START_WE)
+	if (tile == START_WE)
 		return (M_PI);
-	if (get_tile(map->player_start.x, map->player_start.y, map) == START_EA)
+	if (tile == START_EA)
 		return (0);
 	return (0);
 }
