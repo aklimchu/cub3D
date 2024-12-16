@@ -26,7 +26,7 @@ NAME		= cub3D
 
 # Compiler
 CC 			= cc
-CFLAGS		= -g -ggdb3 -ofast -Wall -Wextra -I $(LIBFT_DIR)
+CFLAGS		= -g -ggdb3 -Ofast -Wall -Wextra -I $(LIBFT_DIR)
 RM			= rm -f
 RMDIR		= rm -rf
 #CFLAGS		+= -fsanitize=address,undefined,leak
