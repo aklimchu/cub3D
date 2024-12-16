@@ -12,7 +12,7 @@
 
 #include "../inc/cub3D.h"
 
-static void		ray_loop(t_cub *cub, double ray_angle, int i, size_t n_rays);
+static void		ray_loop(t_cub *cub, double ray_angle, int i);
 static double	check_horiz(t_cub *c, double r_angle, double *r_x, double *r_y);
 static double	check_vert(t_cub *c, double r_angle, double *r_x, double *r_y);
 
@@ -20,24 +20,22 @@ void	raycasting(t_cub *cub)
 {
 	double	ray_angle;	
 	size_t	i;
-	size_t	n_rays;
 	double	viewport;
 
 	ray_angle = cub->player.angle - 30 * DEGREE;
 	ray_angle = normalize_angle(ray_angle);
 	i = 0;
-	n_rays = cub->img_game->width / 2;
 	viewport = 60 * DEGREE;
-	while (i < n_rays)
+	while (i < cub->n_rays)
 	{
-		ray_loop(cub, ray_angle, i, n_rays);
-		ray_angle += viewport / n_rays;
+		ray_loop(cub, ray_angle, i);
+		ray_angle += viewport / cub->n_rays;
 		ray_angle = normalize_angle(ray_angle);
 		i++;
 	}
 }
 
-static void	ray_loop(t_cub *cub, double ray_angle, int i, size_t n_rays)
+static void	ray_loop(t_cub *cub, double ray_angle, int i)
 {
 	t_coord_f	ray_horiz;
 	t_coord_f	ray_vert;
@@ -65,7 +63,7 @@ static void	ray_loop(t_cub *cub, double ray_angle, int i, size_t n_rays)
 	}
 	/* draw_line(cub->img_map, (t_coord_f){cub->player.x, cub->player.y}, \
 	 	(t_coord_f){r_pos.x, r_pos.y}, RED); */
-	draw_textures(cub, dist_to_ray_final, i, ray_angle, side, n_rays);
+	draw_textures(cub, dist_to_ray_final, i, ray_angle, side);
 }
 
 static double	check_horiz(t_cub *c, double r_angle, double *r_x, double *r_y)

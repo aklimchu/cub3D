@@ -152,11 +152,13 @@ typedef struct s_cub
 	t_player	player;
 	t_map		*map;
 	t_key_state	keys;
-	int			iter_limit;
-	double dist_to_ray;
-	int ray_loop;
-	double ray_angle;
-	uint8_t *bg_buffer;
+	int		iter_limit;
+	int		ray_loop;
+	size_t		n_rays;
+	size_t		vertical_lines;
+	double		dist_to_ray;
+	double		ray_angle;
+	uint8_t		*bg_buffer;
 }				t_cub;
 
 // FUNCTIONS
@@ -188,7 +190,7 @@ void		draw_player(t_cub *cub);
 void		raycasting(t_cub *cub);
 void		fill_rect(mlx_image_t *img, t_rect rect);
 void		draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b, int color);
-void		draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angle, int side, size_t n_rays);
+void		draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angle, int side);
 void		load_textures(t_cub *cub);
 double		check_dist_to_ray(t_coord_f a, t_coord_f b, double angle);
 void		iter_loop(t_cub *cub, t_current *h, double *ray_x, double *ray_y);

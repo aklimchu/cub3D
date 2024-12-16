@@ -29,6 +29,8 @@ void	initialize_values(t_cub *cub)
 	cub->player.dx = cos(cub->player.angle) * /* 0.2 * fps */5; // do we need fps?
 	cub->player.dy = sin(cub->player.angle) * /* 0.2 * fps */5;
 	ft_memset(&cub->keys, false, sizeof(cub->keys));
+	cub->n_rays = cub->img_game->width / 2;
+	cub->vertical_lines = cub->img_game->width / cub->n_rays;
 }
 
 static double	find_angle_and_player(t_map *map, t_cub *cub)

@@ -12,9 +12,8 @@
 
 #include <stdint.h>
 #include "../inc/cub3D.h"
-static void	simple_draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b, int color);
 
-void draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angle, int side, size_t n_rays)
+void draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angle, int side)
 {
 
 	double	angle_diff = cub->player.angle - ray_angle; // right name?
@@ -22,7 +21,7 @@ void draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angl
 	double dist_to_ray_corr = dist_to_ray * cos(angle_diff); // fisheye
 	double	wall_height = CELL_SIZE * cub->img_game->height / dist_to_ray_corr;
 	double	wall_offset = (double)cub->img_game->height / 2 - wall_height / 2;
-	int x = ray_loop * (cub->img_game->width / n_rays);
+	int x = ray_loop * cub->vertical_lines;
 	int y_start = wall_offset;
 	int	y_end	= wall_height + wall_offset;
 	double ray_dist_along_wall = 0;
@@ -54,7 +53,6 @@ void draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angl
 	}
 	double y_scale = (double)texture->height / wall_height;
 	ray_dist_along_wall /= CELL_SIZE; // Make percentage of progress along the wall
-
 	int i;
 	size_t j;
 	int texture_x = (int)floor(ray_dist_along_wall * (texture->width - 1));
@@ -67,21 +65,7 @@ void draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angl
 	{
 		uint8_t* pixelstart_t = &texture->pixels[(((int)(floor(i * y_scale) * texture->width) + texture_x) * BPP)];
 		uint8_t* pixelstart_i = &cub->img_game->pixels[((y_start + i) * cub->img_game->width + x) * BPP];
-		ft_memcpy(pixelstart_i, pixelstart_t, BPP * cub->img_game->width / n_rays);
-		i++;
-	}
-}
-
-static void	simple_draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b, int color)
-{
-	size_t i;
-
-	if (a.x != b.x)
-		error_exit("Internal error");
-	i = 0;
-	while (a.y + i < b.y)
-	{
-		mlx_put_pixel(img, a.x, a.y + i, color);
+		ft_memcpy(pixelstart_i, pixelstart_t, BPP * cub->vertical_lines);
 		i++;
 	}
 }
