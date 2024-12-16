@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/12 10:47:57 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/16 08:24:03 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include "../libft/include/get_next_line.h"
 # include "../libft/include/ft_printf.h"
 # include "../libft/include/memlist.h"
-# include "../MLX42/include/MLX42/MLX42.h"
-# include "../MLX42/include/MLX42/MLX42_Int.h"
+# include "../MLX42/include/MLX42.h"
+# include "../MLX42/include/MLX42_Int.h"
 # include <stdio.h> //for printf
 # include <stdlib.h> //for exit status and malloc
 # include <errno.h> // for errno (error identifiers)
@@ -28,8 +28,8 @@
 # include <stdbool.h> // for boolean data type
 # include <math.h> // for mathematical functions
 
-# define SCREEN_W 800
-# define SCREEN_H 800
+# define SCREEN_W 3000
+# define SCREEN_H 3000
 # define MM_W 300
 # define MM_H 300
 # define DEGREE 0.0174533
