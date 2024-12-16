@@ -17,6 +17,10 @@ void	draw_cub(void *input)
 	t_cub	*cub;
 
 	cub = (t_cub *)input;
+	// TEMPORARY FPS PRINTING, REMOVE BEFORE SUBMISSION
+	double fps = 1 / cub->mlx->delta_time;
+	printf("FPS %f\n", fps);
+	//
 	if (cub->mlx == NULL)
 		return ;
 	ft_memset(cub->img_map->pixels, 50, cub->img_map->width * \
