@@ -28,8 +28,6 @@
 # include <stdbool.h> // for boolean data type
 # include <math.h> // for mathematical functions
 
-# define SCREEN_W 3000
-# define SCREEN_H 3000
 # define MM_W 300
 # define MM_H 300
 # define DEGREE 0.0174533

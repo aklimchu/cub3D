@@ -37,13 +37,19 @@ int	main(int argc, char **argv)
 
 static void	create_images(t_cub *cub)
 {
-	cub->mlx = mlx_init(SCREEN_W, SCREEN_H, "cub3D", 0);
+	int32_t	w;
+	int32_t	h;
+	int32_t monitor_count;
+	cub->mlx = mlx_init(800, 600, "cub3D", 1);
 	if (cub->mlx == NULL)
 		exit (EXIT_FAILURE);
+	mlx_get_monitor_size(0, &w, &h);
+	mlx_set_window_size(cub->mlx, w, h);
+	//mlx_set_setting(MLX_FULLSCREEN, true);
 	cub->img_map = mlx_new_image(cub->mlx, MM_W, MM_H);
 	if (cub->img_map == NULL)
 		free_everything(cub, EXIT_FAILURE);
-	cub->img_game = mlx_new_image(cub->mlx, SCREEN_W, SCREEN_H);
+	cub->img_game = mlx_new_image(cub->mlx, w, h);
 	if (cub->img_game == NULL)
 		free_everything(cub, EXIT_FAILURE);
 	if (!cub->img_map || (mlx_image_to_window(cub->mlx, cub->img_map, 0, 0) < 0))

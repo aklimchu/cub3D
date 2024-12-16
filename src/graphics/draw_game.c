@@ -19,8 +19,8 @@ void draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angl
 	double	angle_diff = cub->player.angle - ray_angle; // right name?
 	angle_diff = normalize_angle(angle_diff);
 	double dist_to_ray_corr = dist_to_ray * cos(angle_diff); // fisheye
-	double	wall_height = CELL_SIZE * SCREEN_H / dist_to_ray_corr;
-	double	wall_offset = (double)SCREEN_H / 3 - wall_height / 2;
+	double	wall_height = CELL_SIZE * cub->img_map->height / dist_to_ray_corr;
+	double	wall_offset = (double)cub->img_map->height / 2 - wall_height / 2;
 	int x = ray_loop * (cub->img_game->width / n_rays);
 	int y_start = wall_offset;
 	int	y_end	= wall_height + wall_offset;
@@ -58,8 +58,8 @@ void draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angl
 	int i;
 	int texture_x = (int)floor(ray_dist_along_wall * (texture->width - 1));
 	i = 0;
-	if ((uint32_t)y_end > cub->img_game->width)
-		y_end = cub->img_game->width;
+	if ((uint32_t)y_end > cub->img_game->height)
+		y_end = cub->img_game->height;
 	if (y_start < 0) // y_start + i = 0
 		i = -y_start;
 	if (y_start > 0)
@@ -71,8 +71,8 @@ void draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angl
 		ft_memcpy(pixelstart_i, pixelstart_t, BPP * cub->img_game->width / n_rays);
 		i++;
 	}
-	if ((uint32_t)y_end < cub->img_game->width - 1)
+	if ((uint32_t)y_end < cub->img_game->height - 1)
 	{
-		draw_line(cub->img_game, (t_coord_f){x, y_end}, (t_coord_f){x, cub->img_game->width - 1}, get_rgba(cub->map->floor_color));
+		draw_line(cub->img_game, (t_coord_f){x, y_end}, (t_coord_f){x, cub->img_game->height - 1}, get_rgba(cub->map->floor_color));
 	}
 }
