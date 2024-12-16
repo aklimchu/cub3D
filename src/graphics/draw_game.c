@@ -15,62 +15,57 @@
 
 static mlx_texture_t	*get_texture(t_draw_context *dc, t_cub *cub);
 static double			get_ray_dist_on_wall(t_draw_context *dc, t_cub *cub);
-static void				draw_loop(t_draw_context *dc, t_cub *cub, int y_start, int y_end);
+static void				draw_loop(t_draw_context *dc, t_cub *cub,
+							t_texture_context *t);
 
-void draw_game(t_cub *cub, t_draw_context dc)
+void	draw_game(t_cub *cub, t_draw_context dc)
 {
-	double			wall_height;
-	double			wall_offset;
-	mlx_texture_t	*texture;
-	int				y_start;
-	int				y_end;
+	double				wall_height;
+	double				wall_offset;
+	double				dist_to_wall_corr;
+	t_texture_context	t;
 
-	dc.dist_to_wall = dc.dist_to_wall * cos(normalize_angle(cub->player.angle - dc.ray_angle));
-	wall_height = CELL_SIZE * cub->img_game->height / dc.dist_to_wall;
+	dist_to_wall_corr = dc.dist_to_wall * \
+		cos(normalize_angle(cub->player.angle - dc.ray_angle));
+	wall_height = CELL_SIZE * cub->img_game->height / dist_to_wall_corr;
 	wall_offset = (double)cub->img_game->height / 2 - wall_height / 2;
-	texture = get_texture(&dc, cub);
-	y_start = (size_t)wall_offset;
-	y_end	= (size_t)wall_height + wall_offset;
-
-	draw_loop(&dc, cub, y_start, y_end);
+	t.texture = get_texture(&dc, cub);
+	t.y_start = (size_t)wall_offset;
+	t.y_end = (size_t)wall_height + wall_offset;
+	t.x = dc.iteration * cub->vertical_lines;
+	t.y_scale = (double)t.texture->height / wall_height;
+	t.texture_x = (int)floor(get_ray_dist_on_wall(&dc, cub) * \
+					(t.texture->width - 1));
+	draw_loop(&dc, cub, &t);
 }
 
-static size_t	get_texture_ind(t_draw_context *dc, mlx_texture_t *t,
-		t_cub *cub, int iter)
+static size_t	get_texture_ind(t_texture_context *t, int iter)
 {
-	double	wall_height;
-	double	y_scale;
-	size_t	texture_x;
 	size_t	ind;
+	size_t	row;
 
-	wall_height = CELL_SIZE * cub->img_game->height / dc->dist_to_wall;
-	y_scale = (double)t->height / wall_height;
-	texture_x = (int)floor(get_ray_dist_on_wall(dc, cub) * (t->width - 1));
-	size_t row = (int)(iter * y_scale);
-	ind = (((row * t->width) + texture_x) * BPP);
+	row = (size_t)(iter * t->y_scale);
+	ind = (((row * t->texture->width) + t->texture_x) * BPP);
 	return (ind);
 }
 
-static void	draw_loop(t_draw_context *dc, t_cub *cub, int y_start, int y_end)
+static void	draw_loop(t_draw_context *dc, t_cub *cub, t_texture_context *t)
 {
 	int				i;
-	size_t			x;
-	mlx_texture_t	*t;
 	uint8_t			*pixelstart_t;
 	uint8_t			*pixelstart_i;
 
-	x = dc->iteration * cub->vertical_lines;
-	t = get_texture(dc, cub);
 	i = 0;
-	if ((uint32_t)y_end > cub->img_game->height)
-		y_end = cub->img_game->height;
-	if (y_start < 0)
-		i = -y_start;
-	while (y_start + i < y_end)
+	if ((uint32_t)t->y_end > cub->img_game->height)
+		t->y_end = cub->img_game->height;
+	if (t->y_start < 0)
+		i = -t->y_start;
+	while (t->y_start + i < t->y_end)
 	{
-		pixelstart_t = &t->pixels[get_texture_ind(dc, t, cub, i)];
-		pixelstart_i = &cub->img_game->pixels[((y_start + i) * \
-			cub->img_game->width + x) * BPP];
+		pixelstart_t = &t->texture->pixels[
+			get_texture_ind(t, i)];
+		pixelstart_i = &cub->img_game->pixels[((t->y_start + i) * \
+			cub->img_game->width + t->x) * BPP];
 		ft_memcpy(pixelstart_i, pixelstart_t, BPP * cub->vertical_lines);
 		i++;
 	}
@@ -86,14 +81,14 @@ static double	get_ray_dist_on_wall(t_draw_context *dc, t_cub *cub)
 		ray_hit_location = (cub->player.x + dc->dist_to_wall * \
 			cos(dc->ray_angle));
 		ray_dist_on_wall = ray_hit_location - CELL_SIZE * \
-			floor((ray_hit_location / CELL_SIZE));
+			(int)((ray_hit_location / CELL_SIZE));
 	}
 	else
 	{
 		ray_hit_location = (cub->player.y + dc->dist_to_wall * \
 			sin(dc->ray_angle));
 		ray_dist_on_wall = ray_hit_location - CELL_SIZE * \
-			floor((ray_hit_location / CELL_SIZE));
+			(int)((ray_hit_location / CELL_SIZE));
 	}
 	return (ray_dist_on_wall / CELL_SIZE);
 }

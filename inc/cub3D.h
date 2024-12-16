@@ -174,10 +174,11 @@ typedef struct s_texture_context
 	t_draw_context	*dc;
 	t_cub		*cub;
 	mlx_texture_t	*texture;
-	double		wall_height;
-	double		wall_offset;
+	double		texture_x;
+	double		y_scale;
 	int		y_start;
 	int		y_end;
+	int		x;
 }	t_texture_context;
 
 // FUNCTIONS
