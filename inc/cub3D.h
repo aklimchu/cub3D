@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 10:45:07 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/16 11:48:52 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@
 # define BPP sizeof(int32_t) // not according to Norm?
 # define CELL_SIZE 64
 # define MAP_CELL_SIZE 25
+# define ROTATION_SPEED 0.05
+# define PLAYER_SPEED 5 // link to fps?
 
 // ERROR MESSAGES
 # define ERR_INVALID_FILE "Invalid input file"
@@ -130,6 +132,15 @@ typedef struct s_textures
 	mlx_texture_t	*e;
 }	t_textures;
 
+typedef struct s_key_state {
+    bool w;
+    bool a;
+    bool s;
+    bool d;
+    bool left;
+    bool right;
+}	t_key_state;
+
 typedef struct s_cub
 {
 	mlx_t		*mlx;
@@ -140,6 +151,7 @@ typedef struct s_cub
 	t_coord		map_size;
 	t_player	player;
 	t_map		*map;
+	t_key_state	keys;
 	int			iter_limit;
 	double		dist_to_ray;
 	int			ray_loop;
@@ -164,7 +176,7 @@ uint32_t	get_rgba(t_color c);
 void		handle_destroy(void *input);
 void		handle_keypress(struct mlx_key_data key_data, void *input);
 int			check_next_tile(t_cub *cub, double x, double y);
-void		check_angle(t_cub *cub, bool x_dir);
+void		check_angle(t_cub *cub, bool x_dir, double *dx, double *dy);
 void		key_left_event(t_cub *cub);
 void		key_right_event(t_cub *cub);
 // graphics
@@ -182,6 +194,7 @@ void		iter_loop(t_cub *cub, t_current *h, double *ray_x, double *ray_y);
 void		update_no_iter(t_cub *cub, t_current *h);
 double		normalize_angle(double angle);
 void		draw_cell(t_cub *cub, t_coord cell, t_coord_f current);
+void		update_player(t_cub *cub);
 // miscellaneous
 void		initialize_values(t_cub *cub);
 // exit

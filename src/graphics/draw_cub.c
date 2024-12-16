@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:22:30 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 10:56:30 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/16 11:42:18 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	draw_cub(void *input)
 	ft_memset(cub->img_fps->pixels, 50, cub->img_fps->width * \
 		cub->img_fps->height * BPP);
 	print_fps(cub, fps); // do we need to remove?
+	update_player(cub);
 	draw_map(cub);
 	draw_player(cub);
 	raycasting(cub);

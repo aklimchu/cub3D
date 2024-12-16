@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:42:30 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 10:12:15 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/16 12:02:13 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,14 @@ void	draw_player(t_cub *cub)
 		mlx_put_pixel(cub->img_map, MM_W / 2 + x1, MM_H / 2 + y1, WHITE);
 		i += 0.1;
 	}
-	draw_line(cub->img_map, (t_coord_f){MM_W / 2, MM_H / 2}, \
-		(t_coord_f){MM_W / 2 + cub->player.dx * 2, \
-		MM_H / 2 + cub->player.dy * 2}, WHITE);
+	if (!cub->player.dx && !cub->player.dy)
+		draw_line(cub->img_map, (t_coord_f){MM_W / 2, MM_H / 2}, \
+			(t_coord_f){MM_W / 2 + cos(cub->player.angle) * PLAYER_SPEED * 2, \
+			MM_H / 2 + sin(cub->player.angle) * PLAYER_SPEED * 2}, WHITE);
+	else
+		draw_line(cub->img_map, (t_coord_f){MM_W / 2, MM_H / 2}, \
+			(t_coord_f){MM_W / 2 + cub->player.dx * 2, \
+			MM_H / 2 + cub->player.dy * 2}, WHITE);
 }
 
 //The function draws the line based on given dimensions

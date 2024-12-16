@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:17:51 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 10:12:15 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/16 11:27:06 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	initialize_values(t_cub *cub)
 	fps = 1000 / cub->mlx->delta_time;
 	cub->player.dx = cos(cub->player.angle) * /* 0.2 * fps */5; // do we need fps?
 	cub->player.dy = sin(cub->player.angle) * /* 0.2 * fps */5;
+	ft_memset(&cub->keys, false, sizeof(cub->keys));
 }
 
 static double	find_angle_and_player(t_map *map, t_cub *cub)
