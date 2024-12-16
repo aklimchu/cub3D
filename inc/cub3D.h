@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 08:24:03 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/16 09:21:38 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define LIGHT_BLUE 0x00FFFFFF
 # define RED 0xFF0000FF
 # define GREEN 0x008000FF
-# define BPP sizeof(int32_t)
+# define BPP sizeof(int32_t) // not according to Norm?
 # define CELL_SIZE 64
 # define MAP_CELL_SIZE 25
 
@@ -60,18 +60,17 @@ typedef enum e_map_elems
 	END_ROW = 8
 }	t_map_elems;
 
-
 typedef struct s_coord
 {
-	int		x;
-	int		y;
+	int	x;
+	int	y;
 }				t_coord;
 
-typedef struct s_coord_f
+typedef struct s_coord_d
 {
 	double	x;
 	double	y;
-}				t_coord_f;
+}				t_coord_d;
 
 typedef struct s_player
 {
@@ -85,8 +84,8 @@ typedef struct s_player
 typedef struct s_current
 {
 	double		dist_to_ray;
-	t_coord_f	offset;
-	t_coord_f	ray_pos;
+	t_coord_d	offset;
+	t_coord_d	r_pos;
 	t_coord		map_pos;
 	int			ray_iter;
 	double		ray_angle;
@@ -108,7 +107,7 @@ typedef struct s_color
 	uint8_t	r;
 	uint8_t	g;
 	uint8_t	b;
-	uint8_t a;
+	uint8_t	a;
 }	t_color;
 
 typedef struct s_map
@@ -122,7 +121,7 @@ typedef struct s_map
 	t_map_elems	**map;
 	size_t		map_cols;
 	size_t		map_rows;
-	t_coord		player_start; // row first
+	t_coord		player_start;
 }	t_map;
 
 typedef struct s_textures
@@ -136,17 +135,16 @@ typedef struct s_textures
 typedef struct s_cub
 {
 	mlx_t		*mlx;
-	mlx_image_t *img_map;
-	mlx_image_t *img_game;
+	mlx_image_t	*img_map;
+	mlx_image_t	*img_game;
 	t_textures	textures;
 	t_coord		map_size;
 	t_player	player;
-	//int			cell_size;
 	t_map		*map;
 	int			iter_limit;
-	double dist_to_ray;
-	int ray_loop;
-	double ray_angle;
+	double		dist_to_ray;
+	int			ray_loop;
+	double		ray_angle;
 }				t_cub;
 
 // FUNCTIONS
@@ -177,14 +175,14 @@ void		draw_rect(mlx_image_t *img, t_rect rect);
 void		draw_player(t_cub *cub);
 void		raycasting(t_cub *cub);
 void		fill_rect(mlx_image_t *img, t_rect rect);
-void		draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b, int color);
+void		draw_line(mlx_image_t *img, t_coord_d a, t_coord_d b, int color);
 void		draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angle, int side, size_t n_rays);
 void		load_textures(t_cub *cub);
-double		check_dist_to_ray(t_coord_f a, t_coord_f b, double angle);
+double		check_dist_to_ray(t_coord_d a, t_coord_d b, double angle);
 void		iter_loop(t_cub *cub, t_current *h, double *ray_x, double *ray_y);
 void		update_no_iter(t_cub *cub, t_current *h);
 double		normalize_angle(double angle);
-void		draw_cell(t_cub *cub, t_coord cell, t_coord_f current);
+void		draw_cell(t_cub *cub, t_coord cell, t_coord_d current);
 // miscellaneous
 void		initialize_values(t_cub *cub);
 // exit

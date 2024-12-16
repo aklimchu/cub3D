@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:15:43 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/12 15:52:45 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/16 08:55:44 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	key_s_event(t_cub *cub);
 void	handle_keypress(struct mlx_key_data key_data, void *input)
 {
 	t_cub	*cub;
-	
+
 	cub = (t_cub *)input;
 	(void)key_data;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE) == true)
@@ -32,7 +32,7 @@ void	handle_keypress(struct mlx_key_data key_data, void *input)
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_W) == true)
 		key_w_event(cub);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_S) == true)
-		key_s_event(cub);	
+		key_s_event(cub);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT) == true)
 		key_left_event(cub);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT) == true)

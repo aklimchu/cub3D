@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.c                                             :+:      :+:    :+:   */
+/*   draw_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 09:40:50 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/12 15:39:14 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/16 08:34:34 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angl
 	if (y_start < 0) // y_start + i = 0
 		i = -y_start;
 	if (y_start > 0)
-		draw_line(cub->img_game, (t_coord_f){x, 0}, (t_coord_f){x, y_start - 1}, get_rgba(cub->map->roof_color));
+		draw_line(cub->img_game, (t_coord_d){x, 0}, (t_coord_d){x, y_start - 1}, get_rgba(cub->map->roof_color));
 	while (y_start + i < y_end && (uint32_t)y_end <= cub->img_game->width)
 	{
 		uint8_t* pixelstart_t = &texture->pixels[(((int)(floor(i * y_scale) * texture->width) + texture_x) * BPP)];
@@ -73,6 +73,6 @@ void draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angl
 	}
 	if ((uint32_t)y_end < cub->img_game->width - 1)
 	{
-		draw_line(cub->img_game, (t_coord_f){x, y_end}, (t_coord_f){x, cub->img_game->width - 1}, get_rgba(cub->map->floor_color));
+		draw_line(cub->img_game, (t_coord_d){x, y_end}, (t_coord_d){x, cub->img_game->width - 1}, get_rgba(cub->map->floor_color));
 	}
 }
