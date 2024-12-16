@@ -6,42 +6,54 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:15:43 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/12 15:52:45 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/16 11:39:35 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void	key_a_event(t_cub *cub);
+/* static void	key_a_event(t_cub *cub);
 static void	key_d_event(t_cub *cub);
 static void	key_w_event(t_cub *cub);
-static void	key_s_event(t_cub *cub);
+static void	key_s_event(t_cub *cub); */
 
 void	handle_keypress(struct mlx_key_data key_data, void *input)
 {
 	t_cub	*cub;
-	
+
 	cub = (t_cub *)input;
-	(void)key_data;
+	//(void)key_data;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE) == true)
 		free_everything(cub, 0);
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_A) == true)
+	/* if (mlx_is_key_down(cub->mlx, MLX_KEY_A) == true)
 		key_a_event(cub);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_D) == true)
 		key_d_event(cub);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_W) == true)
 		key_w_event(cub);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_S) == true)
-		key_s_event(cub);	
+		key_s_event(cub);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT) == true)
 		key_left_event(cub);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT) == true)
-		key_right_event(cub);
-	cub->player.dx = cos(cub->player.angle) * 5;
-	cub->player.dy = sin(cub->player.angle) * 5;
+		key_right_event(cub); */
+/* 	cub->player.dx = cos(cub->player.angle) * 5; // fps?
+	cub->player.dy = sin(cub->player.angle) * 5; // fps? */
+	if (key_data.key == MLX_KEY_W)
+        cub->keys.w = key_data.action == MLX_PRESS || key_data.action == MLX_REPEAT;
+    if (key_data.key == MLX_KEY_A)
+        cub->keys.a = key_data.action == MLX_PRESS || key_data.action == MLX_REPEAT;
+    if (key_data.key == MLX_KEY_S)
+        cub->keys.s = key_data.action == MLX_PRESS || key_data.action == MLX_REPEAT;
+    if (key_data.key == MLX_KEY_D)
+        cub->keys.d = key_data.action == MLX_PRESS || key_data.action == MLX_REPEAT;
+    if (key_data.key == MLX_KEY_LEFT)
+        cub->keys.left = key_data.action == MLX_PRESS || key_data.action == MLX_REPEAT;
+    if (key_data.key == MLX_KEY_RIGHT)
+        cub->keys.right = key_data.action == MLX_PRESS || key_data.action == MLX_REPEAT;
 }
 
-static void	key_a_event(t_cub *cub)
+/* static void	key_a_event(t_cub *cub)
 {
 	if (check_next_tile(cub, cub->player.x + cub->player.dy, \
 		cub->player.y - cub->player.dx) == 1)
@@ -120,3 +132,4 @@ static void	key_s_event(t_cub *cub)
 		cub->player.y -= cub->player.dy;
 	}
 }
+ */

@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 08:24:03 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/16 11:48:52 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@
 # define LIGHT_BLUE 0x00FFFFFF
 # define RED 0xFF0000FF
 # define GREEN 0x008000FF
-# define BPP sizeof(int32_t)
+# define BPP sizeof(int32_t) // not according to Norm?
 # define CELL_SIZE 64
 # define MAP_CELL_SIZE 25
+# define ROTATION_SPEED 0.05
+# define PLAYER_SPEED 5 // link to fps?
 
 // ERROR MESSAGES
 # define ERR_INVALID_FILE "Invalid input file"
@@ -58,11 +60,10 @@ typedef enum e_map_elems
 	END_ROW = 8
 }	t_map_elems;
 
-
 typedef struct s_coord
 {
-	int		x;
-	int		y;
+	int	x;
+	int	y;
 }				t_coord;
 
 typedef struct s_coord_f
@@ -84,7 +85,7 @@ typedef struct s_current
 {
 	double		dist_to_ray;
 	t_coord_f	offset;
-	t_coord_f	ray_pos;
+	t_coord_f	r_pos;
 	t_coord		map_pos;
 	int			ray_iter;
 	double		ray_angle;
@@ -106,7 +107,7 @@ typedef struct s_color
 	uint8_t	r;
 	uint8_t	g;
 	uint8_t	b;
-	uint8_t a;
+	uint8_t	a;
 }	t_color;
 
 typedef struct s_map
@@ -120,7 +121,7 @@ typedef struct s_map
 	t_map_elems	**map;
 	size_t		map_cols;
 	size_t		map_rows;
-	t_coord		player_start; // row first
+	t_coord		player_start;
 }	t_map;
 
 typedef struct s_textures
@@ -131,16 +132,26 @@ typedef struct s_textures
 	mlx_texture_t	*e;
 }	t_textures;
 
+typedef struct s_key_state {
+    bool w;
+    bool a;
+    bool s;
+    bool d;
+    bool left;
+    bool right;
+}	t_key_state;
+
 typedef struct s_cub
 {
 	mlx_t		*mlx;
-	mlx_image_t *img_map;
-	mlx_image_t *img_game;
+	mlx_image_t	*img_map;
+	mlx_image_t	*img_game;
+	mlx_image_t	*img_fps;
 	t_textures	textures;
 	t_coord		map_size;
 	t_player	player;
-	//int			cell_size;
 	t_map		*map;
+	t_key_state	keys;
 	int			iter_limit;
 	double dist_to_ray;
 	int ray_loop;
@@ -166,7 +177,7 @@ uint32_t	get_rgba(t_color c);
 void		handle_destroy(void *input);
 void		handle_keypress(struct mlx_key_data key_data, void *input);
 int			check_next_tile(t_cub *cub, double x, double y);
-void		check_angle(t_cub *cub, bool x_dir);
+void		check_angle(t_cub *cub, bool x_dir, double *dx, double *dy);
 void		key_left_event(t_cub *cub);
 void		key_right_event(t_cub *cub);
 // graphics
@@ -184,6 +195,7 @@ void		iter_loop(t_cub *cub, t_current *h, double *ray_x, double *ray_y);
 void		update_no_iter(t_cub *cub, t_current *h);
 double		normalize_angle(double angle);
 void		draw_cell(t_cub *cub, t_coord cell, t_coord_f current);
+void		update_player(t_cub *cub);
 // miscellaneous
 void		initialize_values(t_cub *cub);
 // exit

@@ -6,13 +6,14 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:22:30 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/12 14:19:33 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/16 11:42:18 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
 static void draw_game_background(t_cub *cub);
+static void	print_fps(t_cub *cub, double fps);
 
 void	draw_cub(void *input)
 {
@@ -28,7 +29,21 @@ void	draw_cub(void *input)
 	ft_memset(cub->img_map->pixels, 50, cub->img_map->width * \
 		cub->img_map->height * BPP);
 	ft_memcpy(cub->img_game->pixels, cub->bg_buffer, cub->img_game->width * cub->img_game->height * BPP);
+	ft_memset(cub->img_fps->pixels, 50, cub->img_fps->width * \
+		cub->img_fps->height * BPP);
+	print_fps(cub, fps); // do we need to remove?
+	update_player(cub);
 	draw_map(cub);
 	draw_player(cub);
 	raycasting(cub);
+}
+
+static void	print_fps(t_cub *cub, double fps)
+{
+	char *str_fps = ft_itoa((int)fps);
+	printf("%s\n", str_fps);
+	char *text = ft_strjoin("fps: ", str_fps);
+	printf("%s\n", text);
+	cub->img_fps = mlx_put_string(cub->mlx, text, cub->img_game->width - 200, 100);
+	free(text);
 }
