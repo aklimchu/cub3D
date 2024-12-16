@@ -145,6 +145,7 @@ typedef struct s_cub
 	double dist_to_ray;
 	int ray_loop;
 	double ray_angle;
+	uint8_t *bg_buffer;
 }				t_cub;
 
 // FUNCTIONS

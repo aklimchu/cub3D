@@ -12,6 +12,8 @@
 
 #include "../inc/cub3D.h"
 
+static void draw_game_background(t_cub *cub);
+
 void	draw_cub(void *input)
 {
 	t_cub	*cub;
@@ -25,8 +27,7 @@ void	draw_cub(void *input)
 		return ;
 	ft_memset(cub->img_map->pixels, 50, cub->img_map->width * \
 		cub->img_map->height * BPP);
-	ft_memset(cub->img_game->pixels, 50, cub->img_game->width * \
-		cub->img_game->height * BPP);
+	ft_memcpy(cub->img_game->pixels, cub->bg_buffer, cub->img_game->width * cub->img_game->height * BPP);
 	draw_map(cub);
 	draw_player(cub);
 	raycasting(cub);

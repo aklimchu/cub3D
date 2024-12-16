@@ -12,6 +12,7 @@
 
 #include <stdint.h>
 #include "../inc/cub3D.h"
+static void	simple_draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b, int color);
 
 void draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angle, int side, size_t n_rays)
 {
@@ -62,16 +63,6 @@ void draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angl
 		y_end = cub->img_game->height;
 	if (y_start < 0) // y_start + i = 0
 		i = -y_start;
-	if (y_start > 0)
-	{
-		j = 0;
-		while (j < cub->img_game->width / n_rays)
-		{
-			draw_line(cub->img_game, (t_coord_f){x + j, 0}, (t_coord_f){x + j, y_start - 1}, get_rgba(cub->map->roof_color));
-			j++;
-		}
-	}
-
 	while (y_start + i < y_end && (uint32_t)y_end <= cub->img_game->width)
 	{
 		uint8_t* pixelstart_t = &texture->pixels[(((int)(floor(i * y_scale) * texture->width) + texture_x) * BPP)];
@@ -79,13 +70,18 @@ void draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angl
 		ft_memcpy(pixelstart_i, pixelstart_t, BPP * cub->img_game->width / n_rays);
 		i++;
 	}
-	if ((uint32_t)y_end < cub->img_game->height - 1)
+}
+
+static void	simple_draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b, int color)
+{
+	size_t i;
+
+	if (a.x != b.x)
+		error_exit("Internal error");
+	i = 0;
+	while (a.y + i < b.y)
 	{
-		j = 0;
-		while (j < cub->img_game->width / n_rays)
-		{
-		draw_line(cub->img_game, (t_coord_f){x + j, y_end}, (t_coord_f){x + j, cub->img_game->height - 1}, get_rgba(cub->map->floor_color));
-			j++;
-		}
+		mlx_put_pixel(img, a.x, a.y + i, color);
+		i++;
 	}
 }

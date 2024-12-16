@@ -14,6 +14,7 @@
 
 static void	create_images(t_cub *cub);
 static void	add_shading(mlx_texture_t *texture);
+static void	create_bg_buffer(t_cub *cub);
 
 int	main(int argc, char **argv)
 {
@@ -27,6 +28,7 @@ int	main(int argc, char **argv)
 	add_shading(cub.textures.e);
 	create_images(&cub);
 	initialize_values(&cub);
+	create_bg_buffer(&cub);
 	mlx_loop_hook(cub.mlx, &draw_cub, &cub);
 	//mlx_close_hook(cub.mlx, &handle_destroy, &cub);
 	mlx_key_hook(cub.mlx, &handle_keypress, &cub);
@@ -39,7 +41,7 @@ static void	create_images(t_cub *cub)
 {
 	int32_t	w;
 	int32_t	h;
-	int32_t monitor_count;
+
 	cub->mlx = mlx_init(800, 600, "cub3D", 1);
 	if (cub->mlx == NULL)
 		exit (EXIT_FAILURE);
@@ -82,4 +84,26 @@ static void	add_shading(mlx_texture_t *texture)
             pixel[3] = pixel[3];
         i++;
     }
+}
+
+static void	create_bg_buffer(t_cub *cub)
+{
+	size_t	i;
+	size_t	game_size;
+
+	game_size = cub->img_game->height * cub->img_game->width * BPP;
+	cub->bg_buffer = reserve(game_size);
+	if (!cub->bg_buffer)
+		error_exit(ERR_FATAL);
+	i = 0;
+	while (i < game_size / 2)
+	{
+		mlx_draw_pixel(&cub->bg_buffer[i], get_rgba(cub->map->roof_color));
+		i += 4;
+	}
+	while (i < game_size)
+	{
+		mlx_draw_pixel(&cub->bg_buffer[i], get_rgba(cub->map->floor_color));
+		i += 4;
+	}
 }
