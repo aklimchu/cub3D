@@ -19,8 +19,8 @@ void draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angl
 	double	angle_diff = cub->player.angle - ray_angle; // right name?
 	angle_diff = normalize_angle(angle_diff);
 	double dist_to_ray_corr = dist_to_ray * cos(angle_diff); // fisheye
-	double	wall_height = CELL_SIZE * cub->img_map->height / dist_to_ray_corr;
-	double	wall_offset = (double)cub->img_map->height / 2 - wall_height / 2;
+	double	wall_height = CELL_SIZE * cub->img_game->height / dist_to_ray_corr;
+	double	wall_offset = (double)cub->img_game->height / 2 - wall_height / 2;
 	int x = ray_loop * (cub->img_game->width / n_rays);
 	int y_start = wall_offset;
 	int	y_end	= wall_height + wall_offset;
