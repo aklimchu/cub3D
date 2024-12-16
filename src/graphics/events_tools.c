@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 11:14:45 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 08:54:59 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/16 10:18:46 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ void	check_angle(t_cub *cub, bool x_dir)
 
 void	key_left_event(t_cub *cub)
 {
-	cub->player.angle -= 0.1;
+	cub->player.angle -= 0.05;
 	if (cub->player.angle < 0)
 		cub->player.angle += 2 * M_PI;
 }
 
 void	key_right_event(t_cub *cub)
 {
-	cub->player.angle += 0.1;
+	cub->player.angle += 0.05;
 	if (cub->player.angle > 2 * M_PI)
 		cub->player.angle -= 2 * M_PI;
 }

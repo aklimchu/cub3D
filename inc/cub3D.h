@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 10:12:25 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/16 10:45:07 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ typedef struct s_cub
 	mlx_t		*mlx;
 	mlx_image_t	*img_map;
 	mlx_image_t	*img_game;
+	mlx_image_t	*img_fps;
 	t_textures	textures;
 	t_coord		map_size;
 	t_player	player;
