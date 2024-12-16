@@ -20,10 +20,7 @@ void	draw_cub(void *input)
 	t_cub	*cub;
 
 	cub = (t_cub *)input;
-	// TEMPORARY FPS PRINTING, REMOVE BEFORE SUBMISSION
 	double fps = 1 / cub->mlx->delta_time;
-	printf("FPS %f\n", fps);
-	//
 	if (cub->mlx == NULL)
 		return ;
 	ft_memset(cub->img_map->pixels, 50, cub->img_map->width * \
@@ -40,10 +37,18 @@ void	draw_cub(void *input)
 
 static void	print_fps(t_cub *cub, double fps)
 {
-	char *str_fps = ft_itoa((int)fps);
-	printf("%s\n", str_fps);
-	char *text = ft_strjoin("fps: ", str_fps);
-	printf("%s\n", text);
+	char *str_fps;
+	char *text;
+
+	str_fps = ft_itoa((int)fps);
+	if (!str_fps)
+		error_exit(ERR_FATAL);
+	memlist_add(str_fps);
+	text = ft_strjoin("fps: ", str_fps);
+	release(str_fps);
+	if (!text)
+		error_exit(ERR_FATAL);
+	memlist_add(text);
 	cub->img_fps = mlx_put_string(cub->mlx, text, cub->img_game->width - 200, 100);
-	free(text);
+	release(text);
 }

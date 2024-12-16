@@ -41,8 +41,8 @@
 # define BPP sizeof(int32_t) // not according to Norm?
 # define CELL_SIZE 64
 # define MAP_CELL_SIZE 25
-# define ROTATION_SPEED 0.05
-# define PLAYER_SPEED 5 // link to fps?
+# define ROTATION_SPEED 2
+# define PLAYER_SPEED 200
 
 // ERROR MESSAGES
 # define ERR_INVALID_FILE "Invalid input file"

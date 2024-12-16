@@ -25,17 +25,17 @@ void	draw_player(t_cub *cub)
 		angle = i;
 		x1 = ((double)CELL_SIZE / 20) * cos(angle * M_PI / 180);
 		y1 = ((double)CELL_SIZE / 20) * sin(angle * M_PI / 180);
-		mlx_put_pixel(cub->img_map, MM_W / 2 + x1, MM_H / 2 + y1, WHITE);
+		mlx_put_pixel(cub->img_map, MM_W / 2 + (int)x1, MM_H / 2 + (int)y1, WHITE);
 		i += 0.1;
 	}
 	if (!cub->player.dx && !cub->player.dy)
-		draw_line(cub->img_map, (t_coord_f){MM_W / 2, MM_H / 2}, \
-			(t_coord_f){MM_W / 2 + cos(cub->player.angle) * PLAYER_SPEED * 2, \
-			MM_H / 2 + sin(cub->player.angle) * PLAYER_SPEED * 2}, WHITE);
+		draw_line(cub->img_map, (t_coord_f){(double)MM_W / 2, (double)MM_H / 2}, \
+			(t_coord_f){(double)MM_W / 2 + cos(cub->player.angle) * PLAYER_SPEED * cub->mlx->delta_time * 2, \
+			(double)MM_H / 2 + sin(cub->player.angle) * PLAYER_SPEED * cub->mlx->delta_time *  2}, WHITE);
 	else
-		draw_line(cub->img_map, (t_coord_f){MM_W / 2, MM_H / 2}, \
-			(t_coord_f){MM_W / 2 + cub->player.dx * 2, \
-			MM_H / 2 + cub->player.dy * 2}, WHITE);
+		draw_line(cub->img_map, (t_coord_f){(double)MM_W / 2, (double)MM_H / 2}, \
+			(t_coord_f){(double)MM_W / 2 + cub->player.dx * 2, \
+			(double)MM_H / 2 + cub->player.dy * 2}, WHITE);
 }
 
 //The function draws the line based on given dimensions

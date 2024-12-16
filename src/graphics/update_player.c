@@ -17,24 +17,31 @@ void	update_player(t_cub *cub)
 	cub->player.dx = 0;
    cub->player.dy = 0;
 
+    double delta_t = cub->mlx->delta_time;
 	// Handle forward/backward movement
+    // Handle rotation
+    if (cub->keys.left)
+        cub->player.angle -= ROTATION_SPEED * delta_t;
+    if (cub->keys.right)
+        cub->player.angle += ROTATION_SPEED * delta_t;
+    cub->player.angle = normalize_angle(cub->player.angle);
     if (cub->keys.w) {
-        cub->player.dx += cos(cub->player.angle) * PLAYER_SPEED; // fps?
-        cub->player.dy += sin(cub->player.angle) * PLAYER_SPEED;
+        cub->player.dx += cos(cub->player.angle) * PLAYER_SPEED * delta_t; // fps?
+        cub->player.dy += sin(cub->player.angle) * PLAYER_SPEED * delta_t;
     }
     if (cub->keys.s) {
-        cub->player.dx -= cos(cub->player.angle) * PLAYER_SPEED;
-        cub->player.dy -= sin(cub->player.angle) * PLAYER_SPEED;
+        cub->player.dx -= cos(cub->player.angle) * PLAYER_SPEED * delta_t;
+        cub->player.dy -= sin(cub->player.angle) * PLAYER_SPEED * delta_t;
     }
 
     // Handle strafing (left/right movement)
     if (cub->keys.a) {
-        cub->player.dx += sin(cub->player.angle) * PLAYER_SPEED;
-        cub->player.dy -= cos(cub->player.angle) * PLAYER_SPEED;
+        cub->player.dx += sin(cub->player.angle) * PLAYER_SPEED * delta_t;
+        cub->player.dy -= cos(cub->player.angle) * PLAYER_SPEED * delta_t;
     }
     if (cub->keys.d) {
-        cub->player.dx -= sin(cub->player.angle) * PLAYER_SPEED;
-        cub->player.dy += cos(cub->player.angle) * PLAYER_SPEED;
+        cub->player.dx -= sin(cub->player.angle) * PLAYER_SPEED * delta_t;
+        cub->player.dy += cos(cub->player.angle) * PLAYER_SPEED * delta_t;
     }
 
 	if (check_next_tile(cub, cub->player.x + cub->player.dx, \
@@ -54,10 +61,4 @@ void	update_player(t_cub *cub)
         cub->player.y += cub->player.dy;
     }
 
-    // Handle rotation
-    if (cub->keys.left)
-        cub->player.angle -= ROTATION_SPEED;
-    if (cub->keys.right)
-        cub->player.angle += ROTATION_SPEED;
-    cub->player.angle = normalize_angle(cub->player.angle);
 }
