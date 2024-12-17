@@ -82,6 +82,7 @@ static void	handle_sliding(t_cub *cub, t_coord_f *offset)
 		cub->player.y + cub->player.dy + offset->y) == 1)
 	{
 		cub->player.dy = dy_backup;
+		check_offset(cub->player.dx, cub->player.dy, offset);
 		check_angle(false, &cub->player.dx, &cub->player.dy);
 	}
 }
