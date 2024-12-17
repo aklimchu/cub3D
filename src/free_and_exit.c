@@ -30,6 +30,7 @@ void	free_everything(t_cub *cub, int exit_code)
 		mlx_delete_image(cub->mlx, cub->img_game);
 	if (cub->img_fps)
 		mlx_delete_image(cub->mlx, cub->img_fps);
+	delete_textures(cub);
 	mlx_terminate(cub->mlx);
 	memlist_release_all();
 	exit(exit_code);

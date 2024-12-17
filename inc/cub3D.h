@@ -228,5 +228,6 @@ void		initialize_values(t_cub *cub);
 // exit
 void		free_everything(t_cub *cub, int exit_code);
 void		error_exit(char	*msg);
+void		delete_textures(t_cub *cub);
 
 #endif /*CUB3D_H*/

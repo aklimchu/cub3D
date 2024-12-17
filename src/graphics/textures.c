@@ -27,3 +27,15 @@ void	load_textures(t_cub *cub)
 	if (!cub->textures.e)
 		error_exit(strerror(mlx_errno));
 }
+
+void	delete_textures(t_cub *cub)
+{
+	if (cub->textures.n)
+		mlx_delete_texture(cub->textures.n);
+	if (cub->textures.e)
+		mlx_delete_texture(cub->textures.e);
+	if (cub->textures.s)
+		mlx_delete_texture(cub->textures.s);
+	if (cub->textures.w)
+		mlx_delete_texture(cub->textures.w);
+}
