@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:24:41 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 10:12:15 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:03:44 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static double	check_horiz(t_cub *c, double r_angle, double *r_x, double *r_y)
 {
 	t_current	h;
 
+	h.ray_iter = 0;
 	*r_x = (double)c->player.x;
 	*r_y = (double)c->player.y;
 	h.ray_angle = r_angle;
@@ -87,7 +88,7 @@ static double	check_horiz(t_cub *c, double r_angle, double *r_x, double *r_y)
 		h.offset.y = CELL_SIZE;
 		h.offset.x = -1 * h.offset.y * h.neg_inv_tan;
 	}
-	if (fabs(r_angle) < 0.01 || fabs(r_angle - M_PI) < 0.01)
+	if (fabs(r_angle) < 0.0001 || fabs(r_angle - M_PI) < 0.0001)
 		update_no_iter(c, &h);
 	iter_loop(c, &h, r_x, r_y);
 	return (h.dist_to_ray);
@@ -116,7 +117,7 @@ static double	check_vert(t_cub *c, double r_angle, double *r_x, double *r_y)
 		v.offset.x = CELL_SIZE;
 		v.offset.y = -1 * v.offset.x * v.neg_tan;
 	}
-	if (fabs(r_angle - M_PI / 2) < 0.01 || fabs(r_angle - 3 * M_PI / 2) < 0.01)
+	if (fabs(r_angle - M_PI / 2) < 0.0001 || fabs(r_angle - 3 * M_PI / 2) < 0.0001)
 		update_no_iter(c, &v);
 	iter_loop(c, &v, r_x, r_y);
 	return (v.dist_to_ray);

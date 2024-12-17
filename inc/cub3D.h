@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/17 11:30:01 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:35:10 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,12 +198,10 @@ uint32_t	get_rgba(t_color c);
 void		check_map_line(char *line);
 void		read_file(char *path, t_list **file);
 // events
-void		handle_destroy(void *input);
+//void		handle_destroy(void *input);
 void		handle_keypress(struct mlx_key_data key_data, void *input);
 int			check_next_tile(t_cub *cub, double x, double y);
 void		check_angle(bool x_dir, double *dx, double *dy);
-void		key_left_event(t_cub *cub);
-void		key_right_event(t_cub *cub);
 // graphics
 void		draw_cub(void *input);
 void		draw_map(t_cub *cub);

@@ -39,3 +39,26 @@ void	handle_keypress(struct mlx_key_data key_data, void *input)
 		cub->keys.right = (key_data.action == MLX_PRESS || \
 			key_data.action == MLX_REPEAT);
 }
+
+int	check_next_tile(t_cub *cub, double x, double y)
+{
+	int	x_tile;
+	int	y_tile;
+	int	tile;
+
+	x_tile = (int)x / CELL_SIZE;
+	y_tile = (int)y / CELL_SIZE;
+	tile = get_tile(y_tile, x_tile, cub->map);
+	if (tile == EMPTY || tile == START_NO || \
+		tile == START_SO || tile == START_EA || tile == START_WE)
+		return (0);
+	return (1);
+}
+
+void	check_angle(bool x_dir, double *dx, double *dy)
+{
+	if (x_dir == true)
+		*dy = 0;
+	else
+		*dx = 0;
+}
