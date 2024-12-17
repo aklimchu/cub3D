@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:42:30 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 14:16:59 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/17 13:20:08 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,15 @@ void	draw_player(t_cub *cub)
 		angle = i;
 		x1 = ((double)CELL_SIZE / 20) * cos(angle * M_PI / 180);
 		y1 = ((double)CELL_SIZE / 20) * sin(angle * M_PI / 180);
-		mlx_put_pixel(cub->img_map, MM_W / 2 + (int)x1, \
-			MM_H / 2 + (int)y1, WHITE);
+		mlx_put_pixel(cub->img_map, cub->img_map->width / 2 + (int)x1, \
+			cub->img_map->height / 2 + (int)y1, WHITE);
 		i += 0.1;
 	}
-	draw_line(cub->img_map, (t_coord_f){(double)MM_W / 2, (double)MM_H / 2}, \
-		(t_coord_f){(double)MM_W / 2 + cos(cub->player.angle) * 10, \
-		(double)MM_H / 2 + sin(cub->player.angle) * 10}, WHITE);
+	draw_line(cub->img_map, (t_coord_f){(double)cub->img_map->width / 2, \
+		(double)cub->img_map->height / 2}, \
+		(t_coord_f){(double)cub->img_map->width / 2 + \
+		cos(cub->player.angle) * 10, (double)cub->img_map->height / 2 + \
+		sin(cub->player.angle) * 10}, WHITE);
 }
 
 //The function draws the line based on given dimensions

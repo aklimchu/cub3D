@@ -6,13 +6,13 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:10:41 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/17 11:39:38 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/17 13:06:21 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void	create_images(t_cub *cub);
+static void	create_images(t_cub *c);
 static void	add_shading(mlx_texture_t *texture);
 static void	create_bg_buffer(t_cub *cub);
 
@@ -37,36 +37,33 @@ int	main(int argc, char **argv)
 	exit(EXIT_SUCCESS);
 }
 
-static void	create_images(t_cub *cub)
+static void	create_images(t_cub *c)
 {
-	int32_t	w;
-	int32_t	h;
+	int32_t	m_width;
+	int32_t	m_height;
 
-	cub->mlx = mlx_init(800, 600, "cub3D", 1);
-	if (cub->mlx == NULL)
+	c->mlx = mlx_init(800, 600, "cub3D", 1);
+	if (c->mlx == NULL)
 		exit (EXIT_FAILURE);
-	mlx_get_monitor_size(0, &w, &h);
-	mlx_set_window_size(cub->mlx, w, h);
+	mlx_get_monitor_size(0, &m_width, &m_height);
+	mlx_set_window_size(c->mlx, m_width, m_height);
 	//mlx_set_setting(MLX_FULLSCREEN, true);
-	cub->img_map = mlx_new_image(cub->mlx, MM_W, MM_H);
-	if (cub->img_map == NULL)
-		free_everything(cub, EXIT_FAILURE);
-	cub->img_game = mlx_new_image(cub->mlx, w, h);
-	if (cub->img_game == NULL)
-		free_everything(cub, EXIT_FAILURE);
-	cub->img_fps = NULL;
-	if (!cub->img_map || (mlx_image_to_window(cub->mlx, \
-		cub->img_map, 0, 0) < 0))
-	{
-		free_everything(cub, EXIT_FAILURE);
-	}
-	if (!cub->img_game || (mlx_image_to_window(cub->mlx, \
-		cub->img_game, 0, 0) < 0))
-	{
-		free_everything(cub, EXIT_FAILURE);
-	}
-	mlx_set_instance_depth(cub->img_map->instances, 1);
-	mlx_set_instance_depth(cub->img_game->instances, 0);
+	if (m_width > m_height)
+		c->img_map = mlx_new_image(c->mlx, m_width / 10, m_width / 10);
+	else
+		c->img_map = mlx_new_image(c->mlx, m_height / 10, m_height / 10);
+	if (c->img_map == NULL)
+		free_everything(c, EXIT_FAILURE);
+	c->img_game = mlx_new_image(c->mlx, m_width, m_height);
+	if (c->img_game == NULL)
+		free_everything(c, EXIT_FAILURE);
+	c->img_fps = NULL;
+	if (!c->img_map || (mlx_image_to_window(c->mlx, c->img_map, 0, 0) < 0))
+		free_everything(c, EXIT_FAILURE);
+	if (!c->img_game || (mlx_image_to_window(c->mlx, c->img_game, 0, 0) < 0))
+		free_everything(c, EXIT_FAILURE);
+	mlx_set_instance_depth(c->img_map->instances, 1);
+	mlx_set_instance_depth(c->img_game->instances, 0);
 }
 
 static void	add_shading(mlx_texture_t *texture)
