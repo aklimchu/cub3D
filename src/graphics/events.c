@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:15:43 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 14:16:15 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/17 13:52:10 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	handle_keypress(struct mlx_key_data key_data, void *input)
 {
 	t_cub	*cub;
-	bool	key_bool;
 
 	cub = (t_cub *)input;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE) == true)
