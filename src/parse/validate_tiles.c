@@ -12,6 +12,28 @@
 
 #include "cub3D.h"
 
+// static void	check_empty_tile(t_map *map, size_t row, size_t col)
+// {
+// 	int	i;
+// 	int	j;
+//
+// 	if (row == 0 || row == map->map_rows - 1
+// 		|| col == 0 || col == map->map_cols - 1)
+// 		error_exit("The map must be surrounded by walls");
+// 	i = -1;
+// 	while (i < 2)
+// 	{
+// 		j = -1;
+// 		while (j < 2)
+// 		{
+// 			if (map->map[row + i][col + j] == PADDING)
+// 				error_exit("The map must be surrounded by walls");
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
+
 static void	check_empty_tile(t_map *map, size_t row, size_t col)
 {
 	int	i;
@@ -26,8 +48,11 @@ static void	check_empty_tile(t_map *map, size_t row, size_t col)
 		j = -1;
 		while (j < 2)
 		{
-			if (map->map[row + i][col + j] == PADDING)
-				error_exit("The map must be surrounded by walls");
+			if (abs(i) != abs(j))
+			{
+				if (map->map[row + i][col + j] == PADDING)
+					error_exit("The map must be surrounded by walls");
+			}
 			j++;
 		}
 		i++;
