@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 10:35:57 by pleander          #+#    #+#             */
-/*   Updated: 2024/12/05 10:36:04 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/17 13:49:04 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void	parse_texture_path(char **dst, char *line)
 	char	*path_start;
 	char	*path_end;
 
+	if (*dst != NULL)
+		error_exit("Texture duplicated");
 	while (ft_isspace(*line))
 		line++;
 	path_start = line;
@@ -48,6 +50,33 @@ static int	line_is_empty(char *line)
 		return (0);
 }
 
+static int	parse_line_colors(char *line, t_map *map)
+{
+	if (!ft_strncmp(line, "F ", 2))
+	{
+		if (!map->parsed_floor)
+		{
+			parse_colors(&map->floor_color, line + 2);
+			map->parsed_floor = 1;
+		}
+		else
+			error_exit("Multiple definitions for floor color");
+		return (1);
+	}
+	else if (!ft_strncmp(line, "C ", 2))
+	{
+		if (!map->parsed_roof)
+		{
+			parse_colors(&map->roof_color, line + 2);
+			map->parsed_roof = 1;
+		}
+		else
+			error_exit("Multiple definitions for roof color");
+		return (1);
+	}
+	return (0);
+}
+
 /**
  * @brief Parses a line if it is of recongnized format, othweise
  * return -1
@@ -68,10 +97,8 @@ int	parse_line(char *line, t_map *map)
 			parse_texture_path(&map->we_texture, line + 3);
 		else if (!ft_strncmp(line, "EA ", 3))
 			parse_texture_path(&map->ea_texture, line + 3);
-		else if (!ft_strncmp(line, "F ", 2))
-			parse_colors(&map->floor_color, line + 2);
-		else if (!ft_strncmp(line, "C ", 2))
-			parse_colors(&map->roof_color, line + 2);
+		else if (parse_line_colors(line, map))
+			;
 		else
 			error_exit(ERR_INVALID_FILE);
 	}

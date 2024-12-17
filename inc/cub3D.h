@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/17 11:41:07 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:46:19 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ typedef struct s_map
 	size_t		map_cols;
 	size_t		map_rows;
 	t_coord		player_start;
+	int		parsed_floor;
+	int		parsed_roof;
 }	t_map;
 
 typedef struct s_textures

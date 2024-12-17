@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 10:42:46 by pleander          #+#    #+#             */
-/*   Updated: 2024/12/09 09:57:36 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/17 13:02:05 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,17 @@ static void	parse_single_color(uint8_t *dst, char *color_start, char *color_end)
 	char	*str;
 	int		color;
 
+	if (!color_start || !color_end)
+		error_exit("Invalid color");
 	if (!ft_isalnum(*color_start))
-		error_exit(ERR_INVALID_FILE);
+		error_exit("Invalid color");
 	str = ft_strndup(color_start, color_end - color_start);
 	if (!str)
 		return (error_exit(ERR_FATAL));
 	color = ft_atoi(str);
 	free(str);
 	if (color < 0 || color > 255)
-		error_exit(ERR_INVALID_FILE);
+		error_exit("Invalid color");
 	*dst = (uint8_t)color;
 }
 

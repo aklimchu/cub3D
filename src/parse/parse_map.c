@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:23:32 by pleander          #+#    #+#             */
-/*   Updated: 2024/12/09 09:49:50 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/17 13:40:36 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,6 @@ void	check_map_line(char *line)
 		i++;
 	}
 }
-
-// void	read_map_line(char *line, t_list **lst)
-// {
-// 	t_list	*new;
-// 	char	*dup;
-//
-// 	check_map_line(line);
-// 	dup = ft_strdup(line);
-// 	if (!dup)
-// 		error_exit(ERR_FATAL);
-// 	memlist_add(dup);
-// 	new = ft_lstnew(dup);
-// 	if (!new)
-// 		error_exit(ERR_FATAL);
-// 	memlist_add(new);
-// 	if (*lst == NULL)
-// 		*lst = new;
-// 	else
-// 		ft_lstadd_back(lst, new);
-// }
 
 static int	get_longest_row(t_list **rows)
 {
@@ -96,11 +76,27 @@ static void	parse_map_row(t_map_elems *dst, int size, char *row)
 	dst[i] = END_ROW;
 }
 
+int	row_is_empty(t_map_elems *row)
+{
+	int	i;
+
+	i = 0;
+	while (row[i] != END_ROW)
+	{
+		if (row[i] != PADDING)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void	parse_map(t_map *map, t_list **rows)
 {
 	size_t	i;
 	t_list	*cur;
+	int		reached_map_end;
 
+	reached_map_end = 0;
 	map->map_cols = (size_t)get_longest_row(rows);
 	map->map_rows = (size_t)ft_lstsize(*rows);
 	map->map = creserve(map->map_rows + 1, sizeof(void *));
@@ -114,6 +110,10 @@ void	parse_map(t_map *map, t_list **rows)
 		if (!map->map[i])
 			error_exit(ERR_FATAL);
 		parse_map_row(map->map[i], map->map_cols, (char *)cur->content);
+		if (!reached_map_end && row_is_empty(map->map[i]))
+			reached_map_end = 1;
+		if (reached_map_end && !row_is_empty(map->map[i]))
+			error_exit("Extra content after map");
 		cur = cur->next;
 		i++;
 	}

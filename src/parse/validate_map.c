@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 14:40:34 by pleander          #+#    #+#             */
-/*   Updated: 2024/12/17 12:35:16 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:50:27 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,27 @@ static void	check_player_inside_map(t_map *map)
 	}
 }
 
+static void	check_fields(t_map *map)
+{
+	if (!map->no_texture)
+		error_exit("Missing north texture");
+	if (!map->ea_texture)
+		error_exit("Missing east texture");
+	if (!map->so_texture)
+		error_exit("Missing south texture");
+	if (!map->we_texture)
+		error_exit("Missing west texture");
+	if (!map->parsed_roof)
+		error_exit("Missing ceiling color");
+	if (!map->parsed_floor)
+		error_exit("Missing floor color");
+}
+
 void	check_map(t_map *map)
 {
 	if (!map->map || !*map->map)
 		error_exit("The map is missing from the cub-file");
+	check_fields(map);
 	find_player_start(map);
 	check_player_inside_map(map);
 	check_tiles(map);
