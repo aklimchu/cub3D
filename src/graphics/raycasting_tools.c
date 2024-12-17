@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 12:42:34 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/17 10:52:37 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/17 13:21:35 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ double	check_dist_to_ray(t_coord_f a, t_coord_f b, double angle)
 
 void	iter_loop(t_cub *cub, t_current *h, double *ray_x, double *ray_y)
 {
-	h->dist_to_ray = 1000000;
 	while (h->ray_iter < cub->iter_limit)
 	{
 		if (h->r_pos.y < (double)INT_MIN)

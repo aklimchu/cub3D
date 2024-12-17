@@ -6,13 +6,12 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:22:30 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/17 11:39:11 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/17 13:19:21 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void draw_game_background(t_cub *cub);
 static void	print_fps(t_cub *cub, double fps);
 
 void	draw_cub(void *input)
@@ -54,8 +53,8 @@ static void	print_fps(t_cub *cub, double fps)
 		error_exit(ERR_FATAL);
 	memlist_add(text);
 	if (cub->img_fps)
-		mlx_delete_image(cub->mlx, cub->img_fps); 
+		mlx_delete_image(cub->mlx, cub->img_fps);
 	cub->img_fps = mlx_put_string(cub->mlx, text, \
-		cub->img_game->width - 200, 100);
+		cub->fps_on_screen.x, cub->fps_on_screen.y);
 	release(text);
 }
