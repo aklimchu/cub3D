@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "memlist.h"
 
-static	void	check_map_line(char *line)
+void	check_map_line(char *line)
 {
 	int		i;
 
@@ -27,25 +27,25 @@ static	void	check_map_line(char *line)
 	}
 }
 
-void	read_map_line(char *line, t_list **lst)
-{
-	t_list	*new;
-	char	*dup;
-
-	check_map_line(line);
-	dup = ft_strdup(line);
-	if (!dup)
-		error_exit(ERR_FATAL);
-	memlist_add(dup);
-	new = ft_lstnew(dup);
-	if (!new)
-		error_exit(ERR_FATAL);
-	memlist_add(new);
-	if (*lst == NULL)
-		*lst = new;
-	else
-		ft_lstadd_back(lst, new);
-}
+// void	read_map_line(char *line, t_list **lst)
+// {
+// 	t_list	*new;
+// 	char	*dup;
+//
+// 	check_map_line(line);
+// 	dup = ft_strdup(line);
+// 	if (!dup)
+// 		error_exit(ERR_FATAL);
+// 	memlist_add(dup);
+// 	new = ft_lstnew(dup);
+// 	if (!new)
+// 		error_exit(ERR_FATAL);
+// 	memlist_add(new);
+// 	if (*lst == NULL)
+// 		*lst = new;
+// 	else
+// 		ft_lstadd_back(lst, new);
+// }
 
 static int	get_longest_row(t_list **rows)
 {

@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 13:28:55 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:30:01 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,8 @@ void		check_map(t_map *map);
 void		check_tiles(t_map *map);
 t_map_elems	get_tile_xy(size_t x, size_t y, t_map *map);
 uint32_t	get_rgba(t_color c);
+void		check_map_line(char *line);
+void		read_file(char *path, t_list **file);
 // events
 void		handle_destroy(void *input);
 void		handle_keypress(struct mlx_key_data key_data, void *input);
