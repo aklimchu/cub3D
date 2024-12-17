@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:19:18 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 14:18:37 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/17 10:53:46 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	handle_sliding(t_cub *cub);
 
 void	update_player(t_cub *cub)
 {
-	double	delta_t;
+	double		delta_t;
 
 	cub->player.dx = 0;
 	cub->player.dy = 0;
@@ -77,27 +77,4 @@ static void	handle_sliding(t_cub *cub)
 		cub->player.dy = dy_backup;
 		check_angle(false, &cub->player.dx, &cub->player.dy);
 	}
-}
-
-int	check_next_tile(t_cub *cub, double x, double y)
-{
-	int	x_tile;
-	int	y_tile;
-	int	tile;
-
-	x_tile = (int)x / CELL_SIZE;
-	y_tile = (int)y / CELL_SIZE;
-	tile = get_tile(y_tile, x_tile, cub->map);
-	if (tile == EMPTY || tile == START_NO || \
-		tile == START_SO || tile == START_EA || tile == START_WE)
-		return (0);
-	return (1);
-}
-
-void	check_angle(bool x_dir, double *dx, double *dy)
-{
-	if (x_dir == true)
-		*dy = 0;
-	else
-		*dx = 0;
 }
