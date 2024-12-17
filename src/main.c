@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:10:41 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 10:55:41 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:39:38 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,7 @@ static void	create_images(t_cub *cub)
 	cub->img_game = mlx_new_image(cub->mlx, w, h);
 	if (cub->img_game == NULL)
 		free_everything(cub, EXIT_FAILURE);
-	cub->img_fps = mlx_new_image(cub->mlx, MM_W, MM_H);
-	if (cub->img_fps == NULL)
-		free_everything(cub, EXIT_FAILURE);
+	cub->img_fps = NULL;
 	if (!cub->img_map || (mlx_image_to_window(cub->mlx, \
 		cub->img_map, 0, 0) < 0))
 	{
@@ -67,13 +65,7 @@ static void	create_images(t_cub *cub)
 	{
 		free_everything(cub, EXIT_FAILURE);
 	}
-	/* if (!cub->img_fps || (mlx_image_to_window(cub->mlx, \
-		cub->img_fps, w - MM_W - 1, 0) < 0))
-	{
-		free_everything(cub, EXIT_FAILURE);
-	} */
-	mlx_set_instance_depth(cub->img_map->instances, 2);
-	//mlx_set_instance_depth(cub->img_fps->instances, 1);
+	mlx_set_instance_depth(cub->img_map->instances, 1);
 	mlx_set_instance_depth(cub->img_game->instances, 0);
 }
 

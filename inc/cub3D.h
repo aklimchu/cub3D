@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/17 10:52:49 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:33:23 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,12 +152,13 @@ typedef struct s_cub
 	t_player	player;
 	t_map		*map;
 	t_key_state	keys;
-	int		iter_limit;
-	int		ray_loop;
+	int			iter_limit;
+	int			ray_loop;
 	size_t		n_rays;
 	size_t		vertical_lines;
 	double		dist_to_ray;
 	double		ray_angle;
+	double		previous_fps;
 	uint8_t		*bg_buffer;
 }				t_cub;
 

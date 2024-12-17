@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:22:30 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 14:02:47 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:39:11 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,21 @@ static void	print_fps(t_cub *cub, double fps);
 void	draw_cub(void *input)
 {
 	t_cub	*cub;
-	double	fps;
+	double	current_fps;
 
 	cub = (t_cub *)input;
-	fps = 1 / cub->mlx->delta_time;
 	if (cub->mlx == NULL)
 		return ;
 	ft_memset(cub->img_map->pixels, 50, cub->img_map->width * \
 		cub->img_map->height * BPP);
 	ft_memcpy(cub->img_game->pixels, cub->bg_buffer, \
 		cub->img_game->width * cub->img_game->height * BPP);
-	ft_memset(cub->img_fps->pixels, 50, cub->img_fps->width * \
-		cub->img_fps->height * BPP);
-	print_fps(cub, fps);
+	current_fps = 1 / cub->mlx->delta_time;
+	if (fabs(current_fps - cub->previous_fps) > 2)
+	{
+		print_fps(cub, current_fps);
+		cub->previous_fps = current_fps;
+	}
 	update_player(cub);
 	draw_map(cub);
 	draw_player(cub);
@@ -51,6 +53,8 @@ static void	print_fps(t_cub *cub, double fps)
 	if (!text)
 		error_exit(ERR_FATAL);
 	memlist_add(text);
+	if (cub->img_fps)
+		mlx_delete_image(cub->mlx, cub->img_fps); 
 	cub->img_fps = mlx_put_string(cub->mlx, text, \
 		cub->img_game->width - 200, 100);
 	release(text);
