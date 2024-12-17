@@ -6,7 +6,7 @@
 /*   By: pleander <pleander@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 14:40:34 by pleander          #+#    #+#             */
-/*   Updated: 2024/12/09 09:42:13 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:35:16 by pleander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,12 @@ static void	check_player_inside_map(t_map *map)
 	while (i < map->player_start.x + 1)
 	{
 		j = map->player_start.y - 1;
+		if (i < 0 || i >= (int)map->map_rows - 1)
+			error_exit("Player is on the edge of the map");
 		while (j < map->player_start.y + 1)
 		{
+			if (j < 0 || j >= (int)map->map_cols - 1)
+				error_exit("Player is on the edge of the map");
 			if (map->map[i][j] == PADDING)
 				error_exit("Player start is outside the map");
 			j++;
