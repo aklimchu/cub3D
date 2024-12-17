@@ -39,6 +39,7 @@ static void	parse_file(t_list **file, t_map *map)
 
 	cur = *file;
 	reading_map = 0;
+	map_start = NULL;
 	while (cur)
 	{
 		line = cur->content;
@@ -51,6 +52,8 @@ static void	parse_file(t_list **file, t_map *map)
 		}
 		cur = cur->next;
 	}
+	if (!map_start)
+		error_exit("Map is missing from .cub file");
 	parse_map(map, &map_start);
 	release_list(file);
 }
