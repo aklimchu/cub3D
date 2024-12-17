@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 15:06:19 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/17 10:52:49 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@
 # define MAP_CELL_SIZE 25
 # define ROTATION_SPEED 2
 # define PLAYER_SPEED 200
-# define MOVEMENT_OFFSET 10
-# define MOVEMENT_OFFSET_MIN 5
 
 // ERROR MESSAGES
 # define ERR_INVALID_FILE "Invalid input file"
