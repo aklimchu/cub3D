@@ -61,9 +61,7 @@ static void	ray_loop(t_cub *cub, double ray_angle, int i)
 		r_pos.y = ray_vert.y;
 		side = 0;
 	}
-	/* draw_line(cub->img_map, (t_coord_f){cub->player.x, cub->player.y}, \
-	 	(t_coord_f){r_pos.x, r_pos.y}, RED); */
-	draw_textures(cub, dist_to_ray_final, i, ray_angle, side);
+	draw_game(cub, (t_draw_context){dist_to_ray_final, ray_angle, i, side});
 }
 
 static double	check_horiz(t_cub *c, double r_angle, double *r_x, double *r_y)

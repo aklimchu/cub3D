@@ -161,6 +161,26 @@ typedef struct s_cub
 	uint8_t		*bg_buffer;
 }				t_cub;
 
+typedef struct s_draw_context
+{
+	double	dist_to_wall;
+	double	ray_angle;
+	int	iteration;
+	int	side;
+}	t_draw_context;
+
+typedef struct s_texture_context
+{
+	t_draw_context	*dc;
+	t_cub		*cub;
+	mlx_texture_t	*texture;
+	double		texture_x;
+	double		y_scale;
+	int		y_start;
+	int		y_end;
+	int		x;
+}	t_texture_context;
+
 // FUNCTIONS
 // parsing
 t_map		*parse(char *path);
@@ -188,7 +208,7 @@ void		draw_player(t_cub *cub);
 void		raycasting(t_cub *cub);
 void		fill_rect(mlx_image_t *img, t_rect rect);
 void		draw_line(mlx_image_t *img, t_coord_f a, t_coord_f b, int color);
-void		draw_textures(t_cub *cub, double dist_to_ray, int ray_loop, double ray_angle, int side);
+void		draw_game(t_cub *cub, t_draw_context dc);
 void		load_textures(t_cub *cub);
 double		check_dist_to_ray(t_coord_f a, t_coord_f b, double angle);
 void		iter_loop(t_cub *cub, t_current *h, double *ray_x, double *ray_y);
