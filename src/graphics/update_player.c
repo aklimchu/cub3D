@@ -13,14 +13,18 @@
 #include "../inc/cub3D.h"
 
 static void	handle_awsd(t_cub *cub, double delta_t);
-static void	handle_sliding(t_cub *cub);
+static void	handle_sliding(t_cub *cub, t_coord_f *offset);
+static void	check_offset(double x, double y, t_coord_f offset);
 
 void	update_player(t_cub *cub)
 {
-	double	delta_t;
+	double		delta_t;
+	t_coord_f	offset;
 
 	cub->player.dx = 0;
 	cub->player.dy = 0;
+	offset.x = MOVEMENT_OFFSET;
+	offset.y = MOVEMENT_OFFSET;
 	delta_t = cub->mlx->delta_time;
 	if (cub->keys.left)
 		cub->player.angle -= ROTATION_SPEED * delta_t;
@@ -28,7 +32,7 @@ void	update_player(t_cub *cub)
 		cub->player.angle += ROTATION_SPEED * delta_t;
 	cub->player.angle = normalize_angle(cub->player.angle);
 	handle_awsd(cub, delta_t);
-	handle_sliding(cub);
+	handle_sliding(cub, &offset);
 	if (check_next_tile(cub, cub->player.x + cub->player.dx, \
 		cub->player.y + cub->player.dy) == 0)
 	{
@@ -61,11 +65,12 @@ static void	handle_awsd(t_cub *cub, double delta_t)
 	}
 }
 
-static void	handle_sliding(t_cub *cub)
+static void	handle_sliding(t_cub *cub, t_coord_f *offset)
 {
 	double	dy_backup;
 
 	dy_backup = cub->player.dy;
+	check_offset(cub->player.dx, cub->player.dy, offset);
 	if (check_next_tile(cub, cub->player.x + cub->player.dx, \
 		cub->player.y + cub->player.dy) == 1)
 	{
@@ -79,25 +84,7 @@ static void	handle_sliding(t_cub *cub)
 	}
 }
 
-int	check_next_tile(t_cub *cub, double x, double y)
+static void	check_offset(double x, double y, t_coord_f offset)
 {
-	int	x_tile;
-	int	y_tile;
-	int	tile;
-
-	x_tile = (int)x / CELL_SIZE;
-	y_tile = (int)y / CELL_SIZE;
-	tile = get_tile(y_tile, x_tile, cub->map);
-	if (tile == EMPTY || tile == START_NO || \
-		tile == START_SO || tile == START_EA || tile == START_WE)
-		return (0);
-	return (1);
-}
-
-void	check_angle(bool x_dir, double *dx, double *dy)
-{
-	if (x_dir == true)
-		*dy = 0;
-	else
-		*dx = 0;
+	if (x < 0)
 }
