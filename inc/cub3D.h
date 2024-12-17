@@ -43,7 +43,8 @@
 # define MAP_CELL_SIZE 25
 # define ROTATION_SPEED 2
 # define PLAYER_SPEED 200
-# define MOVEMENT_OFFSET 0.5
+# define MOVEMENT_OFFSET 10
+# define MOVEMENT_OFFSET_MIN 5
 
 // ERROR MESSAGES
 # define ERR_INVALID_FILE "Invalid input file"
