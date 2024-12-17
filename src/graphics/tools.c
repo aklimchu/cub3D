@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:17:51 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/17 11:34:34 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:38:57 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	initialize_values(t_cub *cub)
 	cub->n_rays = cub->img_game->width / 2;
 	cub->vertical_lines = cub->img_game->width / cub->n_rays;
 	cub->previous_fps = 0;
+	cub->fps_on_screen.x = cub->img_game->width - cub->img_game->width / 10;
+	cub->fps_on_screen.y = cub->img_game->height / 20;
 }
 
 static double	find_angle_and_player(t_map *map, t_cub *cub)

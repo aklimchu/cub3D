@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:06:14 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/16 08:44:28 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:39:56 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	free_everything(t_cub *cub, int exit_code)
 		mlx_delete_image(cub->mlx, cub->img_map);
 	if (cub->img_game)
 		mlx_delete_image(cub->mlx, cub->img_game);
+	if (cub->img_fps)
+		mlx_delete_image(cub->mlx, cub->img_fps);
 	mlx_terminate(cub->mlx);
 	memlist_release_all();
 	exit(exit_code);

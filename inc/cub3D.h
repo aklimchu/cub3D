@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/17 11:41:07 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/17 13:42:39 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # include <stdbool.h> // for boolean data type
 # include <math.h> // for mathematical functions
 
-# define MM_W 300
-# define MM_H 300
+/* # define MM_W 300
+# define MM_H 300 */
 # define DEGREE 0.0174533
 # define WHITE 0xFFFFFFFF
 # define GREY 0x808080FF
@@ -133,12 +133,12 @@ typedef struct s_textures
 }	t_textures;
 
 typedef struct s_key_state {
-    bool w;
-    bool a;
-    bool s;
-    bool d;
-    bool left;
-    bool right;
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+	bool	left;
+	bool	right;
 }	t_key_state;
 
 typedef struct s_cub
@@ -159,27 +159,29 @@ typedef struct s_cub
 	double		dist_to_ray;
 	double		ray_angle;
 	double		previous_fps;
+	t_coord		fps_on_screen;
 	uint8_t		*bg_buffer;
+	int			side;
 }				t_cub;
 
 typedef struct s_draw_context
 {
 	double	dist_to_wall;
 	double	ray_angle;
-	int	iteration;
-	int	side;
+	int		iteration;
+	int		side;
 }	t_draw_context;
 
 typedef struct s_texture_context
 {
 	t_draw_context	*dc;
-	t_cub		*cub;
+	t_cub			*cub;
 	mlx_texture_t	*texture;
-	double		texture_x;
-	double		y_scale;
-	int		y_start;
-	int		y_end;
-	int		x;
+	double			texture_x;
+	double			y_scale;
+	int				y_start;
+	int				y_end;
+	int				x;
 }	t_texture_context;
 
 // FUNCTIONS
