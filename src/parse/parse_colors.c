@@ -33,6 +33,13 @@ static void	parse_single_color(uint8_t *dst, char *color_start, char *color_end)
 	*dst = (uint8_t)color;
 }
 
+char	*skip_whitespace(char *color_start)
+{
+	while (ft_isspace(*color_start))
+		color_start++;
+	return (color_start);
+}
+
 void	parse_colors(t_color *dst, char *line)
 {
 	char	*color_start;
@@ -42,13 +49,13 @@ void	parse_colors(t_color *dst, char *line)
 		line++;
 	color_start = line;
 	color_end = ft_strchr(color_start, ',');
-	parse_single_color(&dst->r, color_start, color_end);
+	parse_single_color(&dst->r, skip_whitespace(color_start), color_end);
 	color_start = ++color_end;
 	color_end = ft_strchr(color_start, ',');
-	parse_single_color(&dst->g, color_start, color_end);
+	parse_single_color(&dst->g, skip_whitespace(color_start), color_end);
 	color_start = ++color_end;
 	color_end = ft_strchr(color_start, '\n');
-	parse_single_color(&dst->b, color_start, color_end);
+	parse_single_color(&dst->b, skip_whitespace(color_start), color_end);
 	dst->a = 255;
 }
 
