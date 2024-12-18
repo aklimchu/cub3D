@@ -35,7 +35,7 @@ static void	parse_single_color(uint8_t *dst, char *color_start, char *color_end)
 
 char	*skip_whitespace(char *color_start)
 {
-	while (ft_isspace(*color_start))
+	while (*color_start == ' ')
 		color_start++;
 	return (color_start);
 }
