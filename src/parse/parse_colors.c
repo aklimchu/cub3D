@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdint.h>
 #include "libft.h"
 #include "cub3D.h"
 
@@ -53,5 +54,5 @@ void	parse_colors(t_color *dst, char *line)
 
 uint32_t	get_rgba(t_color c)
 {
-	return (c.r << 24 | c.g << 16 | c.b << 8 | c.a);
+	return ((uint32_t)c.r << 24 | c.g << 16 | c.b << 8 | c.a);
 }
