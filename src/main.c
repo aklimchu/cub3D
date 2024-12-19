@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "../inc/cub3D.h"
 
 static void	create_images(t_cub *c);
@@ -98,7 +99,7 @@ static void	create_bg_buffer(t_cub *cub)
 	game_size = cub->img_game->height * cub->img_game->width * BPP;
 	cub->bg_buffer = reserve(game_size);
 	if (!cub->bg_buffer)
-		error_exit(ERR_FATAL);
+		free_everything(cub, EXIT_FAILURE, ERR_FATAL);
 	i = 0;
 	while (i < game_size / 2)
 	{
