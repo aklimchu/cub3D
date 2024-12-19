@@ -20,6 +20,7 @@ int	main(int argc, char **argv)
 {
 	t_cub	cub;
 
+	ft_memset(&cub, 0, sizeof(cub));
 	if (argc != 2)
 		error_exit("Incorrect amount of arguments");
 	cub.map = parse(argv[1]);
@@ -30,11 +31,11 @@ int	main(int argc, char **argv)
 	initialize_values(&cub);
 	create_bg_buffer(&cub);
 	mlx_loop_hook(cub.mlx, &draw_cub, &cub);
-	//mlx_close_hook(cub.mlx, &handle_destroy, &cub);
+	mlx_close_hook(cub.mlx, &handle_destroy, &cub);
 	mlx_key_hook(cub.mlx, &handle_keypress, &cub);
 	mlx_loop(cub.mlx);
 	free_everything(&cub, EXIT_SUCCESS);
-	exit(EXIT_SUCCESS);
+	return (0);
 }
 
 static void	create_images(t_cub *c)
@@ -44,7 +45,7 @@ static void	create_images(t_cub *c)
 
 	c->mlx = mlx_init(800, 600, "cub3D", 1);
 	if (c->mlx == NULL)
-		exit (EXIT_FAILURE);
+		free_everything(c, EXIT_FAILURE);
 	mlx_get_monitor_size(0, &m_width, &m_height);
 	mlx_set_window_size(c->mlx, m_width, m_height);
 	//mlx_set_setting(MLX_FULLSCREEN, true);

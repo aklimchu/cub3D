@@ -13,12 +13,6 @@
 #include <limits.h>
 #include "../inc/cub3D.h"
 
-double	check_dist_to_ray(t_coord_f a, t_coord_f b, double angle)
-{
-	(void)angle;
-	return (sqrt((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y)));
-}
-
 void	iter_loop(t_cub *cub, t_current *h, double *ray_x, double *ray_y)
 {
 	while (h->ray_iter < cub->iter_limit)
@@ -33,8 +27,9 @@ void	iter_loop(t_cub *cub, t_current *h, double *ray_x, double *ray_y)
 		{
 			*ray_x = h->r_pos.x;
 			*ray_y = h->r_pos.y;
-			h->dist_to_ray = check_dist_to_ray((t_coord_f){cub->player.x, \
-				cub->player.y}, (t_coord_f){(*ray_x), (*ray_y)}, h->ray_angle);
+			h->dist_to_ray = sqrt((*ray_x - cub->player.x) * \
+				(*ray_x - cub->player.x) + (*ray_y - cub->player.y) * \
+				(*ray_y - cub->player.y));
 			h->ray_iter = cub->iter_limit;
 		}
 		else
