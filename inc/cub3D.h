@@ -223,7 +223,7 @@ void		update_player(t_cub *cub);
 // miscellaneous
 void		initialize_values(t_cub *cub);
 // exit
-void		free_everything(t_cub *cub, int exit_code);
+void		free_everything(t_cub *cub, int exit_code, char *msg);
 void		error_exit(char	*msg);
 void		delete_textures(t_cub *cub);
 

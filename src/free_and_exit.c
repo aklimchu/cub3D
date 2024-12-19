@@ -17,10 +17,10 @@ void	handle_destroy(void *input)
 	t_cub	*cub;
 
 	cub = (t_cub *)input;
-	free_everything(cub, EXIT_SUCCESS);
+	free_everything(cub, EXIT_SUCCESS, NULL);
 }
 
-void	free_everything(t_cub *cub, int exit_code)
+void	free_everything(t_cub *cub, int exit_code, char *msg)
 {
 	if (cub->img_map)
 		mlx_delete_image(cub->mlx, cub->img_map);
@@ -31,6 +31,8 @@ void	free_everything(t_cub *cub, int exit_code)
 	delete_textures(cub);
 	if (cub->mlx)
 		mlx_terminate(cub->mlx);
+	if (msg && exit_code != 0)
+		error_exit(msg);
 	memlist_release_all();
 	exit(exit_code);
 }

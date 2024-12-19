@@ -20,7 +20,7 @@ void	handle_keypress(struct mlx_key_data key_data, void *input)
 
 	cub = (t_cub *)input;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE) == true)
-		free_everything(cub, EXIT_SUCCESS);
+		free_everything(cub, EXIT_SUCCESS, NULL);
 	if (key_data.key == MLX_KEY_W)
 		cub->keys.w = (key_data.action == MLX_PRESS || \
 			key_data.action == MLX_REPEAT);

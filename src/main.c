@@ -34,7 +34,7 @@ int	main(int argc, char **argv)
 	mlx_close_hook(cub.mlx, &handle_destroy, &cub);
 	mlx_key_hook(cub.mlx, &handle_keypress, &cub);
 	mlx_loop(cub.mlx);
-	free_everything(&cub, EXIT_SUCCESS);
+	free_everything(&cub, EXIT_SUCCESS, NULL);
 	return (0);
 }
 
@@ -45,7 +45,7 @@ static void	create_images(t_cub *c)
 
 	c->mlx = mlx_init(800, 600, "cub3D", 1);
 	if (c->mlx == NULL)
-		free_everything(c, EXIT_FAILURE);
+		free_everything(c, EXIT_FAILURE, strerror(mlx_errno));
 	mlx_get_monitor_size(0, &m_width, &m_height);
 	mlx_set_window_size(c->mlx, m_width, m_height);
 	if (m_width > m_height)
@@ -53,15 +53,15 @@ static void	create_images(t_cub *c)
 	else
 		c->img_map = mlx_new_image(c->mlx, m_height / 10, m_height / 10);
 	if (c->img_map == NULL)
-		free_everything(c, EXIT_FAILURE);
+		free_everything(c, EXIT_FAILURE, strerror(mlx_errno));
 	c->img_game = mlx_new_image(c->mlx, m_width, m_height);
 	if (c->img_game == NULL)
-		free_everything(c, EXIT_FAILURE);
+		free_everything(c, EXIT_FAILURE, strerror(mlx_errno));
 	c->img_fps = NULL;
 	if (!c->img_map || (mlx_image_to_window(c->mlx, c->img_map, 0, 0) < 0))
-		free_everything(c, EXIT_FAILURE);
+		free_everything(c, EXIT_FAILURE, strerror(mlx_errno));
 	if (!c->img_game || (mlx_image_to_window(c->mlx, c->img_game, 0, 0) < 0))
-		free_everything(c, EXIT_FAILURE);
+		free_everything(c, EXIT_FAILURE, strerror(mlx_errno));
 	mlx_set_instance_depth(c->img_map->instances, 1);
 	mlx_set_instance_depth(c->img_game->instances, 0);
 }

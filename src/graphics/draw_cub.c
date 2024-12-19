@@ -43,12 +43,12 @@ static void	print_fps(t_cub *cub, double fps)
 
 	str_fps = ft_itoa((int)fps);
 	if (!str_fps)
-		error_exit(ERR_FATAL);
+		free_everything(cub, EXIT_FAILURE, ERR_FATAL);
 	memlist_add(str_fps);
 	text = ft_strjoin("fps: ", str_fps);
 	release(str_fps);
 	if (!text)
-		error_exit(ERR_FATAL);
+		free_everything(cub, EXIT_FAILURE, ERR_FATAL);
 	memlist_add(text);
 	if (cub->img_fps)
 		mlx_delete_image(cub->mlx, cub->img_fps);

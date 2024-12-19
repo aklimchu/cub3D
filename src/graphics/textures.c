@@ -16,16 +16,16 @@ void	load_textures(t_cub *cub)
 {
 	cub->textures.n = mlx_load_png(cub->map->no_texture);
 	if (!cub->textures.n)
-		error_exit(strerror(mlx_errno));
+		free_everything(cub, EXIT_FAILURE, "Failed to load NO texture");
 	cub->textures.s = mlx_load_png(cub->map->so_texture);
 	if (!cub->textures.s)
-		error_exit(strerror(mlx_errno));
+		free_everything(cub, EXIT_FAILURE, "Failed to load SO texture");
 	cub->textures.w = mlx_load_png(cub->map->we_texture);
 	if (!cub->textures.w)
-		error_exit(strerror(mlx_errno));
+		free_everything(cub, EXIT_FAILURE, "Failed to load WE texture");
 	cub->textures.e = mlx_load_png(cub->map->ea_texture);
 	if (!cub->textures.e)
-		error_exit(strerror(mlx_errno));
+		free_everything(cub, EXIT_FAILURE, "Failed to load EA texture");
 }
 
 void	delete_textures(t_cub *cub)

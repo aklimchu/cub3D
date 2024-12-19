@@ -50,9 +50,7 @@ static void	check_player_inside_map(t_map *map)
 {
 	int		i;
 	int		j;
-	t_coord	s;
 
-	s = map->player_start;
 	i = map->player_start.x - 1;
 	while (i < map->player_start.x + 1)
 	{
