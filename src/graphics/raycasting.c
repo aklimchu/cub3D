@@ -20,17 +20,17 @@ static void		fill_values(t_cub *c, t_current *h, double *r_x, double *r_y);
 void	raycasting(t_cub *cub)
 {
 	double	ray_angle;	
+	double	ray_step;
 	size_t	i;
-	double	viewport;
 
-	ray_angle = cub->player.angle - 30 * DEGREE;
+	ray_angle = cub->player.angle - FOV / 2 * DEGREE;
 	ray_angle = normalize_angle(ray_angle);
+	ray_step = FOV * DEGREE / cub->n_rays;
 	i = 0;
-	viewport = 60 * DEGREE;
 	while (i < cub->n_rays)
 	{
 		ray_loop(cub, ray_angle, i);
-		ray_angle += viewport / cub->n_rays;
+		ray_angle += ray_step;
 		ray_angle = normalize_angle(ray_angle);
 		i++;
 	}
@@ -40,7 +40,6 @@ static void	ray_loop(t_cub *cub, double r_angle, int i)
 {
 	t_coord_f	ray_horiz;
 	t_coord_f	ray_vert;
-	t_coord_f	r_pos;
 	t_coord_f	dist_to_ray;
 	double		dist_to_ray_final;
 
@@ -50,15 +49,11 @@ static void	ray_loop(t_cub *cub, double r_angle, int i)
 	if (dist_to_ray.x < dist_to_ray.y)
 	{
 		dist_to_ray_final = dist_to_ray.x;
-		r_pos.x = ray_horiz.x;
-		r_pos.y = ray_horiz.y;
 		cub->side = 1;
 	}
 	else
 	{
 		dist_to_ray_final = dist_to_ray.y;
-		r_pos.x = ray_vert.x;
-		r_pos.y = ray_vert.y;
 		cub->side = 0;
 	}
 	draw_game(cub, (t_draw_context){dist_to_ray_final, r_angle, i, cub->side});
@@ -123,7 +118,7 @@ static double	check_vert(t_cub *c, double r_angle, double *r_x, double *r_y)
 static void	fill_values(t_cub *c, t_current *h, double *r_x, double *r_y)
 {
 	h->ray_iter = 0;
-	h->dist_to_ray = 1000000;
+	h->dist_to_ray = INFINITY;
 	*r_x = c->player.x;
 	*r_y = c->player.y;
 }

@@ -18,7 +18,7 @@ void	handle_destroy(void *input)
 	t_cub	*cub;
 
 	cub = (t_cub *)input;
-	free_everything(cub, 0);
+	free_everything(cub, EXIT_SUCCESS);
 }
 
 //The function frees the memory based on arguments provided
@@ -31,7 +31,8 @@ void	free_everything(t_cub *cub, int exit_code)
 	if (cub->img_fps)
 		mlx_delete_image(cub->mlx, cub->img_fps);
 	delete_textures(cub);
-	mlx_terminate(cub->mlx);
+	if (cub->mlx)
+		mlx_terminate(cub->mlx);
 	memlist_release_all();
 	exit(exit_code);
 }

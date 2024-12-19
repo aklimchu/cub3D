@@ -29,8 +29,9 @@ void	update_player(t_cub *cub)
 	cub->player.angle = normalize_angle(cub->player.angle);
 	handle_awsd(cub, delta_t);
 	handle_sliding(cub);
-	if (check_next_tile(cub, cub->player.x + cub->player.dx, \
-		cub->player.y + cub->player.dy) == 0)
+	if (check_next_tile(cub, (t_coord_f){cub->player.x, cub->player.y}, \
+		(t_coord_f){cub->player.x + cub->player.dx, \
+		cub->player.y + cub->player.dy}) == 0)
 	{
 		cub->player.x += cub->player.dx;
 		cub->player.y += cub->player.dy;
@@ -66,13 +67,15 @@ static void	handle_sliding(t_cub *cub)
 	double	dy_backup;
 
 	dy_backup = cub->player.dy;
-	if (check_next_tile(cub, cub->player.x + cub->player.dx, \
-		cub->player.y + cub->player.dy) == 1)
+	if (check_next_tile(cub, (t_coord_f){cub->player.x, cub->player.y}, \
+		(t_coord_f){cub->player.x + cub->player.dx, \
+		cub->player.y + cub->player.dy}) == 1)
 	{
 		check_angle(true, &cub->player.dx, &cub->player.dy);
 	}
-	if (check_next_tile(cub, cub->player.x + cub->player.dx, \
-		cub->player.y + cub->player.dy) == 1)
+	if (check_next_tile(cub, (t_coord_f){cub->player.x, cub->player.y}, \
+		(t_coord_f){cub->player.x + cub->player.dx, \
+		cub->player.y + cub->player.dy}) == 1)
 	{
 		cub->player.dy = dy_backup;
 		check_angle(false, &cub->player.dx, &cub->player.dy);
