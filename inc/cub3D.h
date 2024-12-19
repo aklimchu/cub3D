@@ -205,7 +205,7 @@ void		read_file(char *path, t_list **file);
 // events
 //void		handle_destroy(void *input);
 void		handle_keypress(struct mlx_key_data key_data, void *input);
-int			check_next_tile(t_cub *cub, double x, double y);
+int			check_next_tile(t_cub *cub, t_coord_f cur, t_coord_f next);
 void		check_angle(bool x_dir, double *dx, double *dy);
 // graphics
 void		draw_cub(void *input);

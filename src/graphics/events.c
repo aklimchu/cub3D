@@ -12,6 +12,8 @@
 
 #include "../inc/cub3D.h"
 
+static int	valid_tile(size_t col, size_t row, t_map *map);
+
 void	handle_keypress(struct mlx_key_data key_data, void *input)
 {
 	t_cub	*cub;
@@ -39,17 +41,35 @@ void	handle_keypress(struct mlx_key_data key_data, void *input)
 			key_data.action == MLX_REPEAT);
 }
 
-int	check_next_tile(t_cub *cub, double x, double y)
+int	check_next_tile(t_cub *cub, t_coord_f cur, t_coord_f next)
 {
-	int	x_tile;
-	int	y_tile;
-	int	tile;
+	t_coord	cur_tile;
+	t_coord	next_tile;
+	t_coord	tiles_diff;
 
-	x_tile = (int)x / CELL_SIZE;
-	y_tile = (int)y / CELL_SIZE;
-	tile = get_tile(y_tile, x_tile, cub->map);
-	if (tile == EMPTY || tile == START_NO || \
-		tile == START_SO || tile == START_EA || tile == START_WE)
+	cur_tile.x = (int)cur.x / CELL_SIZE;
+	cur_tile.y = (int)cur.y / CELL_SIZE;
+	next_tile.x = (int)next.x / CELL_SIZE;
+	next_tile.y = (int)next.y / CELL_SIZE;
+	tiles_diff.x = next_tile.x - cur_tile.x;
+	tiles_diff.y = next_tile.y - cur_tile.y;
+	if (tiles_diff.x && tiles_diff.y)
+	{
+		if (valid_tile(next_tile.x, cur_tile.y, cub->map) == 1)
+			return (1);
+		if (valid_tile(cur_tile.x, next_tile.y, cub->map) == 1)
+			return (1);
+	}
+	return (valid_tile(next_tile.x, next_tile.y, cub->map));
+}
+
+static int	valid_tile(size_t col, size_t row, t_map *map)
+{
+	int		tile_name;
+
+	tile_name = get_tile(row, col, map);
+	if (tile_name == EMPTY || tile_name == START_NO || \
+		tile_name == START_SO || tile_name == START_EA || tile_name == START_WE)
 		return (0);
 	return (1);
 }
