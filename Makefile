@@ -29,7 +29,6 @@ CC 			= cc
 CFLAGS		= -g -ggdb3 -Ofast -Wall -Wextra -I $(LIBFT_DIR)
 RM			= rm -f
 RMDIR		= rm -rf
-CFLAGS		+= -fsanitize=address,undefined,leak
 
 # MLX42
 MLX_PATH	= MLX42/
