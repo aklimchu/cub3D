@@ -12,7 +12,6 @@
 
 #include "../inc/cub3D.h"
 
-//The function calls the action to free the memory
 void	handle_destroy(void *input)
 {
 	t_cub	*cub;
@@ -21,7 +20,6 @@ void	handle_destroy(void *input)
 	free_everything(cub, EXIT_SUCCESS);
 }
 
-//The function frees the memory based on arguments provided
 void	free_everything(t_cub *cub, int exit_code)
 {
 	if (cub->img_map)

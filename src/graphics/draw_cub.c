@@ -20,8 +20,6 @@ void	draw_cub(void *input)
 	double	current_fps;
 
 	cub = (t_cub *)input;
-	if (cub->mlx == NULL)
-		return ;
 	ft_memset(cub->img_map->pixels, 50, cub->img_map->width * \
 		cub->img_map->height * BPP);
 	ft_memcpy(cub->img_game->pixels, cub->bg_buffer, \

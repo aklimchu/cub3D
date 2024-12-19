@@ -26,7 +26,6 @@ void	initialize_values(t_cub *cub)
 	ft_memset(&cub->keys, false, sizeof(cub->keys));
 	cub->n_rays = cub->img_game->width / 2;
 	cub->vertical_lines = cub->img_game->width / cub->n_rays;
-	cub->previous_fps = 0;
 	cub->fps_on_screen.x = cub->img_game->width - cub->img_game->width / 10;
 	cub->fps_on_screen.y = cub->img_game->height / 20;
 }

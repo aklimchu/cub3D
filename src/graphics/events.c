@@ -55,9 +55,8 @@ int	check_next_tile(t_cub *cub, t_coord_f cur, t_coord_f next)
 	tiles_diff.y = next_tile.y - cur_tile.y;
 	if (tiles_diff.x && tiles_diff.y)
 	{
-		if (valid_tile(next_tile.x, cur_tile.y, cub->map) == 1)
-			return (1);
-		if (valid_tile(cur_tile.x, next_tile.y, cub->map) == 1)
+		if (valid_tile(next_tile.x, cur_tile.y, cub->map) == 1 || \
+			(valid_tile(cur_tile.x, next_tile.y, cub->map) == 1))
 			return (1);
 	}
 	return (valid_tile(next_tile.x, next_tile.y, cub->map));
