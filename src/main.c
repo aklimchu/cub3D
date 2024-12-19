@@ -48,7 +48,6 @@ static void	create_images(t_cub *c)
 		free_everything(c, EXIT_FAILURE);
 	mlx_get_monitor_size(0, &m_width, &m_height);
 	mlx_set_window_size(c->mlx, m_width, m_height);
-	//mlx_set_setting(MLX_FULLSCREEN, true);
 	if (m_width > m_height)
 		c->img_map = mlx_new_image(c->mlx, m_width / 10, m_width / 10);
 	else
