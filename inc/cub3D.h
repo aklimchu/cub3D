@@ -17,8 +17,8 @@
 # include "../libft/include/get_next_line.h"
 # include "../libft/include/ft_printf.h"
 # include "../libft/include/memlist.h"
-# include "../MLX42/include/MLX42.h"
-# include "../MLX42/include/MLX42_Int.h"
+# include "MLX42.h"
+# include "MLX42_Int.h"
 # include <stdlib.h> //for exit status and malloc
 # include <errno.h> // for errno (error identifiers)
 # include <fcntl.h> // for open
