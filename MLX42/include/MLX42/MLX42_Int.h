@@ -13,7 +13,7 @@
 #ifndef MLX42_INT_H
 # define MLX42_INT_H
 # define LODEPNG_NO_COMPILE_ALLOCATORS
-# include "../MLX42.h"
+# include "../MLX42/MLX42.h"
 # include "../lodepng/lodepng.h"
 # include "../glad/glad.h"
 # include "../KHR/khrplatform.h"
