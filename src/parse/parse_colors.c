@@ -70,13 +70,13 @@ void	parse_colors(t_color *dst, char *line)
 	parse_single_color(&dst->r, skip_whitespace(color_start), color_end);
 	color_start = ++color_end;
 	color_end = ft_strchr(color_start, ',');
-	parse_single_color(&dst->g, skip_whitespace(color_start), color_end);
+	parse_single_color(&dst->g, color_start, color_end);
 	color_start = ++color_end;
 	color_end = color_start + count_nums(color_start);
-	parse_single_color(&dst->b, skip_whitespace(color_start), color_end);
+	parse_single_color(&dst->b, color_start, color_end);
 	dst->a = 255;
 	color_start = color_end;
-	skip_whitespace(color_start);
+	color_start = skip_whitespace(color_start);
 	if (*color_start != '\n')
 		error_exit("Invalid color");
 }
