@@ -63,7 +63,8 @@ SRC 		=	src/graphics/events.c \
 				src/error.c
 OBJ 		= $(SRC:%.c=$(OBJ_DIR)/%.o)
 OBJ_DIR		= obj
-INCLUDE		= -I "./inc" -I "./libft/include"
+INCLUDE		= -I "./inc" -I "./libft/include" -I "./MLX42/include/MLX42"
+
 
 # Rules
 all:	$(MLX) $(NAME)
