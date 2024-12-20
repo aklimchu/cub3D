@@ -40,6 +40,16 @@ char	*skip_whitespace(char *color_start)
 	return (color_start);
 }
 
+int	count_nums(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] >= '0' && str[i] <= '9')
+		i++;
+	return (i);
+}
+
 void	parse_colors(t_color *dst, char *line)
 {
 	char	*color_start;
@@ -54,9 +64,13 @@ void	parse_colors(t_color *dst, char *line)
 	color_end = ft_strchr(color_start, ',');
 	parse_single_color(&dst->g, skip_whitespace(color_start), color_end);
 	color_start = ++color_end;
-	color_end = ft_strchr(color_start, '\n');
+	color_end = color_start + count_nums(color_start);
 	parse_single_color(&dst->b, skip_whitespace(color_start), color_end);
 	dst->a = 255;
+	color_start = color_end;
+	skip_whitespace(color_start);
+	if (*color_start != '\n')
+		error_exit("Invalid color");
 }
 
 uint32_t	get_rgba(t_color c)
