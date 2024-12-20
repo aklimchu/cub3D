@@ -27,8 +27,13 @@ static void	parse_single_color(uint8_t *dst, char *color_start, char *color_end)
 		return (error_exit(ERR_FATAL));
 	i = -1;
 	while (str[++i])
+	{
 		if (str[i] < '0' || str[i] > '9')
+		{
+			free(str);
 			error_exit("Invalid color");
+		}
+	}
 	color = ft_atoi(str);
 	free(str);
 	if (color < 0 || color > 255)
