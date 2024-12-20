@@ -59,7 +59,7 @@ static void	check_player_inside_map(t_map *map)
 			error_exit("Player is on the edge of the map");
 		while (j <= map->player_start.y + 1)
 		{
-			if (j < 0 || j >= (int)map->map_cols - 1)
+			if (j < 0 || j >= (int)map->map_cols)
 				error_exit("Player is on the edge of the map");
 			if (abs(map->player_start.x - i) != abs(map->player_start.y - j))
 			{
