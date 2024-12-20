@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdint.h>
-#include "../inc/cub3D.h"
+#include "cub3D.h"
 
 static mlx_texture_t	*get_texture(t_draw_context *dc, t_cub *cub);
 static double			get_ray_dist_on_wall(t_draw_context *dc, t_cub *cub);

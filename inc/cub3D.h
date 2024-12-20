@@ -19,13 +19,10 @@
 # include "../libft/include/memlist.h"
 # include "../MLX42/include/MLX42.h"
 # include "../MLX42/include/MLX42_Int.h"
-# include <stdio.h> //for printf
 # include <stdlib.h> //for exit status and malloc
 # include <errno.h> // for errno (error identifiers)
 # include <fcntl.h> // for open
 # include <unistd.h> // for close
-# include <sys/time.h> // for gettimeofday
-# include <stdbool.h> // for boolean data type
 # include <math.h> // for mathematical functions
 
 # define DEGREE 0.0174533

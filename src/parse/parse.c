@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "cub3D.h"
-#include "libft.h"
 #include "memlist.h"
 
 static void	release_list(t_list **lst)

@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "../inc/cub3D.h"
+#include "cub3D.h"
 
 static void	create_images(t_cub *c);
 static void	add_shading(mlx_texture_t *texture);
