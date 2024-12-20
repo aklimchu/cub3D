@@ -6,7 +6,7 @@
 #    By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 11:18:05 by aklimchu          #+#    #+#              #
-#    Updated: 2024/12/17 11:33:15 by pleander         ###   ########.fr        #
+#    Updated: 2024/12/20 08:47:48 by aklimchu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ NAME		= cub3D
 
 # Compiler
 CC 			= cc
-CFLAGS		= -g -ggdb3 -Ofast -Wall -Wextra -I $(LIBFT_DIR)
+CFLAGS		= -Ofast -Wall -Werror -Wextra -I $(LIBFT_DIR)
 RM			= rm -f
 RMDIR		= rm -rf
 
