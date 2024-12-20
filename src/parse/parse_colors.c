@@ -20,7 +20,7 @@ static void	parse_single_color(uint8_t *dst, char *color_start, char *color_end)
 	int		color;
 	int		i;
 
-	if (!color_start || !color_end)
+	if (!color_start || !color_end || (color_start == color_end))
 		error_exit("Invalid color");
 	str = ft_strndup(color_start, color_end - color_start);
 	if (!str)
