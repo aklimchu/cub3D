@@ -29,7 +29,7 @@ CC 			= cc
 CFLAGS		= -g -ggdb3 -Ofast -Wall -Wextra -I $(LIBFT_DIR)
 RM			= rm -f
 RMDIR		= rm -rf
-#CFLAGS		+= -fsanitize=address,undefined,leak
+CFLAGS		+= -fsanitize=address,undefined,leak
 
 # MLX42
 MLX_PATH	= MLX42/
@@ -83,13 +83,14 @@ $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 $(NAME):	$(OBJ_DIR) $(OBJ)
 	@echo "$(YELLOW)Compiling libft... $(DEF_COLOR)"
 	@make -C $(LIBFT_DIR) --no-print-directory		# make libft
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT_LIB) $(MLX) $(INCLUDE) -Iinclude -ldl -lglfw -pthread -lm -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT_LIB) $(MLX) $(INCLUDE) -ldl -lglfw -lm -o $(NAME)
 	@echo "$(GREEN)SUCCESS, CUB3D IS READY $(DEF_COLOR)"
 
 clean:
 	@echo "$(RED)Deleting object files... $(DEF_COLOR)"
 	@$(RMDIR) $(OBJ_DIR) 
 	@make clean -C $(LIBFT_DIR) --no-print-directory
+	@$(RMDIR) $(MLX_PATH)/build
 
 fclean:		clean
 	@echo "$(GREEN)Deleting cub3D... $(DEF_COLOR)"

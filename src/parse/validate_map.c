@@ -59,12 +59,15 @@ static void	check_player_inside_map(t_map *map)
 		j = map->player_start.y - 1;
 		if (i < 0 || i >= (int)map->map_rows - 1)
 			error_exit("Player is on the edge of the map");
-		while (j < map->player_start.y + 1)
+		while (j <= map->player_start.y + 1)
 		{
 			if (j < 0 || j >= (int)map->map_cols - 1)
 				error_exit("Player is on the edge of the map");
-			if (map->map[i][j] == PADDING)
-				error_exit("Player start is outside the map");
+			if (abs(map->player_start.x - i) == abs(map->player_start.y - j))
+			{
+				if (map->map[i][j] == PADDING || map->map[i][j] == END_ROW)
+					error_exit("Player start is outside the map");
+			}
 			j++;
 		}
 		i++;

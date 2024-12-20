@@ -12,16 +12,14 @@
 
 #include "../inc/cub3D.h"
 
-//The function calls the action to free the memory
 void	handle_destroy(void *input)
 {
 	t_cub	*cub;
 
 	cub = (t_cub *)input;
-	free_everything(cub, 0);
+	free_everything(cub, EXIT_SUCCESS);
 }
 
-//The function frees the memory based on arguments provided
 void	free_everything(t_cub *cub, int exit_code)
 {
 	if (cub->img_map)
@@ -30,7 +28,9 @@ void	free_everything(t_cub *cub, int exit_code)
 		mlx_delete_image(cub->mlx, cub->img_game);
 	if (cub->img_fps)
 		mlx_delete_image(cub->mlx, cub->img_fps);
-	mlx_terminate(cub->mlx);
+	delete_textures(cub);
+	if (cub->mlx)
+		mlx_terminate(cub->mlx);
 	memlist_release_all();
 	exit(exit_code);
 }

@@ -23,8 +23,6 @@ void	draw_map(t_cub *cub)
 	t_coord_f	player_offset;
 	t_coord_f	current;
 
-	// cub->map_width_pix = cub->img_map->width
-	// cub->map_height_pix = 
 	cell.y = cub->player.y / CELL_SIZE;
 	cell.x = cub->player.x / CELL_SIZE;
 	player_offset.x = (cub->player.x - cell.x * CELL_SIZE) / \
