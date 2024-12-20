@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:15:40 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/17 13:51:11 by pleander         ###   ########.fr       */
+/*   Updated: 2024/12/20 08:48:11 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,6 @@ typedef struct s_texture_context
 // parsing
 t_map		*parse(char *path);
 void		parse_colors(t_color *dst, char *line);
-void		read_map_line(char *line, t_list **lst);
 void		parse_map(t_map *map, t_list **rows);
 char		*get_token(t_map_elems tok);
 void		show_map(t_map *map);
