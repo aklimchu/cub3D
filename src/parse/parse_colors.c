@@ -18,14 +18,17 @@ static void	parse_single_color(uint8_t *dst, char *color_start, char *color_end)
 {
 	char	*str;
 	int		color;
+	int		i;
 
 	if (!color_start || !color_end)
-		error_exit("Invalid color");
-	if (!ft_isalnum(*color_start))
 		error_exit("Invalid color");
 	str = ft_strndup(color_start, color_end - color_start);
 	if (!str)
 		return (error_exit(ERR_FATAL));
+	i = -1;
+	while (str[++i])
+		if (str[i] < '0' || str[i] > '9')
+			error_exit("Invalid color");
 	color = ft_atoi(str);
 	free(str);
 	if (color < 0 || color > 255)
