@@ -6,7 +6,7 @@
 /*   By: aklimchu <aklimchu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:10:41 by aklimchu          #+#    #+#             */
-/*   Updated: 2024/12/17 13:06:21 by aklimchu         ###   ########.fr       */
+/*   Updated: 2024/12/20 09:49:50 by aklimchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	create_images(t_cub *c)
 	int32_t	m_width;
 	int32_t	m_height;
 
-	c->mlx = mlx_init(800, 600, "cub3D", 1);
+	c->mlx = mlx_init(800, 600, "cub3D", 0);
 	if (c->mlx == NULL)
 		free_everything(c, EXIT_FAILURE, strerror(mlx_errno));
 	mlx_get_monitor_size(0, &m_width, &m_height);
