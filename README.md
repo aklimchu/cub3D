@@ -1,6 +1,6 @@
 # cub3D
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://opensource.org/licenses/GPL-3.0)
-Our goal was to create a dynamic view inside a maze, in which you’ll have to find your way. We rendered the game using the Ray-Casting principles.
+cub3D is a 3D maze exploration game built using Ray-Casting principles, allowing players to navigate a maze with dynamic perspectives. The game is rendered with OpenGL for a fluid and interactive experience.
 
 ---
 
@@ -37,7 +37,7 @@ sudo apt-get install mesa-utils
 
 ## 🛠️ Building the Program
 
-### After cloning the directory use `make` command to create the executable file:
+### After cloning the directory use `make` command to compile the program and generate the executable::
 ```bash
 make
 ```
@@ -46,24 +46,34 @@ make
 
 ## 🎮 Running the Program
 
+To run the program, use the following command:
 ```bash
-./cub3D mandelbrot link_to_the_map
+./cub3D <map_file>
 ```
-### Arguments:
-- **`link_to_the_map`**: You can choose one of the maps provided in /maps folder. 
+- **`map_file`**: Specify the path to a map file located in the `/maps` directory.
 
-In the file containing the map 0 stands for an empty space, 1 for a wall, and N,S,E or W for the player’s start position and spawning
-orientation. NO, SO, WE, EA stand stand for the links to the textures that are rendered to the walls located in corresponding direction on the map. F and C stand for floor and ceiling colors (in RGB color model).
+Maps are written in a custom format, where:
+- `0` = empty space
+- `1` = wall
+- `N/S/E/W` = starting position and direction
+- `NO/SO/WE/EA` = texture paths for walls
+- `F/C` = floor and ceiling colors (RGB)
+
 Feel free to modify the maps at your own wish!
-
 
 ---
 
 ## ✨ Controls
 
-* W, A, S, and D keys - move the point of view through the maze.
-* Light and right arrow keys: look left and right in the maze. 
-* Esc: Exit the program
+Use the following keys to control the game:
+
+- **W**: Move forward
+- **A**: Move left
+- **S**: Move backward
+- **D**: Move right
+- **Left Arrow**: Turn left
+- **Right Arrow**: Turn right
+- **Esc**: Exit the program
 
 ---
 
