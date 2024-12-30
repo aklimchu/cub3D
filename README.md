@@ -7,12 +7,11 @@ Our goal was to create a dynamic view inside a maze, in which you’ll have to f
 ## 📚 Table of Contents
 - [🔍 Preview](#preview)
 - [📦 Requirements](#-requirements)
-- [🚀 Installation](#-installation)
 - [🛠️ Build the Program](#%EF%B8%8F-build-the-program)
 - [🎮 Running the Program](#-running-the-program)
 - [✨ Controls](#-controls)
 - [🧹 Cleaning Up](#-cleaning-up)
-- [License](#license)
+- [📜 License](#license)
 
 ---
 
@@ -36,19 +35,9 @@ sudo apt-get install mesa-utils
 
 ---
 
-## 🚀 Installation
-
-Clone the repository and navigate to the project directory:
-```bash
-git clone https://github.com/aklimchu/cub3D.git
-cd cub3D
-```
-
----
-
 ## 🛠️ Build the Program
 
-### Use `make` command to create the program:
+### After cloning the directory use `make` command to create the executable file:
 ```bash
 make
 ```
