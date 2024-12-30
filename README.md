@@ -1,12 +1,11 @@
-# cub3D: Exploring the Ray-casting
+# cub3D
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://opensource.org/licenses/GPL-3.0)
-Our goal was to create a dynamic view inside a maze, in which you’ll have to find your way.
+Our goal was to create a dynamic view inside a maze, in which you’ll have to find your way. We rendered the game using the Ray-Casting principles.
 
 ---
 
 ## 📚 Table of Contents
 - [🔍 Preview](#preview)
-- [📦 Features](#-features)
 - [📦 Requirements](#-requirements)
 - [🚀 Installation](#-installation)
 - [🛠️ Build the Program](#%EF%B8%8F-build-the-program)
@@ -21,10 +20,6 @@ Our goal was to create a dynamic view inside a maze, in which you’ll have to f
 ![cub3D Preview](https://github.com/user-attachments/assets/3a9e852e-a9cf-4558-87b8-51f0909077e1)
 
 ---
-
-## ✨ Features
-- Parsing
-- Ray-casting
 
 ## 📦 Requirements
 
@@ -63,9 +58,15 @@ make
 ## 🎮 Running the Program
 
 ```bash
-./cub3D mandelbrot 
+./cub3D mandelbrot link_to_the_map
 ```
-*broken maps
+### Arguments:
+- **`link_to_the_map`**: Feel free to choose choose one of the maps provided in /maps folder. 
+
+In the file containing the map 0 stands for an empty space, 1 for a wall, and N,S,E or W for the player’s start position and spawning
+orientation. NO, SO, WE, EA stand stand for the links to the textures that are rendered to the walls located in corresponding direction on the map. F and C stand for floor and ceiling colors (in RGB color model).
+Feel free to modify the maps at your own wish!
+
 
 ---
 
