@@ -16,7 +16,7 @@ Our goal was to create a dynamic view inside a maze, in which you’ll have to f
 ---
 
 ## 🔍 Preview
-![cub3D Preview](https://github.com/user-attachments/assets/3a9e852e-a9cf-4558-87b8-51f0909077e1)
+![cub3D Preview](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO8zYFV51PkkJPxwyXnnnKG8kz1Jgs-ZBX6Q&s)
 
 ---
 
