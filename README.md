@@ -7,7 +7,7 @@ Our goal was to create a dynamic view inside a maze, in which you’ll have to f
 ## 📚 Table of Contents
 - [🔍 Preview](#preview)
 - [📦 Requirements](#-requirements)
-- [🛠️ Build the Program](#%EF%B8%8F-build-the-program)
+- [🛠️ Building the Program](#%EF%B8%8F-building-the-program)
 - [🎮 Running the Program](#-running-the-program)
 - [✨ Controls](#-controls)
 - [🧹 Cleaning Up](#-cleaning-up)
@@ -35,7 +35,7 @@ sudo apt-get install mesa-utils
 
 ---
 
-## 🛠️ Build the Program
+## 🛠️ Building the Program
 
 ### After cloning the directory use `make` command to create the executable file:
 ```bash
@@ -50,7 +50,7 @@ make
 ./cub3D mandelbrot link_to_the_map
 ```
 ### Arguments:
-- **`link_to_the_map`**: Feel free to choose choose one of the maps provided in /maps folder. 
+- **`link_to_the_map`**: You can choose one of the maps provided in /maps folder. 
 
 In the file containing the map 0 stands for an empty space, 1 for a wall, and N,S,E or W for the player’s start position and spawning
 orientation. NO, SO, WE, EA stand stand for the links to the textures that are rendered to the walls located in corresponding direction on the map. F and C stand for floor and ceiling colors (in RGB color model).
@@ -61,11 +61,8 @@ Feel free to modify the maps at your own wish!
 
 ## ✨ Controls
 
-* Mouse Wheel: Zoom in/out
-* Arrow Keys: Move the view
-* Z / X: Change colors for Mandelbrot and Julia fractals
-* Q: Expand the Pythagoras tree
-* R: Change the Pythagoras tree color
+* W, A, S, and D keys - move the point of view through the maze.
+* Light and right arrow keys: look left and right in the maze. 
 * Esc: Exit the program
 
 ---
