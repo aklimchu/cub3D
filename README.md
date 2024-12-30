@@ -5,36 +5,38 @@ Our goal was to create a dynamic view inside a maze, in which you’ll have to f
 ---
 
 ## 📚 Table of Contents
-- [Preview](#preview)
-- [Requirements](#-requirements)
+- [🔍 Preview](#preview)
+- [📦 Features](#-features)
+- [📦 Requirements](#-requirements)
 - [🚀 Installation](#-installation)
 - [🛠️ Build the Program](#%EF%B8%8F-build-the-program)
 - [🎮 Running the Program](#-running-the-program)
-  - [Mandelbrot](#mandelbrot)
-  - [Julia](#julia)
-  - [Pythagoras Tree](#pythagoras-tree)
 - [✨ Controls](#-controls)
 - [🧹 Cleaning Up](#-cleaning-up)
 - [License](#license)
 
 ---
 
-## Preview
-![Fractol Preview](https://github.com/user-attachments/assets/3a9e852e-a9cf-4558-87b8-51f0909077e1)
+## 🔍 Preview
+![cub3D Preview](https://github.com/user-attachments/assets/3a9e852e-a9cf-4558-87b8-51f0909077e1)
 
 ---
+
+## ✨ Features
+- Parsing
+- Ray-casting
 
 ## 📦 Requirements
 
 Depending on your system, you may need to install the following dependencies
 ```bash
-libreadline
+OpenGl
 ```
 
 Using APT:
 
 ```bash
-sudo apt install libreadline-dev
+sudo apt-get install mesa-utils
 ```
 
 ---
@@ -43,8 +45,8 @@ sudo apt install libreadline-dev
 
 Clone the repository and navigate to the project directory:
 ```bash
-git clone https://github.com/aklimchu/fractol.git
-cd fractol
+git clone https://github.com/aklimchu/cub3D.git
+cd cub3D
 ```
 
 ---
@@ -60,20 +62,10 @@ make
 
 ## 🎮 Running the Program
 
-* #### Mandelbrot:
 ```bash
-./fractol mandelbrot
+./cub3D mandelbrot 
 ```
-* #### Julia:
-```bash
-./fractol julia x-value y-value
-```
-*(x and y values should be between -2 and 2)*
-
-* #### Pythagoras Tree:
-```bash
-./fractol pythagoras
-```
+*broken maps
 
 ---
 
