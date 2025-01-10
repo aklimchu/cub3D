@@ -16,7 +16,7 @@ cub3D is a 3D maze exploration game built using Ray-Casting principles, allowing
 ---
 
 ## 🔍 Preview
-![cub3D Preview](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO8zYFV51PkkJPxwyXnnnKG8kz1Jgs-ZBX6Q&s)
+![cub3D Preview](cub3d.png)
 
 ---
 
